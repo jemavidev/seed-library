@@ -1,0 +1,11 @@
+{
+  "id": "skill.sdlc.git-vcs-operator",
+  "kind": "skill",
+  "name": "git-vcs-operator",
+  "description": "Version-control operations (status, branch, checkout, commit, push, revert) \u2014 one action per call; push publishes and needs confirmation.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

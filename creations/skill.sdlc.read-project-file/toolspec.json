@@ -1,0 +1,31 @@
+{
+  "id": "seed:sdlc:read-file",
+  "name": "read-project-file",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "content": { "type": "string" },
+      "truncated": { "type": "boolean" },
+      "size_bytes": { "type": "integer" }
+    },
+    "required": ["content", "truncated", "size_bytes"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "not_found", "retryable": false },
+    { "code": "access_denied", "retryable": false },
+    { "code": "too_large", "retryable": false },
+    { "code": "binary_file", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 120, "burst": 30 },
+  "idempotency": { "supported": true, "keyFrom": ["file_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

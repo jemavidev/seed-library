@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "run-test-suite input",
+  "type": "object",
+  "properties": {
+    "test_path": {
+      "type": "string",
+      "description": "Directory or file containing the tests, project-relative"
+    },
+    "framework": {
+      "type": "string",
+      "enum": ["auto", "pytest", "unittest", "jest", "vitest", "go-test"],
+      "description": "Test runner; auto detects from project files"
+    },
+    "filter": {
+      "type": ["string", "null"],
+      "description": "Test-name pattern to select a subset; null runs everything under test_path"
+    },
+    "timeout_seconds": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Hard cap for the whole run; null means implementation default (600)"
+    }
+  },
+  "required": ["test_path", "framework", "filter", "timeout_seconds"],
+  "additionalProperties": false
+}

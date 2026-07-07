@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "web-search input",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "description": "Search query; must contain no secrets or personal data"
+    },
+    "max_results": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 20,
+      "description": "Result cap; null means 5"
+    },
+    "recency_days": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Restrict to results published/updated within this many days; null means no restriction"
+    }
+  },
+  "required": ["query", "max_results", "recency_days"],
+  "additionalProperties": false
+}

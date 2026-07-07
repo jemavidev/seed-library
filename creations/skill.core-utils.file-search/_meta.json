@@ -1,0 +1,9 @@
+{
+  "id": "skill.core-utils.file-search",
+  "kind": "skill",
+  "name": "file-search",
+  "description": "Find files by name or lines by content/regex across the project, with locations and excerpts. Read-only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

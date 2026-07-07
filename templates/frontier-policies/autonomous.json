@@ -1,0 +1,12 @@
+{
+  "id": "frontier-policy.autonomous",
+  "description": "Unattended-operation preset for mature, well-compensated setups: interruptions reserved for effects that cannot be undone.",
+  "effect_stances": {
+    "pure": "free",
+    "local": "free",
+    "external_compensated": "notify",
+    "external_uncompensated": "confirm"
+  },
+  "overrides_allowed": "per-tool overrides toward stricter stances; loosening below confirm for uncompensated external effects is not representable",
+  "notes": "Intended for daemon/long-horizon runs. Safe only where compensations are tested and checkpoints are on; pair with budget alerts so autonomy is bounded by spend as well as by stance."
+}

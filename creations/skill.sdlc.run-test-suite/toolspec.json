@@ -1,0 +1,43 @@
+{
+  "id": "seed:sdlc:run-tests",
+  "name": "run-test-suite",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "passed": { "type": "integer" },
+      "failed": { "type": "integer" },
+      "skipped": { "type": "integer" },
+      "failures": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "test": { "type": "string" },
+            "message": { "type": "string" },
+            "location": { "type": "string" }
+          },
+          "required": ["test", "message", "location"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["passed", "failed", "skipped", "failures"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "framework_not_found", "retryable": false },
+    { "code": "setup_error", "retryable": false },
+    { "code": "timeout", "retryable": true }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 12, "burst": 3 },
+  "idempotency": { "supported": true, "keyFrom": ["test_path", "framework", "filter"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["subprocess"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

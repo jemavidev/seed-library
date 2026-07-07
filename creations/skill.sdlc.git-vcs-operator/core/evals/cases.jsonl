@@ -1,0 +1,6 @@
+{"name": "status on clean repo", "kind": "golden", "input": {"repo_path": ".", "action": "status", "branch": null, "commit_message": null, "ref": null}, "expect": {"action": "status"}}
+{"name": "commit staged change", "kind": "golden", "input": {"repo_path": ".", "action": "commit", "branch": null, "commit_message": "fix: guard null input", "ref": null}, "expect": {"action": "commit"}}
+{"name": "create and switch branch", "kind": "golden", "input": {"repo_path": ".", "action": "branch", "branch": "feat/x", "commit_message": null, "ref": null}, "expect": {"ref": "feat/x"}}
+{"name": "revert produces inverse commit", "kind": "golden", "input": {"repo_path": ".", "action": "revert", "branch": null, "commit_message": null, "ref": "a1b2c3d"}, "expect": {"action": "revert"}}
+{"name": "commit without message fails", "kind": "failure", "input": {"repo_path": ".", "action": "commit", "branch": null, "commit_message": null, "ref": null}, "expect": {"failure": "nothing_to_commit"}}
+{"name": "non-repo path is typed failure", "kind": "failure", "input": {"repo_path": "/tmp/empty", "action": "status", "branch": null, "commit_message": null, "ref": null}, "expect": {"failure": "not_a_repo"}}

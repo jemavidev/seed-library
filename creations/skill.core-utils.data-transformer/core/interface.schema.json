@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "data-transformer input",
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": ["string", "null"],
+      "description": "Inline data text; mutually exclusive with input_path"
+    },
+    "input_path": {
+      "type": ["string", "null"],
+      "description": "File to convert, project-relative; mutually exclusive with input"
+    },
+    "from": {
+      "type": "string",
+      "enum": ["json", "yaml", "csv", "auto"],
+      "description": "Source format; auto detects from content/extension"
+    },
+    "to": {
+      "type": "string",
+      "enum": ["json", "yaml", "csv", "markdown-table"],
+      "description": "Target format"
+    },
+    "output_path": {
+      "type": ["string", "null"],
+      "description": "Write result here; null returns it inline"
+    }
+  },
+  "required": ["input", "input_path", "from", "to", "output_path"],
+  "additionalProperties": false
+}

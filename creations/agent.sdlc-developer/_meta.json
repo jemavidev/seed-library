@@ -1,0 +1,9 @@
+{
+  "id": "agent.sdlc-developer",
+  "kind": "agent",
+  "name": "sdlc-developer",
+  "description": "Implement the briefed change correctly and verifiably, leaving the project healthier than found.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

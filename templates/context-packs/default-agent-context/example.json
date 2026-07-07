@@ -1,0 +1,16 @@
+{
+  "profile": "agent.sdlc-developer",
+  "system_context_refs": [
+    { "ref": "profile:prompt", "budget_tokens": 800 },
+    { "ref": "block:project-rules", "budget_tokens": 1500 },
+    { "ref": "block:task-brief", "budget_tokens": 600 }
+  ],
+  "retrieval_sources": [
+    { "source": "project-code-search", "top_k": 5, "min_relevance": 0.4 }
+  ],
+  "shared_state_keys": ["task_brief", "draft", "verdict", "feedback", "attempts"],
+  "private_state_keys": ["scratch_notes", "intermediate_diffs"],
+  "handoff_contract": {
+    "required_output_fields": ["action_taken", "status", "artifacts", "open_items", "next_steps"]
+  }
+}

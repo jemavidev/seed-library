@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "crypto-token-generator input",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "enum": ["random-token", "uuid", "sha256-digest", "hmac-sha256"],
+      "description": "What to generate"
+    },
+    "length": {
+      "type": ["integer", "null"],
+      "minimum": 16,
+      "maximum": 128,
+      "description": "Entropy bytes for random-token; null means 32"
+    },
+    "input": {
+      "type": ["string", "null"],
+      "description": "Payload to digest/sign; required for sha256-digest and hmac-sha256"
+    },
+    "key_env": {
+      "type": ["string", "null"],
+      "description": "Name of the environment variable holding the HMAC key; required for hmac-sha256"
+    }
+  },
+  "required": ["kind", "length", "input", "key_env"],
+  "additionalProperties": false
+}

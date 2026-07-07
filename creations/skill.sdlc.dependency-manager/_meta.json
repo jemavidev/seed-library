@@ -1,0 +1,12 @@
+{
+  "id": "skill.sdlc.dependency-manager",
+  "kind": "skill",
+  "name": "dependency-manager",
+  "description": "Add/remove/update/install/audit project dependencies via the project's own package manager; changes stay in manifest+lockfile.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "subprocess",
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

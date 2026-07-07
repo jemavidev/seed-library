@@ -1,0 +1,5 @@
+{"name": "green suite", "kind": "golden", "input": {"test_path": "fixtures/passing", "framework": "auto", "filter": null, "timeout_seconds": null}, "expect": {"passed": 3, "failed": 0, "skipped": 0}}
+{"name": "red suite is a result, not an error", "kind": "golden", "input": {"test_path": "fixtures/failing", "framework": "pytest", "filter": null, "timeout_seconds": null}, "expect": {"failed": 1, "failures_have": ["test", "message", "location"]}}
+{"name": "filter selects subset", "kind": "golden", "input": {"test_path": "fixtures/passing", "framework": "auto", "filter": "test_one*", "timeout_seconds": null}, "expect": {"passed": 1}}
+{"name": "broken conftest is setup_error", "kind": "failure", "input": {"test_path": "fixtures/broken-setup", "framework": "pytest", "filter": null, "timeout_seconds": null}, "expect": {"failure": "setup_error"}}
+{"name": "missing runner is typed", "kind": "failure", "input": {"test_path": "fixtures/passing", "framework": "go-test", "filter": null, "timeout_seconds": null}, "expect": {"failure": "framework_not_found"}}

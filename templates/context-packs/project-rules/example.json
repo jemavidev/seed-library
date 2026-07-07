@@ -1,0 +1,10 @@
+{
+  "rule_files": [
+    { "pattern": "AGENTS.md", "sections": null },
+    { "pattern": "**/AGENTS.md", "sections": null },
+    { "pattern": "CONTRIBUTING.md", "sections": ["Style", "Commit messages"] },
+    { "pattern": ".cursorrules", "sections": null }
+  ],
+  "precedence": "nearest-wins",
+  "compile_budget_tokens": 1500
+}

@@ -1,0 +1,4 @@
+{"name": "returns ranked results with urls", "kind": "golden", "input": {"query": "json schema 2020-12 strict validation", "max_results": 5, "recency_days": null}, "expect": {"results_count_at_most": 5, "each_result_has": ["title", "url", "snippet", "published_at"]}}
+{"name": "recency restricts result set", "kind": "golden", "input": {"query": "container runtime release notes", "max_results": 5, "recency_days": 30}, "expect": {"all_published_within_days": 30}}
+{"name": "zero results is success", "kind": "golden", "input": {"query": "xqzv9 nonexistent gibberish term 42", "max_results": 5, "recency_days": null}, "expect": {"results": []}}
+{"name": "provider outage is typed and retryable", "kind": "failure", "input": {"query": "anything", "max_results": null, "recency_days": null}, "expect": {"failure": "provider_unreachable", "retryable": true}}

@@ -1,0 +1,9 @@
+{
+  "id": "skill.core-utils.data-transformer",
+  "kind": "skill",
+  "name": "data-transformer",
+  "description": "Convert JSON/YAML/CSV/markdown-table formats 1:1, inline or file-to-file. Structure-preserving only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

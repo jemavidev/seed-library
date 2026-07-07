@@ -1,0 +1,5 @@
+{"name": "emails deduplicated in order", "kind": "golden", "input": {"text": "a@x.io b@x.io a@x.io", "input_path": null, "extract": "emails", "custom_pattern": null}, "expect": {"matches": ["a@x.io", "b@x.io"], "count": 2}}
+{"name": "ips from log file", "kind": "golden", "input": {"text": null, "input_path": "fixtures/access.log", "extract": "ips", "custom_pattern": null}, "expect": {"count_at_least": 1}}
+{"name": "custom pattern works", "kind": "golden", "input": {"text": "order-1234 order-9999", "input_path": null, "extract": "custom", "custom_pattern": "order-\\d{4}"}, "expect": {"count": 2}}
+{"name": "both inputs rejected", "kind": "failure", "input": {"text": "x", "input_path": "fixtures/access.log", "extract": "ips", "custom_pattern": null}, "expect": {"failure": "no_input"}}
+{"name": "bad custom regex is typed", "kind": "failure", "input": {"text": "x", "input_path": null, "extract": "custom", "custom_pattern": "([oops"}, "expect": {"failure": "invalid_pattern"}}

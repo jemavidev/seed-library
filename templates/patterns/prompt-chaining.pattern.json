@@ -1,0 +1,27 @@
+{
+  "id": "prompt-chaining",
+  "alias": "sequential-pipeline",
+  "intent": "Fixed linear stages: each stage's typed output is the next stage's input; a gate check between stages stops a bad intermediate from propagating.",
+  "state": {
+    "stage_outputs": "object keyed by stage id, each matching that stage's output schema",
+    "current_stage": "string",
+    "gate_failures": "array"
+  },
+  "nodes": [
+    { "id": "stage_1_draft", "role_ref": "agent.sdlc-developer" },
+    { "id": "gate_1", "role_ref": "agent.qa-reviewer" },
+    { "id": "stage_2_refine", "role_ref": "agent.sdlc-developer" },
+    { "id": "stage_3_package", "role_ref": "agent.sdlc-developer" }
+  ],
+  "edges": [
+    { "from": "START", "to": "stage_1_draft", "when": null },
+    { "from": "stage_1_draft", "to": "gate_1", "when": null },
+    { "from": "gate_1", "to": "stage_2_refine", "when": "gate_failures is empty" },
+    { "from": "gate_1", "to": "END", "when": "gate_failures is not empty" },
+    { "from": "stage_2_refine", "to": "stage_3_package", "when": null },
+    { "from": "stage_3_package", "to": "END", "when": null }
+  ],
+  "interrupts": [],
+  "termination": "linear: final stage completes, or a gate stops the chain with typed gate_failures",
+  "budget": { "max_iterations": 1, "account": "task" }
+}

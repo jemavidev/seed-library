@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "write-modify-file input",
+  "type": "object",
+  "properties": {
+    "file_path": {
+      "type": "string",
+      "description": "Project-relative path of the file to create or modify"
+    },
+    "content": {
+      "type": "string",
+      "description": "Full file body (mode=write) or replacement block (mode=patch)"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["write", "patch"],
+      "description": "write = create/overwrite whole file; patch = replace patch_target with content"
+    },
+    "patch_target": {
+      "type": ["string", "null"],
+      "description": "Exact existing text to replace; required when mode=patch, must match exactly once"
+    },
+    "create_dirs": {
+      "type": ["boolean", "null"],
+      "description": "Create missing parent directories; null means false"
+    }
+  },
+  "required": ["file_path", "content", "mode", "patch_target", "create_dirs"],
+  "additionalProperties": false
+}

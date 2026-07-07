@@ -1,0 +1,15 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). SessionStart output is added to context; the command prints the assembled project-rules block.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook style-rules-injector --root . --budget-tokens 1500"
+          }
+        ]
+      }
+    ]
+  }
+}

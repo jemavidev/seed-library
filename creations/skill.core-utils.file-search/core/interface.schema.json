@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "file-search input",
+  "type": "object",
+  "properties": {
+    "pattern": {
+      "type": "string",
+      "description": "Text, glob (filename mode), or regex (regex=true) to match"
+    },
+    "path": {
+      "type": "string",
+      "description": "Directory to search under, project-relative"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["content", "filename"],
+      "description": "Match file contents line-by-line, or file names"
+    },
+    "regex": {
+      "type": ["boolean", "null"],
+      "description": "Treat pattern as a regular expression; null means plain text/glob"
+    },
+    "max_results": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Cap on returned matches; null means implementation default (100)"
+    }
+  },
+  "required": ["pattern", "path", "type", "regex", "max_results"],
+  "additionalProperties": false
+}

@@ -1,0 +1,9 @@
+{
+  "id": "agent.qa-reviewer",
+  "kind": "agent",
+  "name": "qa-reviewer",
+  "description": "Audit a change or artifact against its brief and return typed, actionable findings \u2014 without modifying anything.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

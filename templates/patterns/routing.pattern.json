@@ -1,0 +1,27 @@
+{
+  "id": "routing",
+  "alias": "supervisor-router",
+  "intent": "Single entry point: classify the request's intent and hand it to exactly one specialist; consolidate and return its result.",
+  "state": {
+    "user_request": "string",
+    "intent": "string",
+    "specialist_result": "object",
+    "final_answer": "string"
+  },
+  "nodes": [
+    { "id": "supervisor", "role_ref": "agent.supervisor" },
+    { "id": "specialist_sdlc", "role_ref": "agent.sdlc-developer" },
+    { "id": "specialist_review", "role_ref": "agent.qa-reviewer" }
+  ],
+  "edges": [
+    { "from": "START", "to": "supervisor", "when": null },
+    { "from": "supervisor", "to": "specialist_sdlc", "when": "intent == 'build'" },
+    { "from": "supervisor", "to": "specialist_review", "when": "intent == 'review'" },
+    { "from": "supervisor", "to": "END", "when": "intent == 'answer_directly'" },
+    { "from": "specialist_sdlc", "to": "supervisor", "when": null },
+    { "from": "specialist_review", "to": "supervisor", "when": null }
+  ],
+  "interrupts": [],
+  "termination": "supervisor emits final_answer after at most one specialist round-trip per request",
+  "budget": { "max_iterations": 2, "account": "task" }
+}

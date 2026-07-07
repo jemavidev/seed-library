@@ -1,0 +1,30 @@
+{
+  "id": "seed:core-utils:data-transformer",
+  "name": "data-transformer",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "output": { "type": ["string", "null"] },
+      "output_path": { "type": ["string", "null"] },
+      "records": { "type": "integer" }
+    },
+    "required": ["output", "output_path", "records"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "parse_error", "retryable": false },
+    { "code": "unsupported_conversion", "retryable": false },
+    { "code": "no_input", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 60, "burst": 20 },
+  "idempotency": { "supported": true, "keyFrom": ["input", "input_path", "from", "to", "output_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "skill.sdlc.run-test-suite",
+  "kind": "skill",
+  "name": "run-test-suite",
+  "description": "Run tests (auto-detected framework) and get structured pass/fail results with per-failure messages and locations.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "subprocess"
+  ],
+  "libraryShare": "candidate"
+}

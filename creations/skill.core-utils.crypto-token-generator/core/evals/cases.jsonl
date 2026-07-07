@@ -1,0 +1,5 @@
+{"name": "sha256 of known input", "kind": "golden", "input": {"kind": "sha256-digest", "length": null, "input": "hello", "key_env": null}, "expect": {"value": "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824"}}
+{"name": "uuid v4 shape", "kind": "golden", "input": {"kind": "uuid", "length": null, "input": null, "key_env": null}, "expect": {"value_matches": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"}}
+{"name": "random token default length", "kind": "golden", "input": {"kind": "random-token", "length": null, "input": null, "key_env": null}, "expect": {"value_min_chars": 43}}
+{"name": "hmac needs key env", "kind": "failure", "input": {"kind": "hmac-sha256", "length": null, "input": "payload", "key_env": null}, "expect": {"failure": "missing_key"}}
+{"name": "digest needs input", "kind": "failure", "input": {"kind": "sha256-digest", "length": null, "input": null, "key_env": null}, "expect": {"failure": "missing_input"}}

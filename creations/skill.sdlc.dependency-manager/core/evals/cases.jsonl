@@ -1,0 +1,5 @@
+{"name": "add records from/to", "kind": "golden", "input": {"project_path": ".", "action": "add", "package": "httpx", "version": "^0.27"}, "expect": {"changed_includes": {"package": "httpx", "from": null}}}
+{"name": "install syncs lockfile only", "kind": "golden", "input": {"project_path": ".", "action": "install", "package": null, "version": null}, "expect": {"action": "install"}}
+{"name": "audit reports count without mutating", "kind": "golden", "input": {"project_path": ".", "action": "audit", "package": null, "version": null}, "expect": {"vulnerabilities_is_integer": true, "changed": []}}
+{"name": "unsatisfiable pin is typed", "kind": "failure", "input": {"project_path": ".", "action": "add", "package": "left-pad", "version": "==99.0.0"}, "expect": {"failure": "resolution_conflict"}}
+{"name": "no manifest is typed", "kind": "failure", "input": {"project_path": "fixtures/empty-dir", "action": "install", "package": null, "version": null}, "expect": {"failure": "unsupported_manager"}}

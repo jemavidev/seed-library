@@ -1,0 +1,9 @@
+{
+  "id": "skill.core-utils.regex-data-extractor",
+  "kind": "skill",
+  "name": "regex-data-extractor",
+  "description": "Extract emails/IPs/URLs/hashes or a custom regex from text or a file; deduplicated matches. Read-only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

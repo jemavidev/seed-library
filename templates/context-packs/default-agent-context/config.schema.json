@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "default-agent-context config",
+  "type": "object",
+  "properties": {
+    "profile": {
+      "type": "string",
+      "description": "Library id of the agent profile this pack configures"
+    },
+    "system_context_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ref": { "type": "string", "description": "Source of the block (library id, file path, or well-known block name)" },
+          "budget_tokens": { "type": "integer", "minimum": 50 }
+        },
+        "required": ["ref", "budget_tokens"],
+        "additionalProperties": false
+      }
+    },
+    "retrieval_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": { "type": "string", "description": "Collection/index identifier" },
+          "top_k": { "type": "integer", "minimum": 1 },
+          "min_relevance": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+        },
+        "required": ["source", "top_k", "min_relevance"],
+        "additionalProperties": false
+      }
+    },
+    "shared_state_keys": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "private_state_keys": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "handoff_contract": {
+      "type": "object",
+      "properties": {
+        "required_output_fields": {
+          "type": "array",
+          "items": { "type": "string" },
+          "minItems": 1
+        }
+      },
+      "required": ["required_output_fields"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "profile",
+    "system_context_refs",
+    "retrieval_sources",
+    "shared_state_keys",
+    "private_state_keys",
+    "handoff_contract"
+  ],
+  "additionalProperties": false
+}

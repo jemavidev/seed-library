@@ -1,0 +1,39 @@
+{
+  "id": "seed:core-utils:document-parser",
+  "name": "document-parser",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "content": { "type": "string" },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "format": { "type": "string" },
+          "pages_total": { "type": ["integer", "null"] },
+          "pages_extracted": { "type": ["integer", "null"] },
+          "tables": { "type": "integer" }
+        },
+        "required": ["format", "pages_total", "pages_extracted", "tables"],
+        "additionalProperties": false
+      }
+    },
+    "required": ["content", "metadata"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "unsupported_format", "retryable": false },
+    { "code": "corrupt_file", "retryable": false },
+    { "code": "password_protected", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["input_path", "output_format", "pages"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

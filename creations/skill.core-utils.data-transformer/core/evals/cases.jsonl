@@ -1,0 +1,5 @@
+{"name": "json to markdown table", "kind": "golden", "input": {"input": "[{\"name\":\"a\",\"n\":1}]", "input_path": null, "from": "json", "to": "markdown-table", "output_path": null}, "expect": {"records": 1, "output_contains": "| name | n |"}}
+{"name": "yaml json roundtrip is identity", "kind": "golden", "input": {"input": "{\"a\": [1, 2], \"b\": null}", "input_path": null, "from": "json", "to": "yaml", "output_path": null}, "expect": {"roundtrip_identity": true}}
+{"name": "csv file to json file", "kind": "golden", "input": {"input": null, "input_path": "fixtures/rows.csv", "from": "auto", "to": "json", "output_path": "out/rows.json"}, "expect": {"output": null, "output_path": "out/rows.json"}}
+{"name": "nested json to csv fails loudly", "kind": "failure", "input": {"input": "{\"a\": {\"b\": {\"c\": 1}}}", "input_path": null, "from": "json", "to": "csv", "output_path": null}, "expect": {"failure": "unsupported_conversion"}}
+{"name": "malformed yaml is typed", "kind": "failure", "input": {"input": "a: [1, 2", "input_path": null, "from": "yaml", "to": "json", "output_path": null}, "expect": {"failure": "parse_error"}}

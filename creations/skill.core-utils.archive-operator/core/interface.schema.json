@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "archive-operator input",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": ["compress", "extract", "list"],
+      "description": "The single archive operation"
+    },
+    "archive_path": {
+      "type": "string",
+      "description": "Archive file to create/read, project-relative"
+    },
+    "paths": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Source files/dirs for compress; null otherwise"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["zip", "tar.gz", "auto"],
+      "description": "Archive format; auto detects from extension"
+    },
+    "dest_path": {
+      "type": ["string", "null"],
+      "description": "Extraction target directory; null means alongside the archive"
+    }
+  },
+  "required": ["action", "archive_path", "paths", "format", "dest_path"],
+  "additionalProperties": false
+}

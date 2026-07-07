@@ -1,0 +1,5 @@
+{"name": "finds unused import", "kind": "golden", "input": {"target_path": "fixtures/unused_import.py", "analyzer": "ruff", "severity_threshold": null}, "expect": {"findings_include_rule": "F401"}}
+{"name": "clean file yields empty findings", "kind": "golden", "input": {"target_path": "fixtures/clean.py", "analyzer": "ruff", "severity_threshold": null}, "expect": {"findings": [], "summary": {"error": 0, "warning": 0, "info": 0}}}
+{"name": "threshold filters info", "kind": "golden", "input": {"target_path": "fixtures/mixed.py", "analyzer": "auto", "severity_threshold": "warning"}, "expect": {"findings_max_severity_at_least": "warning"}}
+{"name": "unparseable target is typed", "kind": "failure", "input": {"target_path": "fixtures/syntax_error.py", "analyzer": "auto", "severity_threshold": null}, "expect": {"failure": "parse_error"}}
+{"name": "missing analyzer is typed", "kind": "failure", "input": {"target_path": "fixtures/clean.py", "analyzer": "semgrep", "severity_threshold": null}, "expect": {"failure": "analyzer_not_found"}}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "dependency-manager input",
+  "type": "object",
+  "properties": {
+    "project_path": {
+      "type": "string",
+      "description": "Project root containing the manifest/lockfile"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["install", "add", "remove", "update", "audit"],
+      "description": "The single dependency operation to perform"
+    },
+    "package": {
+      "type": ["string", "null"],
+      "description": "Package name; required for add/remove, optional scope for update/audit"
+    },
+    "version": {
+      "type": ["string", "null"],
+      "description": "Exact version or range; only meaningful with add/update"
+    }
+  },
+  "required": ["project_path", "action", "package", "version"],
+  "additionalProperties": false
+}

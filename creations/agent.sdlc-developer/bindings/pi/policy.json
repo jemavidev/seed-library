@@ -1,0 +1,20 @@
+{
+  "profile": "agent.sdlc-developer",
+  "authorized_skills": [
+    "seed:sdlc:read-file",
+    "seed:sdlc:write-file",
+    "seed:sdlc:git-operator",
+    "seed:sdlc:run-tests",
+    "seed:sdlc:static-analyze",
+    "seed:sdlc:dependency-manager",
+    "seed:core-utils:file-search",
+    "seed:core-utils:data-transformer"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "confirm"
+  },
+  "notes": "Builder profile. git push (external) rides the confirm stance; local edits notify so the audit trail narrates the work."
+}

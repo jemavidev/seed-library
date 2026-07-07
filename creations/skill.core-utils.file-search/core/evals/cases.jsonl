@@ -1,0 +1,5 @@
+{"name": "content hit with location", "kind": "golden", "input": {"pattern": "def main", "path": "fixtures/", "type": "content", "regex": null, "max_results": null}, "expect": {"matches_include_file": "fixtures/cli.py"}}
+{"name": "filename glob", "kind": "golden", "input": {"pattern": "*.schema.json", "path": "fixtures/", "type": "filename", "regex": null, "max_results": null}, "expect": {"matches_count_at_least": 1}}
+{"name": "zero matches is success", "kind": "golden", "input": {"pattern": "zzz_does_not_exist", "path": "fixtures/", "type": "content", "regex": null, "max_results": null}, "expect": {"matches": [], "truncated": false}}
+{"name": "truncation flag on cap", "kind": "golden", "input": {"pattern": "e", "path": "fixtures/", "type": "content", "regex": null, "max_results": 2}, "expect": {"truncated": true}}
+{"name": "bad regex is typed", "kind": "failure", "input": {"pattern": "([unclosed", "path": "fixtures/", "type": "content", "regex": true, "max_results": null}, "expect": {"failure": "invalid_pattern"}}

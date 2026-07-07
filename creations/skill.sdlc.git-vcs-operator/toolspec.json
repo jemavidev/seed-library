@@ -1,0 +1,38 @@
+{
+  "id": "seed:sdlc:git-operator",
+  "name": "git-vcs-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "ref": { "type": "string" },
+      "output": { "type": "string" }
+    },
+    "required": ["action", "ref", "output"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "not_a_repo", "retryable": false },
+    { "code": "nothing_to_commit", "retryable": false },
+    { "code": "merge_conflict", "retryable": false },
+    { "code": "push_rejected", "retryable": true },
+    { "code": "auth_failed", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "GIT_REMOTE_TOKEN", "env": "GIT_REMOTE_TOKEN" }
+  ],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["repo_path", "action", "branch", "ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "commit -> revert(ref); branch/checkout -> checkout back and delete created branch; push -> push the revert commit to the same ref",
+    "toolId": "seed:sdlc:git-operator"
+  },
+  "_meta": "_meta.json"
+}

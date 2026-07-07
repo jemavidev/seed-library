@@ -1,0 +1,11 @@
+{
+  "profile": "agent.supervisor",
+  "authorized_skills": [],
+  "handoffs_allowed": true,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "blocked",
+    "external": "blocked"
+  },
+  "notes": "Router profile: no effect skills by design; local/external blocked because it should never hold them. Handoffs and consolidation only."
+}

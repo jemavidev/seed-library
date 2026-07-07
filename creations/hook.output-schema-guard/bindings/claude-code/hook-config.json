@@ -1,0 +1,16 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). The command receives the tool/step output on stdin and exits non-zero with the error list on stdout to trigger the retry feedback.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Task|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook output-schema-guard --schema-from step-contract --max-retries 2"
+          }
+        ]
+      }
+    ]
+  }
+}

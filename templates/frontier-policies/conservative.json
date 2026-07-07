@@ -1,0 +1,12 @@
+{
+  "id": "frontier-policy.conservative",
+  "description": "Trust-building default for new projects, new users, or regulated environments: every mutation is gated, uncompensated external effects cannot run at all.",
+  "effect_stances": {
+    "pure": "free",
+    "local": "confirm",
+    "external_compensated": "expert-review",
+    "external_uncompensated": "blocked"
+  },
+  "overrides_allowed": "only toward stricter stances",
+  "notes": "external_uncompensated=blocked means such tools run dry-run only under this policy. Loosen by switching policy deliberately, never by per-call exception."
+}

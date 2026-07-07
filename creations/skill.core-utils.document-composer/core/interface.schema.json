@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "document-composer input",
+  "type": "object",
+  "properties": {
+    "outline": {
+      "type": "string",
+      "description": "Markdown headings with body text under each; the full document content"
+    },
+    "output_path": {
+      "type": "string",
+      "description": "Where to write the composed document, project-relative"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["markdown", "html", "docx"],
+      "description": "Output format"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Document title; null derives from the first heading"
+    },
+    "sections_required": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Section names that must exist in the outline; composition fails if any is missing"
+    }
+  },
+  "required": ["outline", "output_path", "format", "title", "sections_required"],
+  "additionalProperties": false
+}

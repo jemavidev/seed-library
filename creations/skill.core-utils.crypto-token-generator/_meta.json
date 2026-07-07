@@ -1,0 +1,9 @@
+{
+  "id": "skill.core-utils.crypto-token-generator",
+  "kind": "skill",
+  "name": "crypto-token-generator",
+  "description": "Generate random tokens, UUIDs, SHA-256 digests, or HMAC signatures (key by env-var name only). Pure.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

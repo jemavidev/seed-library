@@ -1,0 +1,18 @@
+{
+  "profile": "agent.qa-reviewer",
+  "authorized_skills": [
+    "seed:sdlc:read-file",
+    "seed:sdlc:run-tests",
+    "seed:sdlc:static-analyze",
+    "seed:core-utils:file-search",
+    "seed:core-utils:document-parser",
+    "seed:core-utils:regex-extractor"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "free",
+    "external": "blocked"
+  },
+  "notes": "Read-only auditor. local=free covers test runs (sandboxed side effects only); no write or git skills are granted, so review cannot mutate the artifact."
+}

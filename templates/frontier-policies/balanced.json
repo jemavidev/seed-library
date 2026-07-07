@@ -1,0 +1,12 @@
+{
+  "id": "frontier-policy.balanced",
+  "description": "Working default for established projects: silent reads, narrated local work, confirmation at the boundary where effects leave the machine.",
+  "effect_stances": {
+    "pure": "free",
+    "local": "notify",
+    "external_compensated": "confirm",
+    "external_uncompensated": "expert-review"
+  },
+  "overrides_allowed": "per-tool overrides in either direction, recorded with a reason",
+  "notes": "local=notify keeps an audit narrative without interrupting flow; the confirm line sits exactly at network egress / third-party state."
+}

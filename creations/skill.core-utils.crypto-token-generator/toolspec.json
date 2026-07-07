@@ -1,0 +1,31 @@
+{
+  "id": "seed:core-utils:crypto-generator",
+  "name": "crypto-token-generator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "value": { "type": "string" },
+      "kind": { "type": "string" }
+    },
+    "required": ["value", "kind"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "invalid_length", "retryable": false },
+    { "code": "missing_input", "retryable": false },
+    { "code": "missing_key", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "HMAC_KEY", "env": "HMAC_KEY" }
+  ],
+  "rateLimit": { "perMinute": 120, "burst": 30 },
+  "idempotency": { "supported": false },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

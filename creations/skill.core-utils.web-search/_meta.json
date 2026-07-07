@@ -1,0 +1,11 @@
+{
+  "id": "skill.core-utils.web-search",
+  "kind": "skill",
+  "name": "web-search",
+  "description": "Search the web via the configured provider; ranked results with title/url/snippet/date. Read-only, network.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "code-static-analyzer input",
+  "type": "object",
+  "properties": {
+    "target_path": {
+      "type": "string",
+      "description": "File or directory to analyze, project-relative"
+    },
+    "analyzer": {
+      "type": "string",
+      "enum": ["auto", "eslint", "flake8", "ruff", "mypy", "semgrep"],
+      "description": "Analyzer to run; auto picks from project configuration"
+    },
+    "severity_threshold": {
+      "type": ["string", "null"],
+      "enum": ["info", "warning", "error", null],
+      "description": "Drop findings below this severity; null returns everything"
+    }
+  },
+  "required": ["target_path", "analyzer", "severity_threshold"],
+  "additionalProperties": false
+}

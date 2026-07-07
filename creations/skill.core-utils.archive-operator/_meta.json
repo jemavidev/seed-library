@@ -1,0 +1,9 @@
+{
+  "id": "skill.core-utils.archive-operator",
+  "kind": "skill",
+  "name": "archive-operator",
+  "description": "Create, list, or extract zip/tar.gz archives inside the sandbox; zip-slip-safe, all-or-nothing extraction.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

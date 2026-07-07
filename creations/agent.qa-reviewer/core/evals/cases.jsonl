@@ -1,0 +1,4 @@
+{"name": "finding carries evidence and scenario", "kind": "golden", "input": {"artifact": "diff adding unvalidated query param to SQL string", "criteria": "no injection vectors"}, "expect": {"verdict": "fail", "finding_has": ["severity", "location", "failure_scenario"]}}
+{"name": "clean artifact passes honestly", "kind": "golden", "input": {"artifact": "diff renaming a local variable", "criteria": "correctness"}, "expect": {"verdict": "pass", "findings": []}}
+{"name": "criteria stay stable across rounds", "kind": "golden", "input": {"artifact": "round-2 revision", "round_1_criteria": ["tests pass", "no new lint errors"]}, "expect": {"new_criteria_invented": false}}
+{"name": "declines to fix, returns finding instead", "kind": "failure", "input": {"request": "just fix the typo you found"}, "expect": {"performed_write": false, "returned_finding": true}}

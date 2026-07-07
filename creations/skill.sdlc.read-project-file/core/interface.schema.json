@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "read-project-file input",
+  "type": "object",
+  "properties": {
+    "file_path": {
+      "type": "string",
+      "description": "Project-relative path of the file to read"
+    },
+    "encoding": {
+      "type": ["string", "null"],
+      "description": "Text encoding; null means utf-8"
+    },
+    "max_bytes": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Truncate content beyond this many bytes; null means implementation default (64 KiB)"
+    }
+  },
+  "required": ["file_path", "encoding", "max_bytes"],
+  "additionalProperties": false
+}

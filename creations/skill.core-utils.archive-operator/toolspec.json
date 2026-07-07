@@ -1,0 +1,30 @@
+{
+  "id": "seed:core-utils:archive-operator",
+  "name": "archive-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "entries": { "type": "array", "items": { "type": "string" } },
+      "output_path": { "type": ["string", "null"] }
+    },
+    "required": ["action", "entries", "output_path"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "corrupt_archive", "retryable": false },
+    { "code": "unsupported_format", "retryable": false },
+    { "code": "path_escape_blocked", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["action", "archive_path", "dest_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

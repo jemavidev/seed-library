@@ -1,0 +1,26 @@
+{
+  "id": "evaluator-optimizer",
+  "alias": "reflection-self-correction",
+  "intent": "A generator produces an artifact; an evaluator audits it with objective checks; failures feed back to the generator until pass or budget exhausted.",
+  "state": {
+    "task_brief": "string",
+    "draft": "object",
+    "verdict": "string (pass|fail)",
+    "feedback": "array of typed findings",
+    "attempts": "integer"
+  },
+  "nodes": [
+    { "id": "generator", "role_ref": "agent.sdlc-developer" },
+    { "id": "evaluator", "role_ref": "agent.qa-reviewer" }
+  ],
+  "edges": [
+    { "from": "START", "to": "generator", "when": null },
+    { "from": "generator", "to": "evaluator", "when": null },
+    { "from": "evaluator", "to": "generator", "when": "verdict == 'fail' && attempts < budget.max_iterations" },
+    { "from": "evaluator", "to": "END", "when": "verdict == 'pass'" },
+    { "from": "evaluator", "to": "END", "when": "verdict == 'fail' && attempts >= budget.max_iterations" }
+  ],
+  "interrupts": [],
+  "termination": "verdict == 'pass' OR attempts >= budget.max_iterations; exhaustion emits a typed partial result, never a silent success",
+  "budget": { "max_iterations": 3, "account": "task" }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "parallelization",
+  "alias": "map-reduce",
+  "intent": "Split a divisible task into independent shards, run the same worker over each concurrently, reduce the shard results into one consolidated output.",
+  "state": {
+    "shards": "array of shard descriptors",
+    "shard_results": "array of per-shard typed results (result | typed_failure)",
+    "reduced_output": "object"
+  },
+  "nodes": [
+    { "id": "splitter", "role_ref": "agent.supervisor" },
+    { "id": "worker", "role_ref": "agent.qa-reviewer", "fan_out": "one instance per shard" },
+    { "id": "reducer", "role_ref": "agent.supervisor" }
+  ],
+  "edges": [
+    { "from": "START", "to": "splitter", "when": null },
+    { "from": "splitter", "to": "worker", "when": "for each shard, concurrently" },
+    { "from": "worker", "to": "reducer", "when": "all shards resolved (result or typed failure)" },
+    { "from": "reducer", "to": "END", "when": null }
+  ],
+  "interrupts": [],
+  "termination": "all shards resolved and reducer emits reduced_output; a failed shard yields a typed failure entry, never a hung join",
+  "budget": { "max_iterations": 1, "account": "task", "max_concurrent_shards": 5, "per_shard_budget_share": "total/shards" }
+}

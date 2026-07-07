@@ -1,0 +1,30 @@
+{
+  "id": "seed:core-utils:document-composer",
+  "name": "document-composer",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "output_path": { "type": "string" },
+      "word_count": { "type": "integer" },
+      "sections": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["output_path", "word_count", "sections"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "invalid_outline", "retryable": false },
+    { "code": "missing_required_section", "retryable": false },
+    { "code": "write_denied", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["outline", "output_path", "format"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

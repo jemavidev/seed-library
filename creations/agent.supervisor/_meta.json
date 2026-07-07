@@ -1,0 +1,9 @@
+{
+  "id": "agent.supervisor",
+  "kind": "agent",
+  "name": "supervisor",
+  "description": "Classify each incoming request, delegate it to exactly one specialist, and return one consolidated, honest answer.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

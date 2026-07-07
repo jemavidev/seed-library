@@ -1,0 +1,9 @@
+{
+  "id": "skill.sdlc.read-project-file",
+  "kind": "skill",
+  "name": "read-project-file",
+  "description": "Read one project file as text, safely inside the sandbox, with truncation metadata. Read-only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

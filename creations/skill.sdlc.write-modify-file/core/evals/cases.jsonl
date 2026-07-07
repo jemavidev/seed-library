@@ -1,0 +1,5 @@
+{"name": "creates new file with dirs", "kind": "golden", "input": {"file_path": "src/new/util.py", "content": "x = 1\n", "mode": "write", "patch_target": null, "create_dirs": true}, "expect": {"created": true, "bytes_written": 6}}
+{"name": "patches unique target", "kind": "golden", "input": {"file_path": "fixtures/app.py", "content": "def f():\n    return 2", "mode": "patch", "patch_target": "def f():\n    return 1", "create_dirs": null}, "expect": {"created": false}}
+{"name": "overwrite existing is explicit", "kind": "golden", "input": {"file_path": "fixtures/app.py", "content": "# rewritten\n", "mode": "write", "patch_target": null, "create_dirs": null}, "expect": {"created": false}}
+{"name": "ambiguous patch target fails", "kind": "failure", "input": {"file_path": "fixtures/dup.py", "content": "y = 2", "mode": "patch", "patch_target": "x = 1", "create_dirs": null}, "expect": {"failure": "patch_target_not_found"}}
+{"name": "patch mode requires target", "kind": "failure", "input": {"file_path": "fixtures/app.py", "content": "z", "mode": "patch", "patch_target": null, "create_dirs": null}, "expect": {"failure": "missing_patch_target"}}

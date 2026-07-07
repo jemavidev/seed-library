@@ -1,0 +1,9 @@
+{
+  "id": "skill.sdlc.write-modify-file",
+  "kind": "skill",
+  "name": "write-modify-file",
+  "description": "Create or modify one project file (full write or targeted patch), atomically, inside the sandbox.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

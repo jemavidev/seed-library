@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "document-parser input",
+  "type": "object",
+  "properties": {
+    "input_path": {
+      "type": "string",
+      "description": "Path to the document, project-relative"
+    },
+    "output_format": {
+      "type": "string",
+      "enum": ["markdown", "text"],
+      "description": "markdown preserves headings/tables; text is prose only"
+    },
+    "pages": {
+      "type": ["string", "null"],
+      "description": "Page range for paginated formats, e.g. \"1-5\" or \"3\"; null means all pages"
+    }
+  },
+  "required": ["input_path", "output_format", "pages"],
+  "additionalProperties": false
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "regex-data-extractor input",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": ["string", "null"],
+      "description": "Inline text to scan; mutually exclusive with input_path"
+    },
+    "input_path": {
+      "type": ["string", "null"],
+      "description": "File to scan, project-relative; mutually exclusive with text"
+    },
+    "extract": {
+      "type": "string",
+      "enum": ["emails", "ips", "urls", "hashes", "custom"],
+      "description": "Which entity pattern to apply"
+    },
+    "custom_pattern": {
+      "type": ["string", "null"],
+      "description": "Regular expression; required iff extract=custom"
+    }
+  },
+  "required": ["text", "input_path", "extract", "custom_pattern"],
+  "additionalProperties": false
+}

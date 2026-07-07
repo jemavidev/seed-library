@@ -1,0 +1,30 @@
+{
+  "id": "seed:sdlc:write-file",
+  "name": "write-modify-file",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "bytes_written": { "type": "integer" },
+      "created": { "type": "boolean" }
+    },
+    "required": ["bytes_written", "created"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "access_denied", "retryable": false },
+    { "code": "patch_target_not_found", "retryable": false },
+    { "code": "missing_patch_target", "retryable": false },
+    { "code": "disk_full", "retryable": true }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 60, "burst": 15 },
+  "idempotency": { "supported": true, "keyFrom": ["file_path", "mode", "content"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "git-vcs-operator input",
+  "type": "object",
+  "properties": {
+    "repo_path": {
+      "type": "string",
+      "description": "Path to the repository root (project-relative)"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["status", "branch", "checkout", "commit", "push", "revert"],
+      "description": "The single operation to perform"
+    },
+    "branch": {
+      "type": ["string", "null"],
+      "description": "Branch name; required for branch/checkout/push"
+    },
+    "commit_message": {
+      "type": ["string", "null"],
+      "description": "Required for action=commit"
+    },
+    "ref": {
+      "type": ["string", "null"],
+      "description": "Commit ref; required for action=revert"
+    }
+  },
+  "required": ["repo_path", "action", "branch", "commit_message", "ref"],
+  "additionalProperties": false
+}

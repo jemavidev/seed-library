@@ -1,0 +1,29 @@
+{
+  "id": "hitl-checkpoint",
+  "alias": "human-in-the-loop-interrupt",
+  "intent": "Run until a declared gate before a consequential action; freeze all state at the gate; resume, adjust, or abort based on a human verdict delivered through the runtime's approval stance.",
+  "state": {
+    "work_product": "object — everything produced up to the gate",
+    "pending_action": "object — the exact action awaiting approval, human-readable",
+    "verdict": "string (approved|rejected|amended) | null",
+    "verdict_notes": "string | null"
+  },
+  "nodes": [
+    { "id": "worker", "role_ref": "agent.sdlc-developer" },
+    { "id": "gate", "role_ref": null },
+    { "id": "executor", "role_ref": "agent.sdlc-developer" }
+  ],
+  "edges": [
+    { "from": "START", "to": "worker", "when": null },
+    { "from": "worker", "to": "gate", "when": "pending_action is set" },
+    { "from": "gate", "to": "executor", "when": "verdict == 'approved'" },
+    { "from": "gate", "to": "worker", "when": "verdict == 'amended'" },
+    { "from": "gate", "to": "END", "when": "verdict == 'rejected'" },
+    { "from": "executor", "to": "END", "when": null }
+  ],
+  "interrupts": [
+    { "at": "gate", "stance": "confirm", "timeout": "24h", "on_timeout": "abort" }
+  ],
+  "termination": "executor completes after approval, or the gate ends the run on rejection/timeout; timeout never defaults to approval",
+  "budget": { "max_iterations": 2, "account": "task" }
+}

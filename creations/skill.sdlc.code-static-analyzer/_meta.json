@@ -1,0 +1,11 @@
+{
+  "id": "skill.sdlc.code-static-analyzer",
+  "kind": "skill",
+  "name": "code-static-analyzer",
+  "description": "Run a linter/type-checker and get normalized, typed findings (rule, severity, file, line, message). Read-only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "subprocess"
+  ],
+  "libraryShare": "candidate"
+}

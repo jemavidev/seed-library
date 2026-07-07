@@ -1,0 +1,42 @@
+{
+  "id": "seed:core-utils:web-search",
+  "name": "web-search",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "results": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string" },
+            "url": { "type": "string" },
+            "snippet": { "type": "string" },
+            "published_at": { "type": ["string", "null"] }
+          },
+          "required": ["title", "url", "snippet", "published_at"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["results"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "provider_unreachable", "retryable": true },
+    { "code": "quota_exceeded", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "SEARCH_API_KEY", "env": "SEARCH_API_KEY" }
+  ],
+  "rateLimit": { "perMinute": 20, "burst": 5 },
+  "idempotency": { "supported": true, "keyFrom": ["query", "max_results", "recency_days"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

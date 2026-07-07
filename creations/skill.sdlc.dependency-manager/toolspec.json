@@ -1,0 +1,42 @@
+{
+  "id": "seed:sdlc:dependency-manager",
+  "name": "dependency-manager",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "changed": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "package": { "type": "string" },
+            "from": { "type": ["string", "null"] },
+            "to": { "type": ["string", "null"] }
+          },
+          "required": ["package", "from", "to"],
+          "additionalProperties": false
+        }
+      },
+      "vulnerabilities": { "type": ["integer", "null"] }
+    },
+    "required": ["action", "changed", "vulnerabilities"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "resolution_conflict", "retryable": false },
+    { "code": "registry_unreachable", "retryable": true },
+    { "code": "unsupported_manager", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 20, "burst": 5 },
+  "idempotency": { "supported": true, "keyFrom": ["project_path", "action", "package", "version"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["subprocess", "network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

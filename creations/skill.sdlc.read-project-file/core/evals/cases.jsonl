@@ -1,0 +1,5 @@
+{"name": "reads small text file", "kind": "golden", "input": {"file_path": "fixtures/hello.txt", "encoding": null, "max_bytes": null}, "expect": {"content": "hello world\n", "truncated": false, "size_bytes": 12}}
+{"name": "truncates at max_bytes", "kind": "golden", "input": {"file_path": "fixtures/long.txt", "encoding": null, "max_bytes": 10}, "expect": {"truncated": true, "size_bytes": 5000}}
+{"name": "respects latin-1 encoding", "kind": "golden", "input": {"file_path": "fixtures/latin1.txt", "encoding": "latin-1", "max_bytes": null}, "expect": {"truncated": false}}
+{"name": "rejects sandbox escape", "kind": "failure", "input": {"file_path": "../../etc/passwd", "encoding": null, "max_bytes": null}, "expect": {"failure": "access_denied"}}
+{"name": "missing file is typed, not empty", "kind": "failure", "input": {"file_path": "fixtures/nope.txt", "encoding": null, "max_bytes": null}, "expect": {"failure": "not_found"}}

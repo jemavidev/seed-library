@@ -1,0 +1,5 @@
+{"name": "pdf to markdown with headings", "kind": "golden", "input": {"input_path": "fixtures/report.pdf", "output_format": "markdown", "pages": null}, "expect": {"content_contains": "# ", "metadata_format": "pdf"}}
+{"name": "page range respected", "kind": "golden", "input": {"input_path": "fixtures/report.pdf", "output_format": "text", "pages": "1-2"}, "expect": {"metadata": {"pages_extracted": 2}}}
+{"name": "xlsx tables become markdown tables", "kind": "golden", "input": {"input_path": "fixtures/data.xlsx", "output_format": "markdown", "pages": null}, "expect": {"content_contains": "|", "metadata_tables_at_least": 1}}
+{"name": "unknown format is typed", "kind": "failure", "input": {"input_path": "fixtures/blob.bin", "output_format": "text", "pages": null}, "expect": {"failure": "unsupported_format"}}
+{"name": "encrypted pdf is surfaced", "kind": "failure", "input": {"input_path": "fixtures/locked.pdf", "output_format": "text", "pages": null}, "expect": {"failure": "password_protected"}}

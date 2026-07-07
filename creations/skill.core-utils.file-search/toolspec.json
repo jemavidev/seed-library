@@ -1,0 +1,40 @@
+{
+  "id": "seed:core-utils:file-search",
+  "name": "file-search",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "matches": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "file": { "type": "string" },
+            "line": { "type": "integer" },
+            "excerpt": { "type": "string" }
+          },
+          "required": ["file", "line", "excerpt"],
+          "additionalProperties": false
+        }
+      },
+      "truncated": { "type": "boolean" }
+    },
+    "required": ["matches", "truncated"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "invalid_pattern", "retryable": false },
+    { "code": "path_not_found", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 120, "burst": 30 },
+  "idempotency": { "supported": true, "keyFrom": ["pattern", "path", "type"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

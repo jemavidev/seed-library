@@ -1,0 +1,28 @@
+{
+  "id": "seed:core-utils:regex-extractor",
+  "name": "regex-data-extractor",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "matches": { "type": "array", "items": { "type": "string" } },
+      "count": { "type": "integer" }
+    },
+    "required": ["matches", "count"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "invalid_pattern", "retryable": false },
+    { "code": "no_input", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 120, "burst": 30 },
+  "idempotency": { "supported": true, "keyFrom": ["text", "input_path", "extract", "custom_pattern"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

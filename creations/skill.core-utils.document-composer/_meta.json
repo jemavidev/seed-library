@@ -1,0 +1,9 @@
+{
+  "id": "skill.core-utils.document-composer",
+  "kind": "skill",
+  "name": "document-composer",
+  "description": "Turn an outline + section content into a structured markdown/HTML/DOCX document with required-section enforcement.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}
