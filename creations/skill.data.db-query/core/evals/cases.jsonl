@@ -2,4 +2,4 @@
 {"name": "row cap sets truncated", "kind": "golden", "input": {"connection_ref": "reporting", "query": "SELECT id FROM orders", "row_limit": 10, "timeout_seconds": null}, "expect": {"row_count": 10, "truncated": true}}
 {"name": "update statement rejected", "kind": "failure", "input": {"connection_ref": "reporting", "query": "UPDATE orders SET status='paid'", "row_limit": null, "timeout_seconds": null}, "expect": {"failure": "query_rejected"}}
 {"name": "select for update rejected", "kind": "failure", "input": {"connection_ref": "reporting", "query": "SELECT * FROM orders FOR UPDATE", "row_limit": null, "timeout_seconds": null}, "expect": {"failure": "query_rejected"}}
-{"name": "connection string rejected", "kind": "failure", "input": {"connection_ref": "postgres://user:pass@host/db", "query": "SELECT 1", "row_limit": null, "timeout_seconds": null}, "expect": {"failure": "connection_not_found"}}
+{"name": "connection string rejected", "kind": "failure", "input": {"connection_ref": "db://user:pass@host/db", "query": "SELECT 1", "row_limit": null, "timeout_seconds": null}, "expect": {"failure": "connection_not_found"}}

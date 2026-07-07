@@ -7,16 +7,7 @@
     "ref": "https://github.com/mattpocock/skills",
     "version": "MIT; writing-great-skills + writing-docs doctrine"
   },
-  "parameters": {
-    "type": "object",
-    "properties": {
-      "draft_ref": { "type": ["string", "null"], "description": "Path to the draft creation under authoring/review; null for a fresh authoring session" },
-      "mode": { "type": "string", "enum": ["author", "edit", "diagnose"], "description": "Create new, revise existing, or diagnose a misfiring asset" },
-      "asset_class": { "type": "string", "enum": ["skill", "agent", "hook"], "description": "The executable asset class being authored" }
-    },
-    "required": ["draft_ref", "mode", "asset_class"],
-    "additionalProperties": false
-  },
+  "parameters": { "$ref": "core/interface.schema.json" },
   "returns": {
     "type": "object",
     "properties": {

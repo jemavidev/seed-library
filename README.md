@@ -43,6 +43,23 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - Templates are filename-addressed: `templates/patterns/<id>.pattern.json` (+ `<id>.md` rationale),
   `templates/context-packs/<name>/`, `templates/charters/`, `templates/frontier-policies/`.
 
+## Maintaining this library
+
+Derived artifacts are **generated, never hand-edited**: `_meta.json`, each skill's
+`bindings/claude-code/SKILL.md`, and `CATALOG.md` all come from each asset's `core/` +
+`toolspec.json`. After adding, renaming, or editing any asset, run one command:
+
+```bash
+python3 scripts/build.py
+```
+
+It regenerates the derived files (`generate-bindings.py` → `build-catalog.py`) and then
+**validates** (`validate.py`: core-neutrality lint, JSON/JSONL validity, skill-contract
+presence), exiting non-zero on any finding. Stdlib-only and path-relative, so a fresh
+`git clone` rebuilds with nothing but `python3` — the SeeD-vanishes durability property applies
+to the library's own tooling, not just its content. Provenance (`lineage`, `libraryShare`) is
+preserved across regenerations; only genuinely new assets get defaults.
+
 ## Index
 
 > The exhaustive, always-current index is **[CATALOG.md](CATALOG.md)**, generated from asset
