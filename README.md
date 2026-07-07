@@ -30,3 +30,27 @@ from the SeeD product — the product is code that evolves; this is knowledge th
 4. **The SeeD-vanishes test.** If SeeD stopped existing tomorrow, this repo alone must remain
    valuable: prompts readable as markdown, skills droppable into `.claude/skills/`, tools
    runnable as MCP servers, lessons greppable. Any format choice that fails this test is rejected.
+
+## Seeding conventions (hand-seeded assets, pre-F3.5)
+
+Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/main/docs/implementation/library-seeding-plan.md):
+
+- Creation ids: `<kind>.<domain>.<name>` (e.g. `skill.sdlc.read-project-file`, `agent.supervisor`).
+- Skills carry a `toolspec.json` sidecar at the creation root (SeeD ToolSpec contract);
+  the pure JSON Schema interface lives in `core/interface.schema.json` (strict: `additionalProperties:false`).
+- Every hand-seeded `_meta.json` sets `lineage: "hand-seeded@<date>"` and `libraryShare: "candidate"` —
+  the F3.5 promotion gate re-validates everything seeded by hand.
+- Templates are filename-addressed: `templates/patterns/<id>.pattern.json` (+ `<id>.md` rationale),
+  `templates/context-packs/<name>/`, `templates/charters/`, `templates/frontier-policies/`.
+
+## Index
+
+### creations/
+<!-- one line per asset, appended as seeded -->
+
+### templates/
+<!-- one line per asset, appended as seeded -->
+
+### lessons/
+<!-- one line per asset, appended as seeded -->
+
