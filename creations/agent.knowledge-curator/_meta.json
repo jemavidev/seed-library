@@ -1,0 +1,9 @@
+{
+  "id": "agent.knowledge-curator",
+  "kind": "agent",
+  "name": "knowledge-curator",
+  "description": "Keep the cumulative library trustworthy \u2014 every asset findable, current, deduplicated, and honest about its validity; nothing enters or leaves it silently.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

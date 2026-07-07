@@ -1,0 +1,12 @@
+{
+  "id": "skill.devops.container-operator",
+  "kind": "skill",
+  "name": "container-operator",
+  "description": "Container lifecycle (build/run/stop/logs/remove/push) against the configured runtime; push publishes to a registry.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "subprocess",
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

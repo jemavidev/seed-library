@@ -1,0 +1,11 @@
+{
+  "id": "skill.multimodal.image-analyzer",
+  "kind": "skill",
+  "name": "image-analyzer",
+  "description": "Describe, extract text from, question, or compare sandbox images via a vision-capable model; results are judgments with caveats.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "vision"
+  ],
+  "libraryShare": "candidate"
+}

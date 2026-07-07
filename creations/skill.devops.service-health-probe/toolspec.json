@@ -1,0 +1,30 @@
+{
+  "id": "seed:devops:service-health-probe",
+  "name": "service-health-probe",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "healthy": { "type": "boolean" },
+      "latency_ms": { "type": ["number", "null"] },
+      "status_code": { "type": ["integer", "null"] },
+      "details": { "type": "string" }
+    },
+    "required": ["healthy", "latency_ms", "status_code", "details"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "endpoint_not_configured", "retryable": false },
+    { "code": "invalid_threshold", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 60, "burst": 20 },
+  "idempotency": { "supported": true, "keyFrom": ["endpoint_ref", "protocol"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

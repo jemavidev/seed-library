@@ -1,0 +1,31 @@
+{
+  "id": "seed:business:financial-modeler",
+  "name": "financial-modeler",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "analysis": { "type": "string" },
+      "results": { "type": "object" },
+      "assumptions": { "type": "array", "items": { "type": "string" } },
+      "warnings": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["analysis", "results", "assumptions", "warnings"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "missing_input", "retryable": false },
+    { "code": "invalid_inputs", "retryable": false },
+    { "code": "no_solution", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 60, "burst": 20 },
+  "idempotency": { "supported": true, "keyFrom": ["analysis", "inputs"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

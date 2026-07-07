@@ -90,6 +90,24 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - `hook.span-metadata-recorder` — post-tool span enrichment of the canonical access event; fail-open
 - `hook.context-zone-guard` — dual-ceiling context watermark: compact at soft, hand off at hard
 - `hook.pii-redactor` — pre-external secret/PII scan: mask or block, fail-closed, audited
+- `skill.devops.container-operator` — container lifecycle; immutable tags, never overwrite a push (external)
+- `skill.devops.cloud-instance-operator` — provider-neutral instance lifecycle; terminate has no undo (external)
+- `skill.devops.object-storage-operator` — bucket ops; deletes require versioned storage (external)
+- `skill.devops.iac-operator` — two-phase IaC: apply only a saved plan_ref; destroy counts gate review (external)
+- `skill.devops.k8s-operator` — apply/scale/rollback with rollout verification; revision anchored (external)
+- `skill.devops.service-config-manager` — validate→apply→rollback; auto-revert on failed reload (external)
+- `skill.devops.service-health-probe` — one probe with latency bands; unhealthy is a calm result (pure)
+- `skill.daemon.scheduler-operator` — cron/interval/once jobs on registered flows; policy binds at fire time (local)
+- `skill.daemon.watchdog-monitor` — condition watches emitting evidence-bearing triggers; watch/act separated (local)
+- `skill.multimodal.image-analyzer` — describe/extract/answer/compare via vision capability; caveats mandatory (pure)
+- `skill.multimodal.audio-transcriber` — transcription with timestamps/diarization; positional speakers only (pure)
+- `skill.business.financial-modeler` — NPV/IRR/amortization/break-even; results travel with assumptions (pure)
+- `skill.education.curriculum-builder` — outcomes→units→assessments enforced; gaps stay loud (local)
+- `agent.infra-architect` — plan-first infra changes; restore-first on failure; probe is the finish line
+- `agent.educator-tutor` — locate the learner, one concept at a time, check by doing
+- `agent.knowledge-curator` — staleness sweeps, dedupe, two-sided promotion cases; proposes, never disposes
+- `hook.budget-threshold-alert` — graduated spend watermark per account; hard mark gates new spend
+- `hook.lesson-harvester` — post-task lesson candidates into proposed/, evidence-linked, dedupe-first
 
 ### templates/
 - `patterns/routing` — supervisor-router: single entry, one specialist per request
@@ -101,6 +119,9 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - `patterns/multi-agent-debate` — assigned stances, bounded critique rounds, synthesis over vote
 - `patterns/planner-executor` — typed plan artifact approved as a whole; deviations return to the planner
 - `patterns/context-handoff` — proactive succession on context ceiling; packet is the whole interface
+- `patterns/saga-compensation` — compensation registered before each effect; reverse unwind; partial unwind escalates
+- `patterns/long-horizon-run` — bounded episodes + checkpoints + heartbeats; stalls escalate with state attached
+- `patterns/canary-promotion` — same evals both versions; regressions dominate; promotion gated, rollback warm
 - `context-packs/default-agent-context` — per-agent context policy: budgeted blocks, retrieval, state keys, handoff contract
 - `context-packs/project-rules` — rule-file convention: nearest-wins, compilable to one budgeted block
 - `context-packs/memory-taxonomy` — five memory types as config; one-way flow with distillation gates

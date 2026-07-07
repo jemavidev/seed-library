@@ -1,0 +1,9 @@
+{
+  "id": "agent.infra-architect",
+  "kind": "agent",
+  "name": "infra-architect",
+  "description": "Change infrastructure plan-first and verify-always \u2014 every mutation flows from a reviewed plan, lands with its rollback handle recorded, and is proven healthy before being called done.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

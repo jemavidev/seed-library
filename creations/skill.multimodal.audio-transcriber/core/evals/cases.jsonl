@@ -1,0 +1,6 @@
+{"name": "voice note transcribed with language detection", "kind": "golden", "input": {"audio_path": "fixtures/voice-note.ogg", "language": null, "timestamps": false, "diarize": false}, "expect": {"text_nonempty": true, "language_detected_nonempty": true}}
+{"name": "timestamps produce ordered segments", "kind": "golden", "input": {"audio_path": "fixtures/voice-note.ogg", "language": "es", "timestamps": true, "diarize": false}, "expect": {"segments_ordered_by_start": true}}
+{"name": "diarization labels positionally", "kind": "golden", "input": {"audio_path": "fixtures/two-speakers.wav", "language": "en", "timestamps": true, "diarize": true}, "expect": {"speakers_in": ["S1", "S2"]}}
+{"name": "noisy audio marks inaudible spans", "kind": "golden", "input": {"audio_path": "fixtures/noisy.wav", "language": null, "timestamps": false, "diarize": false}, "expect": {"text_contains": "[inaudible]"}}
+{"name": "video file is typed", "kind": "failure", "input": {"audio_path": "fixtures/clip.mp4", "language": null, "timestamps": false, "diarize": false}, "expect": {"failure": "unsupported_audio"}}
+{"name": "three-hour file is typed", "kind": "failure", "input": {"audio_path": "fixtures/marathon.wav", "language": null, "timestamps": false, "diarize": false}, "expect": {"failure": "duration_exceeded"}}

@@ -1,0 +1,32 @@
+{
+  "id": "seed:multimodal:image-analyzer",
+  "name": "image-analyzer",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "task": { "type": "string" },
+      "result": { "type": "string" },
+      "caveats": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["task", "result", "caveats"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "file_not_found", "retryable": false },
+    { "code": "unsupported_image", "retryable": false },
+    { "code": "too_large", "retryable": false },
+    { "code": "missing_question", "retryable": false },
+    { "code": "model_unavailable", "retryable": true }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 20, "burst": 5 },
+  "idempotency": { "supported": true, "keyFrom": ["image_path", "task", "question", "compare_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["vision"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

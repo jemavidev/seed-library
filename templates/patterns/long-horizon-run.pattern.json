@@ -1,0 +1,30 @@
+{
+  "id": "long-horizon-run",
+  "alias": "checkpointed-autonomous-run",
+  "intent": "Pursue an objective across many work episodes without supervision: each episode does bounded work, checkpoints its state, and emits a heartbeat; interruption at any point resumes from the last checkpoint; stalls and budget exhaustion escalate instead of spinning.",
+  "state": {
+    "objective": "string — carried verbatim across all episodes",
+    "checkpoint": "object — { progress_summary, artifacts, decisions_made, next_intent, episode }",
+    "episode": "integer",
+    "last_heartbeat": "timestamp",
+    "stall_counter": "integer — episodes without measurable progress"
+  },
+  "nodes": [
+    { "id": "worker", "role_ref": "bound per instantiation to the acting profile" },
+    { "id": "checkpointer", "role_ref": null },
+    { "id": "stall_check", "role_ref": null }
+  ],
+  "edges": [
+    { "from": "START", "to": "worker", "when": "fresh start, or resume: worker begins from checkpoint.next_intent" },
+    { "from": "worker", "to": "checkpointer", "when": "episode's bounded work complete (or context-handoff fired mid-episode)" },
+    { "from": "checkpointer", "to": "stall_check", "when": "checkpoint persisted and heartbeat emitted" },
+    { "from": "stall_check", "to": "worker", "when": "progress made && objective unmet && budget remains" },
+    { "from": "stall_check", "to": "END", "when": "objective met — outcome: done" },
+    { "from": "stall_check", "to": "END", "when": "stall_counter >= 3 OR budget exhausted — outcome: escalated, with checkpoint attached" }
+  ],
+  "interrupts": [
+    { "at": "stall_check", "stance": "notify", "timeout": null, "on_timeout": null }
+  ],
+  "termination": "objective met, or escalation on stall (3 episodes without progress) or budget exhaustion — escalation always carries the latest checkpoint so a human resumes informed, not from zero",
+  "budget": { "max_iterations": 50, "account": "task" }
+}

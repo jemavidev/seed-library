@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "container-operator input",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": ["build", "run", "stop", "logs", "remove", "push"],
+      "description": "The single lifecycle operation"
+    },
+    "image": {
+      "type": ["string", "null"],
+      "description": "Image name:tag; required for build/run/push"
+    },
+    "container_ref": {
+      "type": ["string", "null"],
+      "description": "Container name/id; required for stop/logs/remove"
+    },
+    "context_path": {
+      "type": ["string", "null"],
+      "description": "Build context directory, project-relative; required for build"
+    },
+    "registry_ref": {
+      "type": ["string", "null"],
+      "description": "Configured registry name; required for push — never a raw registry URL with credentials"
+    },
+    "args": {
+      "type": ["object", "null"],
+      "description": "Action-specific options: ports, env var references, build args, log tail lines"
+    }
+  },
+  "required": ["action", "image", "container_ref", "context_path", "registry_ref", "args"],
+  "additionalProperties": false
+}

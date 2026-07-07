@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "object-storage-operator input",
+  "type": "object",
+  "properties": {
+    "storage_ref": {
+      "type": "string",
+      "description": "Configured object store name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["upload", "download", "list", "delete"],
+      "description": "The single storage operation; list/download are effect-free"
+    },
+    "key": {
+      "type": ["string", "null"],
+      "description": "Object key; required for upload/download/delete"
+    },
+    "local_path": {
+      "type": ["string", "null"],
+      "description": "Sandbox file path; required for upload/download"
+    },
+    "prefix": {
+      "type": ["string", "null"],
+      "description": "Key prefix filter for list"
+    }
+  },
+  "required": ["storage_ref", "action", "key", "local_path", "prefix"],
+  "additionalProperties": false
+}

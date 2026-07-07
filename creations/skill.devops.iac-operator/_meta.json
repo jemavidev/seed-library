@@ -1,0 +1,12 @@
+{
+  "id": "skill.devops.iac-operator",
+  "kind": "skill",
+  "name": "iac-operator",
+  "description": "Two-phase infrastructure-as-code: plan saves an immutable change set; apply executes only a saved plan_ref; destroy counts gate review.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "subprocess",
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "image-analyzer input",
+  "type": "object",
+  "properties": {
+    "image_path": {
+      "type": "string",
+      "description": "Image file in the project sandbox"
+    },
+    "task": {
+      "type": "string",
+      "enum": ["describe", "extract-text", "answer", "compare"],
+      "description": "What to do with the image"
+    },
+    "question": {
+      "type": ["string", "null"],
+      "description": "The specific question; required for task=answer"
+    },
+    "compare_path": {
+      "type": ["string", "null"],
+      "description": "Second image; required for task=compare"
+    },
+    "detail": {
+      "type": "string",
+      "enum": ["brief", "full"],
+      "description": "Result verbosity"
+    }
+  },
+  "required": ["image_path", "task", "question", "compare_path", "detail"],
+  "additionalProperties": false
+}

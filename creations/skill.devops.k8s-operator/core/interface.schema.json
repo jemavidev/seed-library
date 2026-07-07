@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "k8s-operator input",
+  "type": "object",
+  "properties": {
+    "cluster_ref": {
+      "type": "string",
+      "description": "Configured cluster name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["apply", "status", "scale", "rollback", "delete"],
+      "description": "The single operation; status is effect-free"
+    },
+    "manifest_path": {
+      "type": ["string", "null"],
+      "description": "Manifest file, project-relative; required for apply"
+    },
+    "resource_ref": {
+      "type": ["string", "null"],
+      "description": "kind/name (e.g. deployment/api); required for status/scale/rollback/delete"
+    },
+    "replicas": {
+      "type": ["integer", "null"],
+      "minimum": 0,
+      "description": "Target replica count; required for scale"
+    },
+    "revision": {
+      "type": ["string", "null"],
+      "description": "Rollback target revision; null means previous"
+    }
+  },
+  "required": ["cluster_ref", "action", "manifest_path", "resource_ref", "replicas", "revision"],
+  "additionalProperties": false
+}

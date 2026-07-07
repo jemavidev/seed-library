@@ -1,0 +1,11 @@
+{
+  "id": "skill.devops.k8s-operator",
+  "kind": "skill",
+  "name": "k8s-operator",
+  "description": "Apply/scale/rollback/delete orchestrated workloads with rollout verification; every mutation anchored to revision history.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

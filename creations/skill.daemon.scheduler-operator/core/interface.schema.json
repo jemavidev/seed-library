@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "scheduler-operator input",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": ["create", "list", "pause", "resume", "cancel"],
+      "description": "Scheduler operation"
+    },
+    "job_ref": {
+      "type": ["string", "null"],
+      "description": "Job name; required for all actions except list"
+    },
+    "schedule": {
+      "type": ["string", "null"],
+      "description": "Cron expression, every:<interval>, or once:<ISO timestamp>; required for create"
+    },
+    "task_ref": {
+      "type": ["string", "null"],
+      "description": "Registered flow/task id the job runs; required for create"
+    },
+    "window": {
+      "type": ["object", "null"],
+      "properties": {
+        "start": { "type": ["string", "null"] },
+        "end": { "type": ["string", "null"] }
+      },
+      "required": ["start", "end"],
+      "additionalProperties": false,
+      "description": "Validity bounds (ISO timestamps); job is inert outside them"
+    }
+  },
+  "required": ["action", "job_ref", "schedule", "task_ref", "window"],
+  "additionalProperties": false
+}

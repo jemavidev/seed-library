@@ -1,0 +1,31 @@
+{
+  "id": "seed:education:curriculum-builder",
+  "name": "curriculum-builder",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "output_path": { "type": "string" },
+      "units": { "type": "integer" },
+      "outcomes_covered": { "type": "integer" },
+      "gaps": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["output_path", "units", "outcomes_covered", "gaps"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "outcomes_missing", "retryable": false },
+    { "code": "invalid_duration", "retryable": false },
+    { "code": "write_denied", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 20, "burst": 5 },
+  "idempotency": { "supported": true, "keyFrom": ["subject", "outcomes", "format", "output_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

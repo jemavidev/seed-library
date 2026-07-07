@@ -1,0 +1,11 @@
+{
+  "id": "skill.devops.service-config-manager",
+  "kind": "skill",
+  "name": "service-config-manager",
+  "description": "Two-phase service config changes: validate (diagnostics), apply (validated candidates only, auto-revert on failed reload), rollback.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

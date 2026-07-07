@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "curriculum-builder input",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "string",
+      "description": "What is being taught"
+    },
+    "audience": {
+      "type": "object",
+      "properties": {
+        "level": { "type": "string" },
+        "prerequisites": { "type": "array", "items": { "type": "string" } }
+      },
+      "required": ["level", "prerequisites"],
+      "additionalProperties": false,
+      "description": "Who learns; prerequisites are the ONLY assumable knowledge"
+    },
+    "outcomes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Observable statements: 'learner can <checkable action>'"
+    },
+    "duration": {
+      "type": ["string", "null"],
+      "description": "Course/session length, e.g. '6 weeks', '1 session'; null lets the builder propose"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["outline", "full-syllabus", "lesson-plan", "rubric"],
+      "description": "Artifact to produce"
+    },
+    "output_path": {
+      "type": "string",
+      "description": "Where to write the artifact, project-relative"
+    }
+  },
+  "required": ["subject", "audience", "outcomes", "duration", "format", "output_path"],
+  "additionalProperties": false
+}

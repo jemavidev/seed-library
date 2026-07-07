@@ -1,0 +1,6 @@
+{"name": "break-even units", "kind": "golden", "input": {"analysis": "break-even", "inputs": {"fixed_costs": 1200, "unit_price": 15, "unit_variable_cost": 7}, "currency": "USD"}, "expect": {"results": {"units": 150}, "assumptions_nonempty": true}}
+{"name": "npv of known flows", "kind": "golden", "input": {"analysis": "npv", "inputs": {"rate": 0.1, "cash_flows": [-1000, 500, 500, 500]}, "currency": "USD"}, "expect": {"results_npv_close_to": 243.43}}
+{"name": "amortization totals interest", "kind": "golden", "input": {"analysis": "amortization", "inputs": {"principal": 10000, "annual_rate": 0.12, "periods": 12}, "currency": "USD"}, "expect": {"results_have": ["payment", "total_interest", "schedule"]}}
+{"name": "irr with sign changes warns", "kind": "golden", "input": {"analysis": "irr", "inputs": {"cash_flows": [-100, 300, -250, 200]}, "currency": null}, "expect": {"warnings_mention": "multiple"}}
+{"name": "negative price is typed", "kind": "failure", "input": {"analysis": "break-even", "inputs": {"fixed_costs": 1200, "unit_price": -5, "unit_variable_cost": 7}, "currency": null}, "expect": {"failure": "invalid_inputs"}}
+{"name": "irr undefined is no_solution", "kind": "failure", "input": {"analysis": "irr", "inputs": {"cash_flows": [100, 200, 300]}, "currency": null}, "expect": {"failure": "no_solution"}}

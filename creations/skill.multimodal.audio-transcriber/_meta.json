@@ -1,0 +1,11 @@
+{
+  "id": "skill.multimodal.audio-transcriber",
+  "kind": "skill",
+  "name": "audio-transcriber",
+  "description": "Transcribe sandbox audio (timestamps, speaker separation) via an audio-capable model; transcripts are best-effort, verify load-bearing details.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "audio"
+  ],
+  "libraryShare": "candidate"
+}

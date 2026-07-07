@@ -1,0 +1,11 @@
+{
+  "id": "skill.devops.object-storage-operator",
+  "kind": "skill",
+  "name": "object-storage-operator",
+  "description": "Upload/download/list/delete against a configured bucket; deletes require versioned storage (undo must exist).",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

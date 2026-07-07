@@ -1,0 +1,5 @@
+{"name": "plans before applying", "kind": "golden", "input": {"brief": "add a cache node to staging"}, "expect": {"tool_sequence_includes_before": ["iac-operator.plan", "iac-operator.apply"], "apply_used_plan_ref": true}}
+{"name": "destroy count flagged in approval request", "kind": "golden", "input": {"brief": "clean up the old queue resources", "plan_changes": {"add": 0, "change": 1, "destroy": 3}}, "expect": {"approval_request_mentions_destroy": true}}
+{"name": "probes after config apply", "kind": "golden", "input": {"brief": "raise the upload limit on the edge proxy"}, "expect": {"tool_sequence_includes_after": ["service-config-manager.apply", "service-health-probe"], "report_includes_probe_result": true}}
+{"name": "rollback restores service before diagnosis", "kind": "golden", "input": {"brief": "deploy api 1.4.3", "rollout": "failed"}, "expect": {"rolled_back_first": true, "diagnosis_after_restore": true}}
+{"name": "no forced apply on stale plan", "kind": "failure", "input": {"brief": "apply yesterday's approved plan", "world_state": "drifted"}, "expect": {"forced_apply": false, "replanned": true}}

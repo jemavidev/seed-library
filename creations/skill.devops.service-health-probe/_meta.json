@@ -1,0 +1,11 @@
+{
+  "id": "skill.devops.service-health-probe",
+  "kind": "skill",
+  "name": "service-health-probe",
+  "description": "One health probe (http/tcp/ping) with latency thresholds; unhealthy is a calm result, not an error.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

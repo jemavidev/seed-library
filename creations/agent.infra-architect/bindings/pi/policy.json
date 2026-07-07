@@ -1,0 +1,29 @@
+{
+  "profile": "agent.infra-architect",
+  "authorized_skills": [
+    "seed:devops:container-operator",
+    "seed:devops:cloud-instance-operator",
+    "seed:devops:object-storage-operator",
+    "seed:devops:iac-operator",
+    "seed:devops:k8s-operator",
+    "seed:devops:service-config-manager",
+    "seed:devops:service-health-probe",
+    "seed:daemon:scheduler-operator",
+    "seed:daemon:watchdog-monitor",
+    "seed:data:metrics-collector",
+    "seed:data:log-reader",
+    "seed:core-utils:file-search",
+    "seed:sdlc:read-file"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "confirm"
+  },
+  "stance_overrides": {
+    "seed:devops:iac-operator": "expert-review",
+    "seed:devops:cloud-instance-operator": "expert-review"
+  },
+  "notes": "IaC and instance lifecycle escalate to expert-review because they carry the destroy/terminate paths; plans with destroy > 0 are flagged in the request itself."
+}

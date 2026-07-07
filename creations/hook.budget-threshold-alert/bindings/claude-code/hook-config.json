@@ -1,0 +1,16 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). PostToolUse evaluates the ledger; at hard threshold the command exits non-zero to hold the next cost-bearing call pending approval.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook budget-threshold-alert --account task --warn-percent 70 --hard-percent 90 --notify-channel ops-approvals"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "saga-compensation",
+  "alias": "compensated-effect-chain",
+  "intent": "Execute a sequence of external-effect steps where each step's compensation is registered BEFORE the step runs; on failure at step k, execute compensations k-1..1 in reverse order and report the unwind.",
+  "state": {
+    "steps": "array of { step_id, tool_ref, action, compensation: { tool_ref, action, args }, status: pending|done|failed|compensated }",
+    "compensation_log": "append-only record of registered and executed compensations",
+    "outcome": "string (completed | unwound | partially_unwound)"
+  },
+  "nodes": [
+    { "id": "executor", "role_ref": "agent.integrations-operator" },
+    { "id": "compensator", "role_ref": "agent.integrations-operator" }
+  ],
+  "edges": [
+    { "from": "START", "to": "executor", "when": "every step declares a compensation (validated at load — a step without one rejects the saga)" },
+    { "from": "executor", "to": "executor", "when": "step done: register next step's compensation, then run it" },
+    { "from": "executor", "to": "END", "when": "all steps done — outcome: completed" },
+    { "from": "executor", "to": "compensator", "when": "a step failed" },
+    { "from": "compensator", "to": "compensator", "when": "compensations remain: run them newest-first" },
+    { "from": "compensator", "to": "END", "when": "unwind finished — outcome: unwound; or a compensation itself failed — outcome: partially_unwound, escalate with the remaining trail" }
+  ],
+  "interrupts": [
+    { "at": "compensator", "stance": "notify", "timeout": null, "on_timeout": null }
+  ],
+  "termination": "completed, unwound, or partially_unwound — partially_unwound always escalates to a human with the compensation_log and the steps still standing",
+  "budget": { "max_iterations": 1, "account": "task" }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "seed:multimodal:audio-transcriber",
+  "name": "audio-transcriber",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "text": { "type": "string" },
+      "segments": {
+        "type": ["array", "null"],
+        "items": {
+          "type": "object",
+          "properties": {
+            "start": { "type": "number" },
+            "end": { "type": "number" },
+            "speaker": { "type": ["string", "null"] },
+            "text": { "type": "string" }
+          },
+          "required": ["start", "end", "speaker", "text"],
+          "additionalProperties": false
+        }
+      },
+      "language_detected": { "type": "string" },
+      "duration_seconds": { "type": "number" }
+    },
+    "required": ["text", "segments", "language_detected", "duration_seconds"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "file_not_found", "retryable": false },
+    { "code": "unsupported_audio", "retryable": false },
+    { "code": "duration_exceeded", "retryable": false },
+    { "code": "model_unavailable", "retryable": true }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 12, "burst": 4 },
+  "idempotency": { "supported": true, "keyFrom": ["audio_path", "language", "timestamps", "diarize"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["audio"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

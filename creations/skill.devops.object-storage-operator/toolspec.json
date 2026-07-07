@@ -1,0 +1,39 @@
+{
+  "id": "seed:devops:object-storage-operator",
+  "name": "object-storage-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "key": { "type": ["string", "null"] },
+      "keys": { "type": ["array", "null"], "items": { "type": "string" } },
+      "size_bytes": { "type": ["integer", "null"] }
+    },
+    "required": ["action", "key", "keys", "size_bytes"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "storage_unreachable", "retryable": true },
+    { "code": "auth_failed", "retryable": false },
+    { "code": "key_not_found", "retryable": false },
+    { "code": "quota_exceeded", "retryable": false },
+    { "code": "delete_unversioned_blocked", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "STORAGE_CREDENTIALS_<STORAGE_REF>", "env": "STORAGE_CREDENTIALS_<STORAGE_REF>" }
+  ],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["storage_ref", "action", "key"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "upload -> delete(key); delete -> restore prior version (versioned stores only — unversioned deletes are refused up front)",
+    "toolId": "seed:devops:object-storage-operator"
+  },
+  "_meta": "_meta.json"
+}

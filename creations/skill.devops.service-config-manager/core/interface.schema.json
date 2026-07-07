@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "service-config-manager input",
+  "type": "object",
+  "properties": {
+    "service_ref": {
+      "type": "string",
+      "description": "Configured service name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["validate", "apply", "rollback"],
+      "description": "validate checks a candidate; apply installs a validated candidate; rollback restores a kept version"
+    },
+    "config_path": {
+      "type": ["string", "null"],
+      "description": "Candidate config file, project-relative; required for validate/apply"
+    },
+    "version_ref": {
+      "type": ["string", "null"],
+      "description": "Kept version to restore; required for rollback"
+    }
+  },
+  "required": ["service_ref", "action", "config_path", "version_ref"],
+  "additionalProperties": false
+}

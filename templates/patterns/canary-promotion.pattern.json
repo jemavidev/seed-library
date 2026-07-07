@@ -1,0 +1,32 @@
+{
+  "id": "canary-promotion",
+  "alias": "eval-gated-upgrade",
+  "intent": "Decide whether creation version v_candidate replaces v_current: run both against the same eval set, compare win/regression rates, and promote through a gate — or reject with findings. The self-evolution loop, made a reviewable procedure.",
+  "state": {
+    "creation_ref": "string — the library creation under evaluation",
+    "v_current": "string",
+    "v_candidate": "string",
+    "eval_results": "object — { current: {pass, fail, per_case}, candidate: {pass, fail, per_case} }",
+    "comparison": "object — { wins, losses, ties, regressions: [case ids candidate fails that current passed] }",
+    "verdict": "string (promote | reject) | null"
+  },
+  "nodes": [
+    { "id": "eval_runner", "role_ref": "agent.qa-reviewer" },
+    { "id": "comparator", "role_ref": "agent.qa-reviewer" },
+    { "id": "promotion_gate", "role_ref": null },
+    { "id": "promoter", "role_ref": "agent.knowledge-curator" }
+  ],
+  "edges": [
+    { "from": "START", "to": "eval_runner", "when": "candidate's eval set ⊇ current's eval set (never fewer cases than the incumbent ran)" },
+    { "from": "eval_runner", "to": "comparator", "when": "both versions ran the full set" },
+    { "from": "comparator", "to": "promotion_gate", "when": "comparison computed; ANY regression is highlighted first" },
+    { "from": "promotion_gate", "to": "promoter", "when": "verdict == 'promote'" },
+    { "from": "promotion_gate", "to": "END", "when": "verdict == 'reject' — findings attach to the candidate for its next iteration" },
+    { "from": "promoter", "to": "END", "when": "candidate becomes current with lineage bump; prior version retained until the new one proves itself in use" }
+  ],
+  "interrupts": [
+    { "at": "promotion_gate", "stance": "confirm", "timeout": "72h", "on_timeout": "abort" }
+  ],
+  "termination": "promoted (with retained rollback version) or rejected (with findings); timeout at the gate rejects — an unreviewed promotion never defaults through",
+  "budget": { "max_iterations": 1, "account": "meta" }
+}

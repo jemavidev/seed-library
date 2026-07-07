@@ -1,0 +1,39 @@
+{
+  "id": "seed:devops:service-config-manager",
+  "name": "service-config-manager",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "valid": { "type": ["boolean", "null"] },
+      "version_ref": { "type": ["string", "null"] },
+      "diagnostics": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["action", "valid", "version_ref", "diagnostics"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "config_invalid", "retryable": false },
+    { "code": "apply_unvalidated", "retryable": false },
+    { "code": "reload_failed", "retryable": false },
+    { "code": "service_unreachable", "retryable": true },
+    { "code": "version_not_found", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "SERVICE_ADMIN_TOKEN_<SERVICE_REF>", "env": "SERVICE_ADMIN_TOKEN_<SERVICE_REF>" }
+  ],
+  "rateLimit": { "perMinute": 10, "burst": 3 },
+  "idempotency": { "supported": true, "keyFrom": ["service_ref", "action", "config_path", "version_ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "apply -> rollback(version_ref returned by the apply); reload_failed already auto-reverts to the prior version",
+    "toolId": "seed:devops:service-config-manager"
+  },
+  "_meta": "_meta.json"
+}

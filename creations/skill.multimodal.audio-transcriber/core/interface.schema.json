@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "audio-transcriber input",
+  "type": "object",
+  "properties": {
+    "audio_path": {
+      "type": "string",
+      "description": "Audio file in the project sandbox"
+    },
+    "language": {
+      "type": ["string", "null"],
+      "description": "Language hint (ISO code); null auto-detects"
+    },
+    "timestamps": {
+      "type": "boolean",
+      "description": "Return timed segments"
+    },
+    "diarize": {
+      "type": "boolean",
+      "description": "Separate speakers (positional labels S1, S2, …)"
+    }
+  },
+  "required": ["audio_path", "language", "timestamps", "diarize"],
+  "additionalProperties": false
+}

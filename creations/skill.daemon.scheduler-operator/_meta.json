@@ -1,0 +1,9 @@
+{
+  "id": "skill.daemon.scheduler-operator",
+  "kind": "skill",
+  "name": "scheduler-operator",
+  "description": "Create/pause/resume/cancel scheduled jobs pointing at registered flows; policy binds at fire time, never at schedule time.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

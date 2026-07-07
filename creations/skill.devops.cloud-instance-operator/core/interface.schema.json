@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cloud-instance-operator input",
+  "type": "object",
+  "properties": {
+    "provider_ref": {
+      "type": "string",
+      "description": "Configured cloud provider name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["provision", "start", "stop", "reboot", "terminate", "status"],
+      "description": "The single lifecycle operation; status is effect-free"
+    },
+    "instance_ref": {
+      "type": ["string", "null"],
+      "description": "Existing instance id; required for all actions except provision"
+    },
+    "instance_spec": {
+      "type": ["object", "null"],
+      "properties": {
+        "type": { "type": "string" },
+        "region": { "type": "string" },
+        "image_ref": { "type": "string" },
+        "tags": { "type": "object" }
+      },
+      "required": ["type", "region", "image_ref", "tags"],
+      "additionalProperties": false,
+      "description": "Provision-only; tags must include owner and purpose"
+    }
+  },
+  "required": ["provider_ref", "action", "instance_ref", "instance_spec"],
+  "additionalProperties": false
+}

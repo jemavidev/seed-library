@@ -1,0 +1,49 @@
+{
+  "id": "seed:devops:iac-operator",
+  "name": "iac-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "plan_ref": { "type": ["string", "null"] },
+      "changes": {
+        "type": "object",
+        "properties": {
+          "add": { "type": "integer" },
+          "change": { "type": "integer" },
+          "destroy": { "type": "integer" }
+        },
+        "required": ["add", "change", "destroy"],
+        "additionalProperties": false
+      },
+      "output": { "type": "string" }
+    },
+    "required": ["action", "plan_ref", "changes", "output"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "apply_without_plan", "retryable": false },
+    { "code": "plan_stale", "retryable": false },
+    { "code": "config_invalid", "retryable": false },
+    { "code": "state_locked", "retryable": true },
+    { "code": "provider_auth_failed", "retryable": false },
+    { "code": "partial_apply", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "IAC_PROVIDER_CREDENTIALS", "env": "IAC_PROVIDER_CREDENTIALS" }
+  ],
+  "rateLimit": { "perMinute": 6, "burst": 2 },
+  "idempotency": { "supported": true, "keyFrom": ["working_dir", "action", "plan_ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["subprocess", "network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "apply -> apply the recorded prior state (saved with the plan); destroy of stateful resources loses their data — plans with destroy > 0 should gate at expert-review",
+    "toolId": "seed:devops:iac-operator"
+  },
+  "_meta": "_meta.json"
+}

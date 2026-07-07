@@ -1,0 +1,15 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). Stop/SessionEnd receives the transcript reference; the command reviews the episode and drafts lesson candidates into proposed/lessons/.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook lesson-harvester --proposed-dir proposed/lessons --dedupe-against lessons/"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "watchdog-monitor input",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": ["register", "remove", "list"],
+      "description": "Watch management operation"
+    },
+    "watch_ref": {
+      "type": ["string", "null"],
+      "description": "Watch name; required for register/remove"
+    },
+    "source": {
+      "type": ["object", "null"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["metric", "log", "health", "file"] },
+        "source_ref": { "type": "string" },
+        "metric": { "type": ["string", "null"] },
+        "pattern": { "type": ["string", "null"] },
+        "window": { "type": ["string", "null"] },
+        "aggregation": { "type": ["string", "null"] },
+        "path": { "type": ["string", "null"] }
+      },
+      "required": ["kind", "source_ref", "metric", "pattern", "window", "aggregation", "path"],
+      "additionalProperties": false,
+      "description": "What to observe; kind-specific fields, unused ones null"
+    },
+    "condition": {
+      "type": ["string", "null"],
+      "description": "Condition over the source, e.g. \"value > 50\" or \"matches for 5m\"; required for register"
+    },
+    "trigger_ref": {
+      "type": ["string", "null"],
+      "description": "Registered flow the trigger event starts; required for register"
+    },
+    "cooldown_seconds": {
+      "type": ["integer", "null"],
+      "minimum": 60,
+      "description": "Minimum gap between firings; required for register"
+    }
+  },
+  "required": ["action", "watch_ref", "source", "condition", "trigger_ref", "cooldown_seconds"],
+  "additionalProperties": false
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "iac-operator input",
+  "type": "object",
+  "properties": {
+    "working_dir": {
+      "type": "string",
+      "description": "IaC configuration root, project-relative"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["plan", "apply", "destroy"],
+      "description": "plan computes+saves a change set; apply executes a saved plan; destroy tears down"
+    },
+    "var_refs": {
+      "type": ["object", "null"],
+      "description": "Variable name -> environment variable reference (values never inline)"
+    },
+    "target": {
+      "type": ["string", "null"],
+      "description": "Optional resource address to scope the operation"
+    },
+    "plan_ref": {
+      "type": ["string", "null"],
+      "description": "Saved plan identifier; REQUIRED for apply"
+    }
+  },
+  "required": ["working_dir", "action", "var_refs", "target", "plan_ref"],
+  "additionalProperties": false
+}

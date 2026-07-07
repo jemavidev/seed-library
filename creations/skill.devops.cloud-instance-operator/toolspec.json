@@ -1,0 +1,39 @@
+{
+  "id": "seed:devops:cloud-instance-operator",
+  "name": "cloud-instance-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "instance_ref": { "type": "string" },
+      "state": { "type": "string" },
+      "details": { "type": "string" }
+    },
+    "required": ["action", "instance_ref", "state", "details"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "auth_failed", "retryable": false },
+    { "code": "instance_not_found", "retryable": false },
+    { "code": "quota_exceeded", "retryable": false },
+    { "code": "spec_invalid", "retryable": false },
+    { "code": "provider_unreachable", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "CLOUD_CREDENTIALS_<PROVIDER_REF>", "env": "CLOUD_CREDENTIALS_<PROVIDER_REF>" }
+  ],
+  "rateLimit": { "perMinute": 10, "burst": 3 },
+  "idempotency": { "supported": true, "keyFrom": ["provider_ref", "action", "instance_ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "provision -> terminate (of the instance this call created); start -> stop; stop -> start; terminate has NO compensation (instance-local data destroyed) — gate it at expert-review",
+    "toolId": "seed:devops:cloud-instance-operator"
+  },
+  "_meta": "_meta.json"
+}

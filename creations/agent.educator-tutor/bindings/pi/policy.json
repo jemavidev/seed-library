@@ -1,0 +1,19 @@
+{
+  "profile": "agent.educator-tutor",
+  "authorized_skills": [
+    "seed:education:curriculum-builder",
+    "seed:core-utils:document-composer",
+    "seed:core-utils:document-parser",
+    "seed:core-utils:web-search",
+    "seed:saas:web-content-extractor",
+    "seed:data:chart-generator",
+    "seed:multimodal:image-analyzer"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "blocked"
+  },
+  "notes": "Teaches live and writes local materials only; distribution of materials goes through integrations-operator."
+}

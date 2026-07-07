@@ -1,0 +1,6 @@
+{"name": "create returns next_run", "kind": "golden", "input": {"action": "create", "job_ref": "nightly-audit", "schedule": "0 3 * * *", "task_ref": "flow.project-audit", "window": null}, "expect": {"active": true, "next_run_iso": true}}
+{"name": "pause keeps job but stops firing", "kind": "golden", "input": {"action": "pause", "job_ref": "nightly-audit", "schedule": null, "task_ref": null, "window": null}, "expect": {"active": false}}
+{"name": "one-shot schedule", "kind": "golden", "input": {"action": "create", "job_ref": "sat-cleanup", "schedule": "once:2026-07-11T03:00:00Z", "task_ref": "flow.cleanup", "window": null}, "expect": {"next_run": "2026-07-11T03:00:00Z"}}
+{"name": "cancel is the clean inverse", "kind": "golden", "input": {"action": "cancel", "job_ref": "sat-cleanup", "schedule": null, "task_ref": null, "window": null}, "expect": {"active": false}}
+{"name": "unregistered flow refused", "kind": "failure", "input": {"action": "create", "job_ref": "rogue", "schedule": "* * * * *", "task_ref": "flow.does-not-exist", "window": null}, "expect": {"failure": "task_ref_unknown"}}
+{"name": "gibberish schedule is typed", "kind": "failure", "input": {"action": "create", "job_ref": "bad", "schedule": "whenever feels right", "task_ref": "flow.cleanup", "window": null}, "expect": {"failure": "invalid_schedule"}}

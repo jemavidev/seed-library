@@ -1,0 +1,9 @@
+{
+  "id": "skill.education.curriculum-builder",
+  "kind": "skill",
+  "name": "curriculum-builder",
+  "description": "Turn observable learning outcomes into outlines/syllabi/lesson-plans/rubrics with enforced outcome\u2192unit\u2192assessment mapping.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

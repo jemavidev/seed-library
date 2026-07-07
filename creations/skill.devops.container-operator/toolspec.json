@@ -1,0 +1,40 @@
+{
+  "id": "seed:devops:container-operator",
+  "name": "container-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "container_ref": { "type": ["string", "null"] },
+      "image": { "type": ["string", "null"] },
+      "output": { "type": "string" }
+    },
+    "required": ["action", "container_ref", "image", "output"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "build_failed", "retryable": false },
+    { "code": "image_not_found", "retryable": false },
+    { "code": "container_not_found", "retryable": false },
+    { "code": "registry_auth_failed", "retryable": false },
+    { "code": "runtime_unreachable", "retryable": true },
+    { "code": "port_in_use", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "REGISTRY_TOKEN_<REGISTRY_REF>", "env": "REGISTRY_TOKEN_<REGISTRY_REF>" }
+  ],
+  "rateLimit": { "perMinute": 12, "burst": 4 },
+  "idempotency": { "supported": true, "keyFrom": ["action", "image", "container_ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["subprocess", "network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "run -> stop+remove; build -> remove local image; push -> delete the pushed tag where the registry allows, otherwise permanent (push a new tag, never overwrite)",
+    "toolId": "seed:devops:container-operator"
+  },
+  "_meta": "_meta.json"
+}

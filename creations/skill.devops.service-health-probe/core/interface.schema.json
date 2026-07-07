@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "service-health-probe input",
+  "type": "object",
+  "properties": {
+    "endpoint_ref": {
+      "type": "string",
+      "description": "Configured endpoint name"
+    },
+    "protocol": {
+      "type": "string",
+      "enum": ["http", "tcp", "ping"],
+      "description": "Probe type"
+    },
+    "expected_status": {
+      "type": ["integer", "null"],
+      "minimum": 100,
+      "maximum": 599,
+      "description": "Expected HTTP status; null means any 2xx (http only)"
+    },
+    "timeout_seconds": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 60,
+      "description": "Probe timeout; null means 5"
+    },
+    "thresholds": {
+      "type": ["object", "null"],
+      "properties": {
+        "latency_warn_ms": { "type": "integer", "minimum": 1 },
+        "latency_fail_ms": { "type": "integer", "minimum": 1 }
+      },
+      "required": ["latency_warn_ms", "latency_fail_ms"],
+      "additionalProperties": false,
+      "description": "Latency bands; fail threshold marks the probe unhealthy"
+    }
+  },
+  "required": ["endpoint_ref", "protocol", "expected_status", "timeout_seconds", "thresholds"],
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+{
+  "profile": "agent.knowledge-curator",
+  "authorized_skills": [
+    "seed:sdlc:read-file",
+    "seed:sdlc:write-file",
+    "seed:core-utils:file-search",
+    "seed:core-utils:document-parser",
+    "seed:core-utils:document-composer",
+    "seed:core-utils:data-transformer",
+    "seed:core-utils:regex-extractor",
+    "seed:data:vector-store-query",
+    "seed:sdlc:git-operator"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "confirm"
+  },
+  "budget_account": "meta",
+  "notes": "Library amendments are local writes under notify (audit narrates them); pushing curation commits to the library remote rides confirm. All spend charges the meta account."
+}

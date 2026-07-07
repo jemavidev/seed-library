@@ -1,0 +1,39 @@
+{
+  "id": "seed:devops:k8s-operator",
+  "name": "k8s-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "resource_ref": { "type": "string" },
+      "revision": { "type": ["string", "null"] },
+      "state": { "type": "string" }
+    },
+    "required": ["action", "resource_ref", "revision", "state"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "cluster_unreachable", "retryable": true },
+    { "code": "manifest_invalid", "retryable": false },
+    { "code": "resource_not_found", "retryable": false },
+    { "code": "rollout_failed", "retryable": false },
+    { "code": "manifest_unversioned", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "CLUSTER_CREDENTIALS_<CLUSTER_REF>", "env": "CLUSTER_CREDENTIALS_<CLUSTER_REF>" }
+  ],
+  "rateLimit": { "perMinute": 12, "burst": 4 },
+  "idempotency": { "supported": true, "keyFrom": ["cluster_ref", "action", "resource_ref", "manifest_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "apply -> rollback(prior revision); scale -> scale to recorded prior count; delete -> re-apply the versioned manifest (unversioned deletes are refused)",
+    "toolId": "seed:devops:k8s-operator"
+  },
+  "_meta": "_meta.json"
+}

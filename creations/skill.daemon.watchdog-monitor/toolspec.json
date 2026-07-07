@@ -1,0 +1,32 @@
+{
+  "id": "seed:daemon:watchdog-monitor",
+  "name": "watchdog-monitor",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "watch_ref": { "type": ["string", "null"] },
+      "active": { "type": ["boolean", "null"] }
+    },
+    "required": ["action", "watch_ref", "active"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "invalid_condition", "retryable": false },
+    { "code": "source_unknown", "retryable": false },
+    { "code": "trigger_ref_unknown", "retryable": false },
+    { "code": "watch_not_found", "retryable": false },
+    { "code": "duplicate_watch_ref", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["action", "watch_ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "meta" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

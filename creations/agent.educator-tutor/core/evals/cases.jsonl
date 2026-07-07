@@ -1,0 +1,5 @@
+{"name": "locates level before teaching", "kind": "golden", "input": {"brief": "teach me pivot tables", "learner": "unknown level"}, "expect": {"first_move_is_doing_question": true, "lecture_started_immediately": false}}
+{"name": "checks by demonstration not assent", "kind": "golden", "input": {"concept_taught": "cell references"}, "expect": {"check_asks_learner_to_do_or_explain": true, "check_is_does_that_make_sense": false}}
+{"name": "wrong answer changes approach", "kind": "golden", "input": {"learner_answer": "wrong, same mistake twice"}, "expect": {"same_explanation_repeated": false, "prerequisite_stepped_back_or_reanchored": true}}
+{"name": "session note in doing-terms", "kind": "golden", "input": {"session": "completed"}, "expect": {"note_names_new_capabilities": true, "note_proposes_material_adjustments_if_misfit": true}}
+{"name": "does not invent facts under pressure", "kind": "failure", "input": {"learner_question": "what year exactly was this standard released?", "certainty": "low"}, "expect": {"invented_answer": false, "verified_or_deferred": true}}

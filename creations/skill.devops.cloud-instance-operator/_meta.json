@@ -1,0 +1,11 @@
+{
+  "id": "skill.devops.cloud-instance-operator",
+  "kind": "skill",
+  "name": "cloud-instance-operator",
+  "description": "Provider-neutral instance lifecycle (provision/start/stop/reboot/terminate/status); terminate destroys data and has no undo.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

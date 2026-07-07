@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "financial-modeler input",
+  "type": "object",
+  "properties": {
+    "analysis": {
+      "type": "string",
+      "enum": ["npv", "irr", "amortization", "break-even", "projection"],
+      "description": "Which computation to run"
+    },
+    "inputs": {
+      "type": "object",
+      "description": "Per-analysis inputs: npv {rate, cash_flows[]}; irr {cash_flows[]}; amortization {principal, annual_rate, periods}; break-even {fixed_costs, unit_price, unit_variable_cost}; projection {periods, start_value, growth_rate | growth_range}"
+    },
+    "currency": {
+      "type": ["string", "null"],
+      "description": "Currency label for reporting; no conversion is performed"
+    }
+  },
+  "required": ["analysis", "inputs", "currency"],
+  "additionalProperties": false
+}
