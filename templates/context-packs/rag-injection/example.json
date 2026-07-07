@@ -1,0 +1,7 @@
+{
+  "source": "project-runbooks",
+  "retriever": { "top_k": 8, "min_score": 0.35, "filters": { "lang": "en" } },
+  "rerank": { "enabled": true, "keep_top": 4 },
+  "injection": { "budget_tokens": 1200, "block_label": "retrieved-knowledge", "drop_policy": "whole-chunks-by-rank" },
+  "citation_required": true
+}

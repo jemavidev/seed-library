@@ -1,0 +1,5 @@
+{"name": "send returns receipt", "kind": "golden", "input": {"channel_ref": "ops-alerts", "body": "Deploy 1.4.2 ready", "subject": null, "thread_ref": null, "format": "markdown"}, "expect": {"message_id_nonempty": true, "delivered_at_iso": true}}
+{"name": "threading under prior message", "kind": "golden", "input": {"channel_ref": "ops-alerts", "body": "Approved and applied.", "subject": null, "thread_ref": "m-88412", "format": "text"}, "expect": {"message_id_nonempty": true}}
+{"name": "markdown degrades on plain channel", "kind": "golden", "input": {"channel_ref": "sms-oncall", "body": "**urgent**: disk 95%", "subject": null, "thread_ref": null, "format": "markdown"}, "expect": {"delivered_as_text": true}}
+{"name": "raw webhook url rejected", "kind": "failure", "input": {"channel_ref": "https://hooks.example.com/T000/B000/xyz", "body": "hi", "subject": null, "thread_ref": null, "format": "text"}, "expect": {"failure": "channel_not_configured"}}
+{"name": "oversized body is typed", "kind": "failure", "input": {"channel_ref": "ops-alerts", "body": "<50k chars>", "subject": null, "thread_ref": null, "format": "text"}, "expect": {"failure": "body_too_large"}}

@@ -1,0 +1,19 @@
+{
+  "profile": "agent.security-auditor",
+  "authorized_skills": [
+    "seed:sdlc:read-file",
+    "seed:sdlc:static-analyze",
+    "seed:core-utils:file-search",
+    "seed:core-utils:regex-extractor",
+    "seed:core-utils:web-search",
+    "seed:data:log-reader",
+    "seed:data:db-query"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "blocked",
+    "external": "blocked"
+  },
+  "notes": "Read-only auditor: no write, send, or mutation skills granted. db-query is the read-only variant; findings leave only through the report."
+}

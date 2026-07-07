@@ -1,0 +1,9 @@
+{
+  "id": "agent.integrations-operator",
+  "kind": "agent",
+  "name": "integrations-operator",
+  "description": "Operate external services safely \u2014 every outbound effect idempotent or compensated, every send treated as a publication.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

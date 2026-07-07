@@ -1,0 +1,39 @@
+{
+  "id": "seed:saas:email-operator",
+  "name": "email-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "message_id": { "type": "string" },
+      "accepted": { "type": "array", "items": { "type": "string" } },
+      "rejected": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["message_id", "accepted", "rejected"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "provider_unreachable", "retryable": true },
+    { "code": "quota_exceeded", "retryable": true },
+    { "code": "invalid_recipient", "retryable": false },
+    { "code": "attachment_too_large", "retryable": false },
+    { "code": "attachment_not_found", "retryable": false },
+    { "code": "recipient_cap_exceeded", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "EMAIL_PROVIDER_KEY", "env": "EMAIL_PROVIDER_KEY" }
+  ],
+  "rateLimit": { "perMinute": 10, "burst": 3 },
+  "idempotency": { "supported": true, "keyFrom": ["to", "subject", "body"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "email cannot be unsent; compensation is a follow-up correction to the same recipients — policies should treat this skill as effectively uncompensated and gate accordingly",
+    "toolId": "seed:saas:email-operator"
+  },
+  "_meta": "_meta.json"
+}

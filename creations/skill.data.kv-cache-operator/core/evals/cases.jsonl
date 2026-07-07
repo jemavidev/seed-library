@@ -1,0 +1,5 @@
+{"name": "set then get hits", "kind": "golden", "input": {"action": "get", "key": "k1", "namespace": "t1", "value": null, "ttl_seconds": null}, "expect": {"hit": true, "value": "payload"}, "setup": {"action": "set", "key": "k1", "namespace": "t1", "value": "payload", "ttl_seconds": 60}}
+{"name": "miss is success not failure", "kind": "golden", "input": {"action": "get", "key": "never-set", "namespace": "t1", "value": null, "ttl_seconds": null}, "expect": {"hit": false, "value": null}}
+{"name": "expired key misses", "kind": "golden", "input": {"action": "get", "key": "k-ttl", "namespace": "t1", "value": null, "ttl_seconds": null}, "expect": {"hit": false}, "setup": {"action": "set", "key": "k-ttl", "namespace": "t1", "value": "x", "ttl_seconds": 1, "then_wait_seconds": 2}}
+{"name": "namespaces isolate", "kind": "golden", "input": {"action": "get", "key": "k1", "namespace": "t2", "value": null, "ttl_seconds": null}, "expect": {"hit": false}}
+{"name": "set without value is typed", "kind": "failure", "input": {"action": "set", "key": "k2", "namespace": "t1", "value": null, "ttl_seconds": 60}, "expect": {"failure": "missing_value"}}

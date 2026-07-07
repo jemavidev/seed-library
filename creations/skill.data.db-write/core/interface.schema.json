@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "db-write input",
+  "type": "object",
+  "properties": {
+    "connection_ref": {
+      "type": "string",
+      "description": "Name of a configured connection; never a connection string"
+    },
+    "statement": {
+      "type": "string",
+      "description": "Single mutating SQL statement (INSERT/UPDATE/DELETE)"
+    },
+    "expected_max_rows": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Abort (rollback) if the statement would affect more rows than this"
+    },
+    "inverse_statement": {
+      "type": ["string", "null"],
+      "description": "SQL that undoes the statement; recorded for compensation. null = dry-run (execute and roll back)"
+    }
+  },
+  "required": ["connection_ref", "statement", "expected_max_rows", "inverse_statement"],
+  "additionalProperties": false
+}

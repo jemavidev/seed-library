@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "db-query input",
+  "type": "object",
+  "properties": {
+    "connection_ref": {
+      "type": "string",
+      "description": "Name of a configured connection in the connection registry; never a connection string"
+    },
+    "query": {
+      "type": "string",
+      "description": "Read-only SQL statement"
+    },
+    "row_limit": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 10000,
+      "description": "Hard row cap enforced server-side; null means 1000"
+    },
+    "timeout_seconds": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Query timeout; null means implementation default (30)"
+    }
+  },
+  "required": ["connection_ref", "query", "row_limit", "timeout_seconds"],
+  "additionalProperties": false
+}

@@ -1,0 +1,9 @@
+{
+  "id": "skill.data.statistical-analyzer",
+  "kind": "skill",
+  "name": "statistical-analyzer",
+  "description": "Descriptive stats, correlation, hypothesis tests, distribution checks over records \u2014 always with n and caveats.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

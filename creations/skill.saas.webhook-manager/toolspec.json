@@ -1,0 +1,39 @@
+{
+  "id": "seed:saas:webhook-manager",
+  "name": "webhook-manager",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "webhook_id": { "type": ["string", "null"] },
+      "active": { "type": ["boolean", "null"] },
+      "events": { "type": ["array", "null"], "items": { "type": "string" } }
+    },
+    "required": ["action", "webhook_id", "active", "events"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "provider_unreachable", "retryable": true },
+    { "code": "auth_failed", "retryable": false },
+    { "code": "invalid_url", "retryable": false },
+    { "code": "webhook_not_found", "retryable": false },
+    { "code": "event_unsupported", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "PROVIDER_TOKEN_<PROVIDER_REF>", "env": "PROVIDER_TOKEN_<PROVIDER_REF>" }
+  ],
+  "rateLimit": { "perMinute": 12, "burst": 4 },
+  "idempotency": { "supported": true, "keyFrom": ["provider_ref", "action", "url", "events", "webhook_id"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "remove(webhook_id) — exact inverse of register; registrations are recorded so orphans can be swept",
+    "toolId": "seed:saas:webhook-manager"
+  },
+  "_meta": "_meta.json"
+}

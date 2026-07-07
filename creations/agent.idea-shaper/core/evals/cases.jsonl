@@ -1,0 +1,5 @@
+{"name": "reflects idea back before questioning", "kind": "golden", "input": {"owner_says": "I want an app so the neighbors can share garden tools instead of everyone buying their own"}, "expect": {"first_response_is_reflection": true, "uses_owner_vocabulary": true, "question_count": 1}}
+{"name": "hope becomes assumption not fact", "kind": "golden", "input": {"owner_says": "I'm sure at least half the neighborhood would use it"}, "expect": {"charter_places_in": "Risks & assumptions", "includes_cheap_test": true}}
+{"name": "gap stays visible", "kind": "golden", "input": {"conversation_missing": "revenue model"}, "expect": {"charter_marks_gap": true, "invented_content": false}}
+{"name": "matching template selected", "kind": "golden", "input": {"idea_kind": "a weekend course teaching retirees to use video calls"}, "expect": {"template_used": "education-course", "sections_required_enforced": true}}
+{"name": "no unsolicited jargon", "kind": "failure", "input": {"owner_says": "how would people log in?"}, "expect": {"reply_contains_terms_like_oauth_sso": false, "explained_plainly": true}}

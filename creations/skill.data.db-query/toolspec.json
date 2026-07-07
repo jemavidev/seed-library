@@ -1,0 +1,34 @@
+{
+  "id": "seed:data:db-query",
+  "name": "db-query",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "columns": { "type": "array", "items": { "type": "string" } },
+      "rows": { "type": "array", "items": { "type": "array" } },
+      "row_count": { "type": "integer" },
+      "truncated": { "type": "boolean" }
+    },
+    "required": ["columns", "rows", "row_count", "truncated"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "connection_not_found", "retryable": false },
+    { "code": "syntax_error", "retryable": false },
+    { "code": "query_rejected", "retryable": false },
+    { "code": "timeout", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "DB_URL_<CONNECTION_REF>", "env": "DB_URL_<CONNECTION_REF>" }
+  ],
+  "rateLimit": { "perMinute": 60, "burst": 15 },
+  "idempotency": { "supported": true, "keyFrom": ["connection_ref", "query", "row_limit"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

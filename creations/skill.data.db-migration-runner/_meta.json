@@ -1,0 +1,11 @@
+{
+  "id": "skill.data.db-migration-runner",
+  "kind": "skill",
+  "name": "db-migration-runner",
+  "description": "Apply/rollback versioned schema migrations with dry-run planning; built to run behind an approval gate.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

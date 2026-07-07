@@ -1,0 +1,11 @@
+{
+  "id": "skill.data.db-write",
+  "kind": "skill",
+  "name": "db-write",
+  "description": "Transactional SQL mutation with declared blast radius (expected_max_rows) and mandatory inverse statement (null = dry-run).",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

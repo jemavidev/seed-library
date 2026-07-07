@@ -1,0 +1,26 @@
+{
+  "profile": "agent.data-engineer",
+  "authorized_skills": [
+    "seed:data:db-query",
+    "seed:data:db-write",
+    "seed:data:db-migration-runner",
+    "seed:data:vector-store-query",
+    "seed:data:kv-cache-operator",
+    "seed:data:log-reader",
+    "seed:data:metrics-collector",
+    "seed:data:statistical-analyzer",
+    "seed:data:chart-generator",
+    "seed:core-utils:data-transformer",
+    "seed:core-utils:file-search"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "confirm"
+  },
+  "stance_overrides": {
+    "seed:data:db-migration-runner": "expert-review"
+  },
+  "notes": "db-write rides confirm with its inverse recorded; migrations escalate to expert-review because schema changes outlive sessions."
+}

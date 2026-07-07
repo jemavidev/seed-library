@@ -1,0 +1,9 @@
+{
+  "id": "skill.data.kv-cache-operator",
+  "kind": "skill",
+  "name": "kv-cache-operator",
+  "description": "Namespaced key-value cache with TTL (get/set/delete). Ephemeral by contract \u2014 a miss means recompute.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

@@ -1,0 +1,32 @@
+{
+  "id": "seed:saas:web-content-extractor",
+  "name": "web-content-extractor",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "content": { "type": "string" },
+      "title": { "type": "string" },
+      "truncated": { "type": "boolean" },
+      "fetched_at": { "type": "string" }
+    },
+    "required": ["content", "title", "truncated", "fetched_at"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "fetch_failed", "retryable": true },
+    { "code": "timeout", "retryable": true },
+    { "code": "blocked_by_robots", "retryable": false },
+    { "code": "unsupported_content", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["url", "format"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "skill.saas.webhook-manager",
+  "kind": "skill",
+  "name": "webhook-manager",
+  "description": "Register/remove/list webhook subscriptions on configured providers; receivers must be the runtime's own endpoints.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

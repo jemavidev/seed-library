@@ -1,0 +1,16 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). PostToolUse receives tool result metadata on stdin; the command appends the span to the invocation's access event.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook span-metadata-recorder --fail-open"
+          }
+        ]
+      }
+    ]
+  }
+}

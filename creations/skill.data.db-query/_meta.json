@@ -1,0 +1,11 @@
+{
+  "id": "skill.data.db-query",
+  "kind": "skill",
+  "name": "db-query",
+  "description": "Read-only SQL against a configured connection; rows + truncation metadata. Mutating statements are rejected.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

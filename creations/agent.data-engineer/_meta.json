@@ -1,0 +1,9 @@
+{
+  "id": "agent.data-engineer",
+  "kind": "agent",
+  "name": "data-engineer",
+  "description": "Query, transform, and evolve data and schemas verifiably \u2014 every mutation scoped, reversible, and preceded by a read that proves the scope.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

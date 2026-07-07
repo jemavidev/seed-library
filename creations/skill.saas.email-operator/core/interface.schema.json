@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "email-operator input",
+  "type": "object",
+  "properties": {
+    "to": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Explicit recipient addresses; capped by configuration"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject line"
+    },
+    "body": {
+      "type": "string",
+      "description": "Plain-text or simple-markup body"
+    },
+    "from_ref": {
+      "type": "string",
+      "description": "Configured sender identity name; never a raw from-address"
+    },
+    "cc": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "CC addresses; null for none"
+    },
+    "attachments": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "description": "Project-relative file paths; null for none"
+    }
+  },
+  "required": ["to", "subject", "body", "from_ref", "cc", "attachments"],
+  "additionalProperties": false
+}

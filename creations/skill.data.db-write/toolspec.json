@@ -1,0 +1,38 @@
+{
+  "id": "seed:data:db-write",
+  "name": "db-write",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "affected_rows": { "type": "integer" },
+      "committed": { "type": "boolean" },
+      "dry_run": { "type": "boolean" }
+    },
+    "required": ["affected_rows", "committed", "dry_run"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "connection_not_found", "retryable": false },
+    { "code": "syntax_error", "retryable": false },
+    { "code": "constraint_violation", "retryable": false },
+    { "code": "affected_rows_exceeded", "retryable": false },
+    { "code": "deadlock", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "DB_URL_<CONNECTION_REF>", "env": "DB_URL_<CONNECTION_REF>" }
+  ],
+  "rateLimit": { "perMinute": 20, "burst": 5 },
+  "idempotency": { "supported": true, "keyFrom": ["connection_ref", "statement", "expected_max_rows"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "run the inverse_statement recorded at call time within a new transaction",
+    "toolId": "seed:data:db-write"
+  },
+  "_meta": "_meta.json"
+}

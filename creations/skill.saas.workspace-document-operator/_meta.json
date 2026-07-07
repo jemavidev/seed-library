@@ -1,0 +1,11 @@
+{
+  "id": "skill.saas.workspace-document-operator",
+  "kind": "skill",
+  "name": "workspace-document-operator",
+  "description": "Read/append/replace-range/create in hosted collaborative documents; every edit returns a revision_id for rollback.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

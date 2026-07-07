@@ -1,0 +1,22 @@
+{
+  "profile": "agent.analyst-writer",
+  "authorized_skills": [
+    "seed:core-utils:web-search",
+    "seed:saas:web-content-extractor",
+    "seed:core-utils:document-parser",
+    "seed:core-utils:file-search",
+    "seed:core-utils:data-transformer",
+    "seed:core-utils:document-composer",
+    "seed:core-utils:regex-extractor",
+    "seed:data:statistical-analyzer",
+    "seed:data:chart-generator",
+    "seed:data:vector-store-query"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "blocked"
+  },
+  "notes": "Reads the world, writes only local deliverables. Distribution of its documents belongs to integrations-operator under that profile's stances."
+}

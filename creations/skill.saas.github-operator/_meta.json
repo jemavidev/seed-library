@@ -1,0 +1,11 @@
+{
+  "id": "skill.saas.github-operator",
+  "kind": "skill",
+  "name": "github-operator",
+  "description": "Issues/comments/PRs on a hosted repo (create, comment, close, read). One action per call; creations are visible immediately.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

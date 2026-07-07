@@ -1,0 +1,27 @@
+{
+  "id": "orchestrator-workers",
+  "alias": "dynamic-decomposition",
+  "intent": "An orchestrator invents the subtask list at runtime from the objective, dispatches each subtask to a fitting worker profile, integrates results, and may re-plan once from what came back.",
+  "state": {
+    "objective": "string",
+    "subtasks": "array of { id, brief, profile_ref, status }",
+    "results": "object keyed by subtask id (result | typed_failure)",
+    "integrated_output": "object",
+    "planning_rounds": "integer"
+  },
+  "nodes": [
+    { "id": "orchestrator", "role_ref": "agent.supervisor" },
+    { "id": "worker_pool", "role_ref": "instantiated per subtask from subtasks[].profile_ref" },
+    { "id": "integrator", "role_ref": "agent.supervisor" }
+  ],
+  "edges": [
+    { "from": "START", "to": "orchestrator", "when": null },
+    { "from": "orchestrator", "to": "worker_pool", "when": "for each subtask; independent subtasks run concurrently" },
+    { "from": "worker_pool", "to": "integrator", "when": "all subtasks resolved" },
+    { "from": "integrator", "to": "orchestrator", "when": "gaps identified && planning_rounds < budget.max_iterations" },
+    { "from": "integrator", "to": "END", "when": "integrated_output complete OR planning_rounds >= budget.max_iterations" }
+  ],
+  "interrupts": [],
+  "termination": "integration complete, or planning rounds exhausted — exhaustion delivers the partial integration plus the named gaps",
+  "budget": { "max_iterations": 2, "account": "task", "max_concurrent_subtasks": 4 }
+}

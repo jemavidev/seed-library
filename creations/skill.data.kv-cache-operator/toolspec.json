@@ -1,0 +1,33 @@
+{
+  "id": "seed:data:kv-cache-operator",
+  "name": "kv-cache-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "key": { "type": "string" },
+      "value": { "type": ["string", "null"] },
+      "hit": { "type": "boolean" }
+    },
+    "required": ["action", "key", "value", "hit"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "store_unreachable", "retryable": true },
+    { "code": "value_too_large", "retryable": false },
+    { "code": "missing_value", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "CACHE_URL", "env": "CACHE_URL" }
+  ],
+  "rateLimit": { "perMinute": 240, "burst": 60 },
+  "idempotency": { "supported": true, "keyFrom": ["action", "namespace", "key"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

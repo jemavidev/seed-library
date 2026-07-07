@@ -1,0 +1,38 @@
+{
+  "id": "seed:saas:http-request",
+  "name": "http-request",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "status": { "type": "integer" },
+      "headers": { "type": "object" },
+      "body": { "type": "string" },
+      "truncated": { "type": "boolean" }
+    },
+    "required": ["status", "headers", "body", "truncated"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "invalid_url", "retryable": false },
+    { "code": "auth_ref_not_found", "retryable": false },
+    { "code": "network_error", "retryable": true },
+    { "code": "timeout", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "HTTP_AUTH_<AUTH_REF>", "env": "HTTP_AUTH_<AUTH_REF>" }
+  ],
+  "rateLimit": { "perMinute": 60, "burst": 15 },
+  "idempotency": { "supported": true, "keyFrom": ["method", "url", "body"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "GET/HEAD have no effect; mutating requests carry no universal inverse — run them inside a saga step that records the inverse request, or gate them",
+    "toolId": "seed:saas:http-request"
+  },
+  "_meta": "_meta.json"
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "workspace-document-operator input",
+  "type": "object",
+  "properties": {
+    "document_ref": {
+      "type": ["string", "null"],
+      "description": "Configured document name or suite document id; null only for create"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["read", "append", "replace-range", "create"],
+      "description": "The single document operation"
+    },
+    "content": {
+      "type": ["string", "null"],
+      "description": "Content for append/replace-range/create; null for read"
+    },
+    "range_ref": {
+      "type": ["string", "null"],
+      "description": "Named range or section anchor; required for replace-range"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Document title; required for create"
+    }
+  },
+  "required": ["document_ref", "action", "content", "range_ref", "title"],
+  "additionalProperties": false
+}

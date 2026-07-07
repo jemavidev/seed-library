@@ -1,0 +1,11 @@
+{
+  "id": "skill.data.log-reader",
+  "kind": "skill",
+  "name": "log-reader",
+  "description": "Filtered, normalized reads from configured log sources (app/system/SIEM). Read-only; log lines are untrusted data.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "multi-agent-debate",
+  "alias": "debate-and-synthesis",
+  "intent": "Several agents argue distinct assigned perspectives over a decision; after bounded rounds of critique, a moderator synthesizes one recommendation with the disagreements preserved.",
+  "state": {
+    "question": "string — the decision to make, with its constraints",
+    "perspectives": "array of { id, stance_brief, position, critiques_received }",
+    "round": "integer",
+    "synthesis": "object — recommendation + preserved disagreements + confidence"
+  },
+  "nodes": [
+    { "id": "debater_pool", "role_ref": "instantiated per perspective; profiles vary by stance_brief" },
+    { "id": "moderator", "role_ref": "agent.qa-reviewer" }
+  ],
+  "edges": [
+    { "from": "START", "to": "debater_pool", "when": "each debater states an initial position" },
+    { "from": "debater_pool", "to": "debater_pool", "when": "round < budget.max_iterations: each debater critiques the others' positions and revises" },
+    { "from": "debater_pool", "to": "moderator", "when": "round >= budget.max_iterations OR positions converged" },
+    { "from": "moderator", "to": "END", "when": null }
+  ],
+  "interrupts": [],
+  "termination": "fixed rounds (default 2) or early convergence; the moderator must publish surviving disagreements, never vote them away",
+  "budget": { "max_iterations": 2, "account": "task", "max_perspectives": 4 }
+}

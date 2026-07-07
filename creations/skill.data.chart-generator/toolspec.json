@@ -1,0 +1,31 @@
+{
+  "id": "seed:data:chart-generator",
+  "name": "chart-generator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "output_path": { "type": "string" },
+      "series_count": { "type": "integer" },
+      "points": { "type": "integer" }
+    },
+    "required": ["output_path", "series_count", "points"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "no_input", "retryable": false },
+    { "code": "invalid_data", "retryable": false },
+    { "code": "unknown_field", "retryable": false },
+    { "code": "unsupported_chart", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["data", "input_path", "chart_type", "x", "y", "output_path"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "local",
+  "_meta": "_meta.json"
+}

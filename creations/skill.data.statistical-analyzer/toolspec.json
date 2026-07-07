@@ -1,0 +1,32 @@
+{
+  "id": "seed:data:statistical-analyzer",
+  "name": "statistical-analyzer",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "analysis": { "type": "string" },
+      "results": { "type": "object" },
+      "n": { "type": "integer" },
+      "warnings": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["analysis", "results", "n", "warnings"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "no_input", "retryable": false },
+    { "code": "invalid_data", "retryable": false },
+    { "code": "unknown_column", "retryable": false },
+    { "code": "insufficient_data", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["data", "input_path", "analysis", "columns"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

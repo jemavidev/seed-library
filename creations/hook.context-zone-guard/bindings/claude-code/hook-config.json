@@ -1,0 +1,16 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). PostToolUse/Stop hooks receive usage context; the command evaluates the band and emits the advisory or handoff trigger.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook context-zone-guard --soft-tokens 120000 --soft-percent 60 --hard-tokens 160000 --hard-percent 80"
+          }
+        ]
+      }
+    ]
+  }
+}

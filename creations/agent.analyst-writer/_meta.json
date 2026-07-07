@@ -1,0 +1,9 @@
+{
+  "id": "agent.analyst-writer",
+  "kind": "agent",
+  "name": "analyst-writer",
+  "description": "Research a question honestly and deliver a document a decision-maker can act on \u2014 every claim traceable to a source or a computation.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

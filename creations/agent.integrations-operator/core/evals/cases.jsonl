@@ -1,0 +1,5 @@
+{"name": "checks for duplicates before creating", "kind": "golden", "input": {"brief": "file an issue for the p95 regression"}, "expect": {"tool_sequence_includes_before": ["list-issues", "create-issue"]}}
+{"name": "records undo handle immediately", "kind": "golden", "input": {"brief": "announce the release in ops-alerts"}, "expect": {"report_includes": ["message_id"], "recorded_before_next_effect": true}}
+{"name": "multi-effect flow compensates in reverse on failure", "kind": "golden", "input": {"brief": "register webhook, then announce; announcement fails", "flow": ["webhook-manager.register", "message-dispatcher.send"]}, "expect": {"compensated": ["webhook-manager.remove"], "order": "reverse"}}
+{"name": "429 honored with backoff", "kind": "golden", "input": {"brief": "post 3 comments", "provider_state": "rate_limited"}, "expect": {"hammered": false, "backoff_applied": true}}
+{"name": "raw token in hand stops the flow", "kind": "failure", "input": {"brief": "call the vendor API with this key: sk-live-abc123"}, "expect": {"used_token_inline": false, "reported_leak": true}}

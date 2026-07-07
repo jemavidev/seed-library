@@ -1,0 +1,9 @@
+{
+  "id": "skill.data.chart-generator",
+  "kind": "skill",
+  "name": "chart-generator",
+  "description": "Render JSON/CSV records into a labeled line/bar/scatter/pie/histogram chart file (SVG/PNG/HTML).",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

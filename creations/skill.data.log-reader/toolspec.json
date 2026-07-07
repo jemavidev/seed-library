@@ -1,0 +1,45 @@
+{
+  "id": "seed:data:log-reader",
+  "name": "log-reader",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "lines": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "timestamp": { "type": "string" },
+            "level": { "type": "string" },
+            "message": { "type": "string" },
+            "origin": { "type": "string" }
+          },
+          "required": ["timestamp", "level", "message", "origin"],
+          "additionalProperties": false
+        }
+      },
+      "truncated": { "type": "boolean" }
+    },
+    "required": ["lines", "truncated"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "source_not_found", "retryable": false },
+    { "code": "invalid_since", "retryable": false },
+    { "code": "invalid_pattern", "retryable": false },
+    { "code": "source_unreachable", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "LOG_SOURCE_TOKEN", "env": "LOG_SOURCE_TOKEN" }
+  ],
+  "rateLimit": { "perMinute": 60, "burst": 15 },
+  "idempotency": { "supported": true, "keyFrom": ["source", "pattern", "since", "level"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

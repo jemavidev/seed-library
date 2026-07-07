@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "rag-injection config",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Collection/index name to retrieve from"
+    },
+    "retriever": {
+      "type": "object",
+      "properties": {
+        "top_k": { "type": "integer", "minimum": 1, "maximum": 50 },
+        "min_score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "filters": { "type": ["object", "null"] }
+      },
+      "required": ["top_k", "min_score", "filters"],
+      "additionalProperties": false
+    },
+    "rerank": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "keep_top": { "type": ["integer", "null"], "minimum": 1 }
+      },
+      "required": ["enabled", "keep_top"],
+      "additionalProperties": false
+    },
+    "injection": {
+      "type": "object",
+      "properties": {
+        "budget_tokens": { "type": "integer", "minimum": 100 },
+        "block_label": { "type": "string" },
+        "drop_policy": { "type": "string", "enum": ["whole-chunks-by-rank"] }
+      },
+      "required": ["budget_tokens", "block_label", "drop_policy"],
+      "additionalProperties": false
+    },
+    "citation_required": {
+      "type": "boolean",
+      "description": "Claims using retrieved content must cite chunk ids"
+    }
+  },
+  "required": ["source", "retriever", "rerank", "injection", "citation_required"],
+  "additionalProperties": false
+}

@@ -1,0 +1,5 @@
+{"name": "p95 latency with samples", "kind": "golden", "input": {"source": "app-metrics", "metric": "http.request.latency_ms", "window": "1h", "aggregation": "p95"}, "expect": {"value_is_number": true, "samples_at_least": 1}}
+{"name": "count over short window", "kind": "golden", "input": {"source": "app-metrics", "metric": "http.request.errors", "window": "5m", "aggregation": "count"}, "expect": {"aggregation": "count"}}
+{"name": "zero samples returns value null-safe", "kind": "golden", "input": {"source": "app-metrics", "metric": "rare.event", "window": "5m", "aggregation": "sum"}, "expect": {"samples": 0}}
+{"name": "unknown metric is typed", "kind": "failure", "input": {"source": "app-metrics", "metric": "does.not.exist", "window": "1h", "aggregation": "avg"}, "expect": {"failure": "metric_not_found"}}
+{"name": "bad window is typed", "kind": "failure", "input": {"source": "app-metrics", "metric": "http.request.errors", "window": "one hour", "aggregation": "avg"}, "expect": {"failure": "window_invalid"}}

@@ -1,0 +1,38 @@
+{
+  "id": "seed:saas:message-dispatcher",
+  "name": "message-dispatcher",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "message_id": { "type": "string" },
+      "channel_ref": { "type": "string" },
+      "delivered_at": { "type": "string" }
+    },
+    "required": ["message_id", "channel_ref", "delivered_at"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "channel_not_configured", "retryable": false },
+    { "code": "recipient_invalid", "retryable": false },
+    { "code": "delivery_failed", "retryable": true },
+    { "code": "rate_limited", "retryable": true },
+    { "code": "body_too_large", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "CHANNEL_TOKEN_<CHANNEL_REF>", "env": "CHANNEL_TOKEN_<CHANNEL_REF>" }
+  ],
+  "rateLimit": { "perMinute": 20, "burst": 5 },
+  "idempotency": { "supported": true, "keyFrom": ["channel_ref", "body", "thread_ref"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "retract via channel API where supported (message_id); otherwise post a threaded correction — the recipient may have seen the original",
+    "toolId": "seed:saas:message-dispatcher"
+  },
+  "_meta": "_meta.json"
+}

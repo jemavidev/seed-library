@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "metrics-collector input",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string",
+      "description": "Configured metrics source name"
+    },
+    "metric": {
+      "type": "string",
+      "description": "Metric identifier as exposed by the source"
+    },
+    "window": {
+      "type": "string",
+      "description": "Relative window like \"5m\", \"1h\", \"24h\""
+    },
+    "aggregation": {
+      "type": "string",
+      "enum": ["avg", "min", "max", "sum", "count", "p95"],
+      "description": "Aggregation applied over the window"
+    }
+  },
+  "required": ["source", "metric", "window", "aggregation"],
+  "additionalProperties": false
+}

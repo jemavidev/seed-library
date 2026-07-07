@@ -1,0 +1,16 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). PreToolUse receives the tool call on stdin; non-zero exit blocks the call with the redactor's typed reason.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|WebFetch|mcp__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook pii-redactor --policy default --fail-closed"
+          }
+        ]
+      }
+    ]
+  }
+}

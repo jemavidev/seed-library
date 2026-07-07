@@ -1,0 +1,9 @@
+{
+  "id": "hook.span-metadata-recorder",
+  "kind": "hook",
+  "name": "span-metadata-recorder",
+  "description": "A post-tool hook that **enriches** the runtime's existing per-invocation access event with observability metadata \u2014 latency, token usage, retry count, result size \u2014 so cost and performance questions are answerable from the one canonical record.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

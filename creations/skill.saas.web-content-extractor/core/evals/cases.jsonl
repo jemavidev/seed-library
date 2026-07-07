@@ -1,0 +1,5 @@
+{"name": "article extracts to markdown with title", "kind": "golden", "input": {"url": "https://example.org/post/zip-slip", "format": "markdown", "include_links": true, "max_bytes": null}, "expect": {"title_nonempty": true, "content_contains": "#", "fetched_at_iso": true}}
+{"name": "boilerplate stripped", "kind": "golden", "input": {"url": "https://example.org/post/with-nav-and-footer", "format": "text", "include_links": null, "max_bytes": null}, "expect": {"content_excludes": ["cookie banner", "subscribe to our newsletter"]}}
+{"name": "long page truncates", "kind": "golden", "input": {"url": "https://example.org/very-long", "format": "text", "include_links": null, "max_bytes": 2048}, "expect": {"truncated": true}}
+{"name": "robots disallow respected", "kind": "failure", "input": {"url": "https://example.org/private-area", "format": "text", "include_links": null, "max_bytes": null}, "expect": {"failure": "blocked_by_robots"}}
+{"name": "binary target is typed", "kind": "failure", "input": {"url": "https://example.org/file.zip", "format": "text", "include_links": null, "max_bytes": null}, "expect": {"failure": "unsupported_content"}}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "http-request input",
+  "type": "object",
+  "properties": {
+    "method": {
+      "type": "string",
+      "enum": ["GET", "HEAD", "POST", "PUT", "PATCH", "DELETE"],
+      "description": "HTTP method; GET/HEAD are effect-free"
+    },
+    "url": {
+      "type": "string",
+      "description": "Absolute https URL"
+    },
+    "headers": {
+      "type": ["object", "null"],
+      "description": "Extra request headers; auth headers come from auth_ref, never here"
+    },
+    "body": {
+      "type": ["string", "null"],
+      "description": "Request body for mutating methods"
+    },
+    "auth_ref": {
+      "type": ["string", "null"],
+      "description": "Name of a configured credential; null for unauthenticated requests"
+    },
+    "timeout_seconds": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "maximum": 120,
+      "description": "Request timeout; null means 30"
+    }
+  },
+  "required": ["method", "url", "headers", "body", "auth_ref", "timeout_seconds"],
+  "additionalProperties": false
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "webhook-manager input",
+  "type": "object",
+  "properties": {
+    "provider_ref": {
+      "type": "string",
+      "description": "Configured provider name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["register", "remove", "list"],
+      "description": "Subscription operation"
+    },
+    "url": {
+      "type": ["string", "null"],
+      "description": "Receiving endpoint (must be a configured inbound endpoint); required for register"
+    },
+    "events": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Event type names to subscribe; required for register"
+    },
+    "webhook_id": {
+      "type": ["string", "null"],
+      "description": "Subscription id; required for remove"
+    }
+  },
+  "required": ["provider_ref", "action", "url", "events", "webhook_id"],
+  "additionalProperties": false
+}

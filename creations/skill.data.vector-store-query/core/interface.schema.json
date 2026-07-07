@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "vector-store-query input",
+  "type": "object",
+  "properties": {
+    "collection": {
+      "type": "string",
+      "description": "Name of the indexed collection"
+    },
+    "query_text": {
+      "type": "string",
+      "description": "Natural-language query to embed and match"
+    },
+    "top_k": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "description": "Maximum hits to return"
+    },
+    "min_score": {
+      "type": ["number", "null"],
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Drop hits scoring below this; null returns all top_k"
+    },
+    "filters": {
+      "type": ["object", "null"],
+      "description": "Metadata equality constraints, e.g. {\"lang\": \"en\"}; null = no filtering"
+    }
+  },
+  "required": ["collection", "query_text", "top_k", "min_score", "filters"],
+  "additionalProperties": false
+}

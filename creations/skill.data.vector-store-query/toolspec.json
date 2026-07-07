@@ -1,0 +1,44 @@
+{
+  "id": "seed:data:vector-store-query",
+  "name": "vector-store-query",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "hits": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string" },
+            "score": { "type": "number" },
+            "content": { "type": "string" },
+            "metadata": { "type": "object" }
+          },
+          "required": ["id", "score", "content", "metadata"],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": ["hits"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "collection_not_found", "retryable": false },
+    { "code": "embedding_failed", "retryable": true },
+    { "code": "store_unreachable", "retryable": true },
+    { "code": "invalid_filter", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "VECTOR_STORE_URL", "env": "VECTOR_STORE_URL" }
+  ],
+  "rateLimit": { "perMinute": 60, "burst": 15 },
+  "idempotency": { "supported": true, "keyFrom": ["collection", "query_text", "top_k", "min_score"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

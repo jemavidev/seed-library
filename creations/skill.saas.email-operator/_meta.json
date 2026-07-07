@@ -1,0 +1,11 @@
+{
+  "id": "skill.saas.email-operator",
+  "kind": "skill",
+  "name": "email-operator",
+  "description": "Transactional email with explicit recipients and sandbox attachments. Cannot be unsent \u2014 expect strict gating.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

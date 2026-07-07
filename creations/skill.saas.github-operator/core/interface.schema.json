@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "github-operator input",
+  "type": "object",
+  "properties": {
+    "repo": {
+      "type": "string",
+      "description": "Repository as owner/name"
+    },
+    "action": {
+      "type": "string",
+      "enum": ["get-issue", "list-issues", "create-issue", "comment", "create-pr", "close-issue"],
+      "description": "The single operation to perform"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Required for create-issue and create-pr"
+    },
+    "body": {
+      "type": ["string", "null"],
+      "description": "Issue/PR/comment body; required for create-* and comment"
+    },
+    "number": {
+      "type": ["integer", "null"],
+      "description": "Issue/PR number; required for get-issue, comment, close-issue"
+    },
+    "base": {
+      "type": ["string", "null"],
+      "description": "Target branch for create-pr"
+    },
+    "head": {
+      "type": ["string", "null"],
+      "description": "Source branch for create-pr (must be pushed already)"
+    }
+  },
+  "required": ["repo", "action", "title", "body", "number", "base", "head"],
+  "additionalProperties": false
+}

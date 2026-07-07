@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "chart-generator input",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": ["string", "null"],
+      "description": "JSON array of flat records; mutually exclusive with input_path"
+    },
+    "input_path": {
+      "type": ["string", "null"],
+      "description": "JSON or CSV file of records; mutually exclusive with data"
+    },
+    "chart_type": {
+      "type": "string",
+      "enum": ["line", "bar", "scatter", "pie", "histogram"],
+      "description": "Chart form"
+    },
+    "x": {
+      "type": ["string", "null"],
+      "description": "Field for the x axis (or category/label field for pie); null only for histogram"
+    },
+    "y": {
+      "type": ["array", "null"],
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Fields plotted as series (single field for pie/histogram)"
+    },
+    "title": {
+      "type": ["string", "null"],
+      "description": "Chart title; null derives from y field names"
+    },
+    "output_path": {
+      "type": "string",
+      "description": "Where to write the chart artifact, project-relative"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["svg", "png", "html"],
+      "description": "Output format; html is self-contained"
+    }
+  },
+  "required": ["data", "input_path", "chart_type", "x", "y", "title", "output_path", "format"],
+  "additionalProperties": false
+}

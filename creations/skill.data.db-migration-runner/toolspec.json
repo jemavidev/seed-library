@@ -1,0 +1,37 @@
+{
+  "id": "seed:data:db-migration-runner",
+  "name": "db-migration-runner",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "applied": { "type": "array", "items": { "type": "string" } },
+      "current_version": { "type": "string" },
+      "dry_run": { "type": "boolean" }
+    },
+    "required": ["applied", "current_version", "dry_run"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "connection_not_found", "retryable": false },
+    { "code": "checksum_mismatch", "retryable": false },
+    { "code": "migration_conflict", "retryable": false },
+    { "code": "partial_failure", "retryable": false }
+  ],
+  "credentials": [
+    { "name": "DB_URL_<CONNECTION_REF>", "env": "DB_URL_<CONNECTION_REF>" }
+  ],
+  "rateLimit": { "perMinute": 6, "burst": 2 },
+  "idempotency": { "supported": true, "keyFrom": ["connection_ref", "migrations_path", "direction", "target"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "migrate down to the version recorded before the run (requires every applied migration to carry a down; down-less migrations are flagged at dry-run)",
+    "toolId": "seed:data:db-migration-runner"
+  },
+  "_meta": "_meta.json"
+}

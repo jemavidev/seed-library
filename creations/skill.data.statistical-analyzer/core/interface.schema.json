@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "statistical-analyzer input",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": ["string", "null"],
+      "description": "JSON array of flat records; mutually exclusive with input_path"
+    },
+    "input_path": {
+      "type": ["string", "null"],
+      "description": "JSON or CSV file of records; mutually exclusive with data"
+    },
+    "analysis": {
+      "type": "string",
+      "enum": ["descriptive", "correlation", "hypothesis-test", "distribution"],
+      "description": "Which analysis to run"
+    },
+    "columns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1,
+      "description": "Fields involved in the analysis"
+    },
+    "options": {
+      "type": ["object", "null"],
+      "description": "Per-analysis knobs: group_by (hypothesis-test), test (t|mann-whitney|chi2), confidence (0-1)"
+    }
+  },
+  "required": ["data", "input_path", "analysis", "columns", "options"],
+  "additionalProperties": false
+}

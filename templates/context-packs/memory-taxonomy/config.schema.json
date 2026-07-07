@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "memory-taxonomy config",
+  "type": "object",
+  "properties": {
+    "types": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["working", "session", "semantic", "episodic", "knowledge-base"],
+            "description": "Which memory kind this entry configures"
+          },
+          "backend_ref": {
+            "type": "string",
+            "description": "Named runtime store backing this type (binding detail)"
+          },
+          "budget": {
+            "type": "object",
+            "properties": {
+              "max_tokens": { "type": ["integer", "null"], "minimum": 1 },
+              "max_entries": { "type": ["integer", "null"], "minimum": 1 },
+              "retention_days": { "type": ["integer", "null"], "minimum": 1 }
+            },
+            "required": ["max_tokens", "max_entries", "retention_days"],
+            "additionalProperties": false
+          },
+          "write_path": {
+            "type": "string",
+            "enum": ["turn-assembly", "pattern-state", "distillation-gate", "append-only", "ingestion"],
+            "description": "The only legitimate way content enters this type"
+          },
+          "temporal_validity": {
+            "type": "boolean",
+            "description": "Whether entries carry valid_at/invalid_at (mandatory for semantic)"
+          }
+        },
+        "required": ["type", "backend_ref", "budget", "write_path", "temporal_validity"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["types"],
+  "additionalProperties": false
+}

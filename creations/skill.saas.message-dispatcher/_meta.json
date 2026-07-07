@@ -1,0 +1,11 @@
+{
+  "id": "skill.saas.message-dispatcher",
+  "kind": "skill",
+  "name": "message-dispatcher",
+  "description": "Send one message to a configured channel (chat/email-channel) with threading; delivery receipt returned. Sending publishes.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

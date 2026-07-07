@@ -1,0 +1,11 @@
+{
+  "id": "skill.data.metrics-collector",
+  "kind": "skill",
+  "name": "metrics-collector",
+  "description": "Pull one aggregated metric value (avg/min/max/sum/count/p95) over a window from a configured source. Read-only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

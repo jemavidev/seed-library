@@ -1,0 +1,11 @@
+{
+  "id": "skill.saas.http-request",
+  "kind": "skill",
+  "name": "http-request",
+  "description": "One HTTP request (auth by credential ref, capped body). Prefer dedicated operators; mutating methods are external effects.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

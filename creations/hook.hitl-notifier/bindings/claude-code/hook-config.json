@@ -1,0 +1,15 @@
+{
+  "_comment": "Wiring sketch for a Claude Code hooks block (settings.json). Notification fires on permission requests / idle prompts; the command relays to the configured channel and waits for a verdict.",
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "seed-hook hitl-notifier --channel-ref ops-approvals --timeout 24h --on-timeout abort"
+          }
+        ]
+      }
+    ]
+  }
+}

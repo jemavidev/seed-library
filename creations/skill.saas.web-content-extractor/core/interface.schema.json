@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "web-content-extractor input",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "Absolute http(s) URL of a public page"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["markdown", "text"],
+      "description": "markdown keeps structure and optionally links; text is prose only"
+    },
+    "include_links": {
+      "type": ["boolean", "null"],
+      "description": "Keep hyperlinks in markdown output; null means false"
+    },
+    "max_bytes": {
+      "type": ["integer", "null"],
+      "minimum": 1024,
+      "description": "Content cap; null means implementation default (512 KiB)"
+    }
+  },
+  "required": ["url", "format", "include_links", "max_bytes"],
+  "additionalProperties": false
+}

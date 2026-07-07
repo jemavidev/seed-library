@@ -1,0 +1,6 @@
+{"name": "filtered errors within window", "kind": "golden", "input": {"source": "app", "pattern": "payment", "since": "6h", "level": "error", "max_lines": 200}, "expect": {"all_levels_at_least": "error", "all_within_since": true}}
+{"name": "relative since parsed", "kind": "golden", "input": {"source": "app", "pattern": null, "since": "30m", "level": null, "max_lines": 50}, "expect": {"truncated_is_boolean": true}}
+{"name": "zero matches is success", "kind": "golden", "input": {"source": "app", "pattern": "zzz-not-present", "since": "1h", "level": null, "max_lines": 100}, "expect": {"lines": []}}
+{"name": "cap sets truncated", "kind": "golden", "input": {"source": "app", "pattern": null, "since": "7d", "level": null, "max_lines": 10}, "expect": {"truncated": true}}
+{"name": "unknown source is typed", "kind": "failure", "input": {"source": "nope", "pattern": null, "since": "1h", "level": null, "max_lines": 100}, "expect": {"failure": "source_not_found"}}
+{"name": "bad since is typed", "kind": "failure", "input": {"source": "app", "pattern": null, "since": "yesterday-ish", "level": null, "max_lines": 100}, "expect": {"failure": "invalid_since"}}

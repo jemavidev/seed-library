@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "message-dispatcher input",
+  "type": "object",
+  "properties": {
+    "channel_ref": {
+      "type": "string",
+      "description": "Configured destination name; never a raw address or webhook URL"
+    },
+    "body": {
+      "type": "string",
+      "description": "Message content"
+    },
+    "subject": {
+      "type": ["string", "null"],
+      "description": "Subject line for channels that support one; null otherwise"
+    },
+    "thread_ref": {
+      "type": ["string", "null"],
+      "description": "message_id to thread under, where the channel supports threading"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["text", "markdown"],
+      "description": "Body format; markdown degrades to text on channels without it"
+    }
+  },
+  "required": ["channel_ref", "body", "subject", "thread_ref", "format"],
+  "additionalProperties": false
+}

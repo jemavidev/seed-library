@@ -1,0 +1,17 @@
+{
+  "profile": "agent.idea-shaper",
+  "authorized_skills": [
+    "seed:core-utils:document-composer",
+    "seed:core-utils:document-parser",
+    "seed:core-utils:file-search",
+    "seed:core-utils:web-search",
+    "seed:saas:web-content-extractor"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "blocked"
+  },
+  "notes": "Conversation-first intake profile: minimal tools on purpose. Charters compose locally; nothing leaves the machine from this profile."
+}

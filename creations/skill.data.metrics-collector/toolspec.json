@@ -1,0 +1,35 @@
+{
+  "id": "seed:data:metrics-collector",
+  "name": "metrics-collector",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "metric": { "type": "string" },
+      "window": { "type": "string" },
+      "aggregation": { "type": "string" },
+      "value": { "type": ["number", "null"] },
+      "samples": { "type": "integer" }
+    },
+    "required": ["metric", "window", "aggregation", "value", "samples"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "source_not_found", "retryable": false },
+    { "code": "metric_not_found", "retryable": false },
+    { "code": "window_invalid", "retryable": false },
+    { "code": "source_unreachable", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "METRICS_SOURCE_TOKEN", "env": "METRICS_SOURCE_TOKEN" }
+  ],
+  "rateLimit": { "perMinute": 60, "burst": 15 },
+  "idempotency": { "supported": true, "keyFrom": ["source", "metric", "window", "aggregation"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

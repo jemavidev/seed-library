@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "db-migration-runner input",
+  "type": "object",
+  "properties": {
+    "connection_ref": {
+      "type": "string",
+      "description": "Name of a configured connection; never a connection string"
+    },
+    "migrations_path": {
+      "type": "string",
+      "description": "Directory containing versioned migration files, project-relative"
+    },
+    "direction": {
+      "type": "string",
+      "enum": ["up", "down"],
+      "description": "Apply forward or roll back"
+    },
+    "target": {
+      "type": ["string", "null"],
+      "description": "Version to migrate to; null = latest (up) / one step back (down)"
+    },
+    "dry_run": {
+      "type": "boolean",
+      "description": "Report the execution plan without running anything"
+    }
+  },
+  "required": ["connection_ref", "migrations_path", "direction", "target", "dry_run"],
+  "additionalProperties": false
+}

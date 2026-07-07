@@ -1,0 +1,24 @@
+{
+  "profile": "agent.integrations-operator",
+  "authorized_skills": [
+    "seed:saas:http-request",
+    "seed:saas:message-dispatcher",
+    "seed:saas:email-operator",
+    "seed:github:operator",
+    "seed:saas:workspace-document-operator",
+    "seed:saas:web-content-extractor",
+    "seed:saas:webhook-manager",
+    "seed:core-utils:file-search",
+    "seed:core-utils:document-parser"
+  ],
+  "handoffs_allowed": false,
+  "stance_defaults": {
+    "pure": "free",
+    "local": "notify",
+    "external": "confirm"
+  },
+  "stance_overrides": {
+    "seed:saas:email-operator": "expert-review"
+  },
+  "notes": "Email escalates because its compensation is honestly weak (correction only). All sends assume hook.pii-redactor is attached."
+}

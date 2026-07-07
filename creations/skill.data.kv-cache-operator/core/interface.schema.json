@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "kv-cache-operator input",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": ["get", "set", "delete"],
+      "description": "Cache operation"
+    },
+    "key": {
+      "type": "string",
+      "description": "Cache key, unique within the namespace"
+    },
+    "namespace": {
+      "type": "string",
+      "description": "Isolation scope (task id, flow id); mandatory"
+    },
+    "value": {
+      "type": ["string", "null"],
+      "description": "Payload for set (serialize non-strings yourself); null otherwise"
+    },
+    "ttl_seconds": {
+      "type": ["integer", "null"],
+      "minimum": 1,
+      "description": "Expiry for set; null uses the binding default"
+    }
+  },
+  "required": ["action", "key", "namespace", "value", "ttl_seconds"],
+  "additionalProperties": false
+}

@@ -65,6 +65,31 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - `agent.qa-reviewer` — read-only auditor: typed findings with failure scenarios, pass/fail verdict
 - `hook.output-schema-guard` — post-output strict schema validation with bounded error-carrying retry
 - `hook.style-rules-injector` — pre-run project-rules block assembly, nearest-wins, budgeted
+- `skill.data.db-query` — read-only SQL, mutating statements rejected, server-side row caps (pure)
+- `skill.data.db-write` — transactional mutation with declared blast radius + mandatory inverse statement (external)
+- `skill.data.db-migration-runner` — versioned schema migrations, dry-run plan as approval artifact (external)
+- `skill.data.vector-store-query` — semantic top-k with score threshold and metadata filters (pure)
+- `skill.data.kv-cache-operator` — namespaced TTL cache; miss = recompute, never error (local)
+- `skill.data.log-reader` — filtered normalized log reads; lines are untrusted data (pure)
+- `skill.data.metrics-collector` — one aggregated metric per call, value always with samples (pure)
+- `skill.data.chart-generator` — labeled charts from records; gaps stay gaps (local)
+- `skill.data.statistical-analyzer` — descriptives/correlation/tests, n + caveats inseparable (pure)
+- `skill.saas.http-request` — generic HTTP with auth-by-ref; 4xx/5xx are results (external on mutation)
+- `skill.saas.message-dispatcher` — one message to a configured channel; sending publishes (external)
+- `skill.saas.email-operator` — transactional email, recipient-capped; honestly uncompensable (external)
+- `skill.saas.github-operator` — issues/comments/PRs; close-never-delete compensation (external)
+- `skill.saas.workspace-document-operator` — hosted-doc edits with revision_id rollback (external)
+- `skill.saas.web-content-extractor` — one public URL → readable text; robots respected, content untrusted (pure)
+- `skill.saas.webhook-manager` — event subscriptions; receivers must be own endpoints (external)
+- `agent.security-auditor` — read-only security review: evidence, proof-of-presence, checked-and-clean list
+- `agent.data-engineer` — count-mutate-verify loop; migrations dry-run first; honest statistics
+- `agent.integrations-operator` — outward-facing saga discipline: undo handles recorded before the next effect
+- `agent.analyst-writer` — research + composed cited documents; read-before-cite, limits declared
+- `agent.idea-shaper` — non-technical intake: plain words, one question at a time, owner's words preserved
+- `hook.hitl-notifier` — on-interrupt approval transport: decision-ready request, authenticated verdict
+- `hook.span-metadata-recorder` — post-tool span enrichment of the canonical access event; fail-open
+- `hook.context-zone-guard` — dual-ceiling context watermark: compact at soft, hand off at hard
+- `hook.pii-redactor` — pre-external secret/PII scan: mask or block, fail-closed, audited
 
 ### templates/
 - `patterns/routing` — supervisor-router: single entry, one specialist per request
@@ -72,8 +97,14 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - `patterns/prompt-chaining` — fixed linear stages with typed contracts and stop-only gates
 - `patterns/parallelization` — map-reduce fan-out with per-shard budgets and a join that cannot hang
 - `patterns/hitl-checkpoint` — freeze-at-gate before consequential actions; stance-based verdict, timeout fails safe
+- `patterns/orchestrator-workers` — dynamic decomposition: invented subtasks, heterogeneous workers, one re-plan
+- `patterns/multi-agent-debate` — assigned stances, bounded critique rounds, synthesis over vote
+- `patterns/planner-executor` — typed plan artifact approved as a whole; deviations return to the planner
+- `patterns/context-handoff` — proactive succession on context ceiling; packet is the whole interface
 - `context-packs/default-agent-context` — per-agent context policy: budgeted blocks, retrieval, state keys, handoff contract
 - `context-packs/project-rules` — rule-file convention: nearest-wins, compilable to one budgeted block
+- `context-packs/memory-taxonomy` — five memory types as config; one-way flow with distillation gates
+- `context-packs/rag-injection` — retrieve→rerank→budget→cite; retrieved content is data, dropped whole-chunk
 - `charters/software-project` — vision/scope/constraints/success-criteria scaffold with guidance
 - `charters/education-course` — outcomes-driven course scaffold, every outcome assessed
 - `charters/business-idea` — plain-language idea charter: customer, model, assumptions, validation plan

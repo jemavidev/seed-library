@@ -1,0 +1,38 @@
+{
+  "id": "seed:github:operator",
+  "name": "github-operator",
+  "kind": "handwritten",
+  "source": null,
+  "parameters": { "$ref": "core/interface.schema.json" },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "action": { "type": "string" },
+      "number": { "type": ["integer", "null"] },
+      "url": { "type": ["string", "null"] },
+      "state": { "type": ["string", "null"] }
+    },
+    "required": ["action", "number", "url", "state"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "auth_failed", "retryable": false },
+    { "code": "not_found", "retryable": false },
+    { "code": "validation_failed", "retryable": false },
+    { "code": "rate_limited", "retryable": true }
+  ],
+  "credentials": [
+    { "name": "GITHUB_TOKEN", "env": "GITHUB_TOKEN" }
+  ],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["repo", "action", "title", "number"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": ["network-egress"],
+  "cost": { "recorded": true, "account": "task" },
+  "effects": "external",
+  "compensate": {
+    "summary": "close the created issue/PR with a comment explaining why (close-issue); artifacts are closed, never deleted",
+    "toolId": "seed:github:operator"
+  },
+  "_meta": "_meta.json"
+}

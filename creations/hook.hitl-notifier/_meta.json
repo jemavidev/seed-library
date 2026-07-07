@@ -1,0 +1,9 @@
+{
+  "id": "hook.hitl-notifier",
+  "kind": "hook",
+  "name": "hitl-notifier",
+  "description": "An on-interrupt hook: when a workflow gate fires (see pattern `hitl-checkpoint` / `planner-executor`), this hook formats the pending action into a human-readable approval request, delivers it over the configured channel, collects the verdict, and hands it back to the gate.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

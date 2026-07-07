@@ -1,0 +1,11 @@
+{
+  "id": "skill.data.vector-store-query",
+  "kind": "skill",
+  "name": "vector-store-query",
+  "description": "Semantic top-k search over a named vector collection with score threshold and metadata filters. Read-only.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [
+    "network-egress"
+  ],
+  "libraryShare": "candidate"
+}

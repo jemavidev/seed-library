@@ -1,0 +1,5 @@
+{"name": "relevant hit ranks first", "kind": "golden", "input": {"collection": "runbooks", "query_text": "rotate signing key", "top_k": 5, "min_score": null, "filters": null}, "expect": {"first_hit_id": "rb-114#3", "ordered_by_score_desc": true}}
+{"name": "min_score drops weak tail", "kind": "golden", "input": {"collection": "runbooks", "query_text": "rotate signing key", "top_k": 10, "min_score": 0.5, "filters": null}, "expect": {"all_scores_at_least": 0.5}}
+{"name": "metadata filter constrains hits", "kind": "golden", "input": {"collection": "runbooks", "query_text": "backup policy", "top_k": 5, "min_score": null, "filters": {"lang": "en"}}, "expect": {"all_metadata_match": {"lang": "en"}}}
+{"name": "empty result above threshold is success", "kind": "golden", "input": {"collection": "runbooks", "query_text": "completely unrelated topic zzz", "top_k": 5, "min_score": 0.9, "filters": null}, "expect": {"hits": []}}
+{"name": "unknown collection is typed", "kind": "failure", "input": {"collection": "nope", "query_text": "x", "top_k": 5, "min_score": null, "filters": null}, "expect": {"failure": "collection_not_found"}}

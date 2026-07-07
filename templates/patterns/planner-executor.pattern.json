@@ -1,0 +1,32 @@
+{
+  "id": "planner-executor",
+  "alias": "plan-then-execute",
+  "intent": "A planner turns the objective into an explicit, reviewable plan artifact (typed steps with preconditions and effect classes); the plan is approved as a whole; an executor runs it step-by-step, re-validating preconditions and returning to the planner on deviation.",
+  "state": {
+    "objective": "string",
+    "plan": "array of { step_id, action, tool_ref, effect_class, preconditions, expected_outcome }",
+    "plan_approved": "boolean",
+    "step_results": "object keyed by step_id",
+    "deviations": "array of { step_id, expected, observed }"
+  },
+  "nodes": [
+    { "id": "planner", "role_ref": "agent.supervisor" },
+    { "id": "plan_gate", "role_ref": null },
+    { "id": "executor", "role_ref": "bound per instantiation to the acting profile" }
+  ],
+  "edges": [
+    { "from": "START", "to": "planner", "when": null },
+    { "from": "planner", "to": "plan_gate", "when": "plan is complete and typed" },
+    { "from": "plan_gate", "to": "executor", "when": "plan_approved == true" },
+    { "from": "plan_gate", "to": "planner", "when": "verdict == 'amended'" },
+    { "from": "plan_gate", "to": "END", "when": "verdict == 'rejected'" },
+    { "from": "executor", "to": "executor", "when": "step succeeded && steps remain" },
+    { "from": "executor", "to": "planner", "when": "deviation observed && replans < budget.max_iterations" },
+    { "from": "executor", "to": "END", "when": "all steps done OR replans exhausted" }
+  ],
+  "interrupts": [
+    { "at": "plan_gate", "stance": "confirm", "timeout": "24h", "on_timeout": "abort" }
+  ],
+  "termination": "all plan steps executed, or rejection at the gate, or replan budget exhausted (delivering completed steps + the deviation that stopped progress)",
+  "budget": { "max_iterations": 2, "account": "task" }
+}

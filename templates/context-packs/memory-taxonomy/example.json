@@ -1,0 +1,9 @@
+{
+  "types": [
+    { "type": "working", "backend_ref": "context-assembler", "budget": { "max_tokens": 4000, "max_entries": null, "retention_days": null }, "write_path": "turn-assembly", "temporal_validity": false },
+    { "type": "session", "backend_ref": "state-store", "budget": { "max_tokens": null, "max_entries": 500, "retention_days": 30 }, "write_path": "pattern-state", "temporal_validity": false },
+    { "type": "semantic", "backend_ref": "memory-store", "budget": { "max_tokens": null, "max_entries": 2000, "retention_days": null }, "write_path": "distillation-gate", "temporal_validity": true },
+    { "type": "episodic", "backend_ref": "event-log", "budget": { "max_tokens": null, "max_entries": null, "retention_days": 365 }, "write_path": "append-only", "temporal_validity": true },
+    { "type": "knowledge-base", "backend_ref": "vector-store", "budget": { "max_tokens": null, "max_entries": null, "retention_days": null }, "write_path": "ingestion", "temporal_validity": false }
+  ]
+}

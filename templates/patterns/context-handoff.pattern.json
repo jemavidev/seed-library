@@ -1,0 +1,26 @@
+{
+  "id": "context-handoff",
+  "alias": "proactive-succession",
+  "intent": "When a working agent approaches its context ceiling, it finishes the current atomic step, writes a complete handoff packet, and yields to a fresh successor that continues from the packet alone — before quality degrades, not after.",
+  "state": {
+    "task_brief": "string — original, never summarized away",
+    "handoff_packet": "object matching the profile's handoff_contract: action_taken, status, artifacts, decisions_made, open_items, next_steps",
+    "successor_ack": "boolean — successor confirms the packet suffices to continue",
+    "generation": "integer — how many successions this task has seen"
+  },
+  "nodes": [
+    { "id": "incumbent", "role_ref": "the active profile instance" },
+    { "id": "packet_check", "role_ref": null },
+    { "id": "successor", "role_ref": "fresh instance of the same profile" }
+  ],
+  "edges": [
+    { "from": "START", "to": "incumbent", "when": null },
+    { "from": "incumbent", "to": "packet_check", "when": "context ceiling signal received (see hook.context-zone-guard) and current atomic step is complete" },
+    { "from": "packet_check", "to": "successor", "when": "packet satisfies the handoff_contract (all required fields present and concrete)" },
+    { "from": "packet_check", "to": "incumbent", "when": "packet incomplete — fill the named gaps before yielding" },
+    { "from": "successor", "to": "END", "when": "successor_ack == true; successor becomes the new incumbent and the task continues" }
+  ],
+  "interrupts": [],
+  "termination": "succession completes on successor_ack; if generation exceeds budget.max_iterations the task escalates to a human instead of chaining successors indefinitely",
+  "budget": { "max_iterations": 3, "account": "meta" }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "agent.idea-shaper",
+  "kind": "agent",
+  "name": "idea-shaper",
+  "description": "Turn a plainly-described idea from a non-technical owner into a concrete, testable charter \u2014 in the owner's own words, at the owner's own pace.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}
