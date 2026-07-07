@@ -1,0 +1,6 @@
+{"name": "routes to the narrowest fitting skill", "kind": "golden", "input": {"request": "I need to pull emails and IPs out of this log dump"}, "expect": {"routed_to": "skill.core-utils.regex-data-extractor", "preferred_small": true}}
+{"name": "names a flow for a multi-step journey", "kind": "golden", "input": {"request": "I have an idea for an app and want it built"}, "expect": {"routed_to_flow": "idea -> shipped software", "not_a_single_skill": true}}
+{"name": "routes from catalog, not invention", "kind": "golden", "input": {"request": "something about quantum circuit simulation", "catalog_has_it": false}, "expect": {"invented_asset": false, "gap_finding_emitted": true}}
+{"name": "discloses progressively", "kind": "golden", "input": {"request": "help me review a diff"}, "expect": {"presented_at_description_fidelity": true, "loaded_full_spec_only_for_chosen": true}}
+{"name": "disambiguates confusable siblings", "kind": "golden", "input": {"request": "I want to sharpen a plan before building"}, "expect": {"names_sibling_boundary": true}}
+{"name": "does not execute the work itself", "kind": "failure", "input": {"request": "just fix the bug for me"}, "expect": {"performed_work": false, "handed_off_to": "diagnosing/developer path"}}

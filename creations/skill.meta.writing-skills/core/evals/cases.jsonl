@@ -1,0 +1,6 @@
+{"name": "chooses invocation mode with justification", "kind": "golden", "input": {"draft": "a skill agents should fire automatically on any file write"}, "expect": {"names_invocation_mode": true, "justifies_model_invocation_if_chosen": true}}
+{"name": "assigns a leading word", "kind": "golden", "input": {"draft": "a skill that verifies a bug is reproducible before fixing"}, "expect": {"leading_word_present": true, "leading_word_is_pretraining_dense": true}}
+{"name": "pushes detail down the hierarchy", "kind": "golden", "input": {"draft": "a skill with 400 lines of edge-case rules inline"}, "expect": {"proposes_reference_split": true, "top_stays_legible": true}}
+{"name": "diagnoses a misfiring skill by failure mode", "kind": "golden", "input": {"skill": "declares done after the first plausible answer, skips its own verify step"}, "expect": {"names_failure_mode": "premature completion"}}
+{"name": "recommends three-fidelity only when warranted", "kind": "golden", "input": {"asset": "a 2000-word engineering reference that strains the budget"}, "expect": {"recommends_nano_mini_full": true}}
+{"name": "rejects one-fidelity split for a tiny asset", "kind": "failure", "input": {"asset": "a 40-word helper skill"}, "expect": {"forced_three_fidelity": false}}

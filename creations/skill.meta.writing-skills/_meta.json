@@ -1,0 +1,9 @@
+{
+  "id": "skill.meta.writing-skills",
+  "kind": "skill",
+  "name": "writing-skills",
+  "description": "The reference for authoring library assets predictably \u2014 invocation mode, leading words, progressive disclosure, pruning, failure modes, three-fidelity storage.",
+  "lineage": "hand-seeded@2026-07-07",
+  "capabilities": [],
+  "libraryShare": "candidate"
+}

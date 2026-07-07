@@ -1,0 +1,42 @@
+{
+  "id": "seed:meta:writing-skills",
+  "name": "writing-skills",
+  "kind": "handwritten",
+  "source": {
+    "type": "adaptation",
+    "ref": "https://github.com/mattpocock/skills",
+    "version": "MIT; writing-great-skills + writing-docs doctrine"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "draft_ref": { "type": ["string", "null"], "description": "Path to the draft creation under authoring/review; null for a fresh authoring session" },
+      "mode": { "type": "string", "enum": ["author", "edit", "diagnose"], "description": "Create new, revise existing, or diagnose a misfiring asset" },
+      "asset_class": { "type": "string", "enum": ["skill", "agent", "hook"], "description": "The executable asset class being authored" }
+    },
+    "required": ["draft_ref", "mode", "asset_class"],
+    "additionalProperties": false
+  },
+  "returns": {
+    "type": "object",
+    "properties": {
+      "checklist_result": { "type": "object", "description": "Per-item pass/finding across the predictability checklist" },
+      "failure_modes_found": { "type": "array", "items": { "type": "string" } },
+      "leading_word": { "type": ["string", "null"] }
+    },
+    "required": ["checklist_result", "failure_modes_found", "leading_word"],
+    "additionalProperties": false
+  },
+  "failures": [
+    { "code": "draft_not_found", "retryable": false },
+    { "code": "not_an_executable_asset", "retryable": false }
+  ],
+  "credentials": [],
+  "rateLimit": { "perMinute": 30, "burst": 10 },
+  "idempotency": { "supported": true, "keyFrom": ["draft_ref", "mode"] },
+  "mock": "core/evals/cases.jsonl",
+  "capabilities": [],
+  "cost": { "recorded": true, "account": "meta" },
+  "effects": "pure",
+  "_meta": "_meta.json"
+}

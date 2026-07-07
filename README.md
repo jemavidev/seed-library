@@ -45,7 +45,13 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 
 ## Index
 
+> The exhaustive, always-current index is **[CATALOG.md](CATALOG.md)**, generated from asset
+> metadata by `scripts/build-catalog.py` (regenerate after adding/renaming an asset).
+> `agent.librarian` routes from it. The curated list below is a human overview.
+
 ### creations/
+- `agent.librarian` — router over the whole catalog; routes from CATALOG.md, never from memory
+- `skill.meta.writing-skills` — author assets predictably: invocation mode, leading words, failure modes, 3-fidelity
 - `skill.sdlc.read-project-file` — read one project file safely, truncation-aware (pure)
 - `skill.sdlc.write-modify-file` — create/overwrite or patch one file, atomic, patch-over-write (local)
 - `skill.sdlc.git-vcs-operator` — status/branch/checkout/commit/push/revert, one action per call (external: push)
@@ -140,4 +146,7 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - `knowledge-carries-temporal-validity` — facts carry valid_at; supersede, don't delete
 - `single-source-of-truth-schemas` — bindings are derived, never hand-written twins
 - `profiles-as-config-not-code` — agent identity lives in versioned, readable config
+- `cognitive-vs-context-load` — the two currencies assets are paid in; the router pays down cognitive load
+- `leading-words` — anchor a skill in one pretraining-dense concept, for execution and invocation
+- `skill-failure-modes` — premature completion, duplication, sediment, sprawl, no-op (curator's checklist)
 
