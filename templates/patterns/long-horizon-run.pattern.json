@@ -1,6 +1,7 @@
 {
   "id": "long-horizon-run",
   "alias": "checkpointed-autonomous-run",
+  "status": "active",
   "intent": "Pursue an objective across many work episodes without supervision: each episode does bounded work, checkpoints its state, and emits a heartbeat; interruption at any point resumes from the last checkpoint; stalls and budget exhaustion escalate instead of spinning.",
   "state": {
     "objective": "string — carried verbatim across all episodes",

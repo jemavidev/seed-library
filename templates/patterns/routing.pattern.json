@@ -1,6 +1,7 @@
 {
   "id": "routing",
   "alias": "supervisor-router",
+  "status": "active",
   "intent": "Single entry point: classify the request's intent and hand it to exactly one specialist; consolidate and return its result.",
   "state": {
     "user_request": "string",

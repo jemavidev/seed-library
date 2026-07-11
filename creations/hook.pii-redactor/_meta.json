@@ -5,5 +5,6 @@
   "description": "A pre-external hook: scans every outbound payload (message bodies, email content, issue/PR bodies, document edits, HTTP request bodies) for secrets and personal data before the effect executes.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

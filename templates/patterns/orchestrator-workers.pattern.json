@@ -1,6 +1,7 @@
 {
   "id": "orchestrator-workers",
   "alias": "dynamic-decomposition",
+  "status": "active",
   "intent": "An orchestrator invents the subtask list at runtime from the objective, dispatches each subtask to a fitting worker profile, integrates results, and may re-plan once from what came back.",
   "state": {
     "objective": "string",

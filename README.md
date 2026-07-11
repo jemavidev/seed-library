@@ -43,6 +43,57 @@ Seeded per the [library-seeding-plan](https://github.com/jemavidev/SeeD/blob/mai
 - Templates are filename-addressed: `templates/patterns/<id>.pattern.json` (+ `<id>.md` rationale),
   `templates/context-packs/<name>/`, `templates/charters/`, `templates/frontier-policies/`.
 
+## Naming & lifecycle governance
+
+The master rule: **a name says what the asset is without opening it**, and every asset carries
+a lifecycle status the catalog renders. Enforced by `validate.py` (the `lifecycle` check).
+
+### Naming grammar — one form per class
+
+| Class | Form | Rule |
+|---|---|---|
+| Creations | `<kind>.<domain>.<name>` | kind ∈ skill/agent/hook; domain from the closed vocabulary below |
+| Patterns | noun: the **mechanism** | names the orchestration shape, not the problem (`wayfinder`, `triage`) |
+| Lessons | claim-phrase: the **rule itself** | the name *is* the statement compressed (`rejections-are-knowledge`); if it can't be named as a claim, it isn't a lesson yet |
+| Context packs | noun: the **convention** defined | what it standardizes, not where it's used (`spec-template`) |
+| Charters / policies | the **scenario** covered | `software-project`, `balanced` |
+
+Cross-cutting rules: kebab-case English always; the leading word goes first; **names are
+identity and never change** — a rename is deprecate + re-add, so `library://` lineage markers
+in downstream projects never dangle. When citing an asset in docs, maps, or logs, use
+`<class>:<name>` (`pattern:wayfinder`, `lesson:facts-vs-decisions`, `pack:spec-template`);
+creations already carry their class in the id.
+
+**The domain vocabulary is closed**: `sdlc`, `devops`, `data`, `saas`, `core-utils`,
+`business`, `daemon`, `meta`. Adding a domain is an explicit, recorded decision — never a
+side effect of naming one asset. And naming is the *last* step: grep the catalog by concept
+first (a synonym duplicate is the #1 form of catalog pollution).
+
+### Lifecycle — one `status`, five stations
+
+```
+candidate → incubating → active → deprecated → retired
+```
+
+| Status | Means | Lives where |
+|---|---|---|
+| `candidate` | idea in [CANDIDATES.md](CANDIDATES.md); **not an asset yet** | CANDIDATES only |
+| `incubating` | built, not yet validated by real use | asset, badged in catalog |
+| `active` | the default: usable, routed to | asset |
+| `deprecated` | kept for lineage holders; `superseded_by` **required** (validation fails without it) | asset, catalog lifecycle section |
+| `retired` | files deleted from the tree; git history keeps them | history only |
+
+Where `status` lives (single source of truth — the catalog only renders it): creations →
+`_meta.json` (regeneration preserves it, like `lineage`); patterns → the `.pattern.json`;
+packs/charters/frontier-policies → a `> Status:` line under the markdown title; lessons →
+their dated `**Valid at.**` line, and per `lessons/knowledge-carries-temporal-validity.md`
+a lesson is **invalidated with a date, never deleted**.
+
+Usage is never hand-tracked — it rots. Real usage is grepable through the `library://<id>@v<n>`
+lineage markers that copy-with-lineage leaves in downstream projects; the library records only
+`Valid at` / last-validated dates. When in doubt: deprecate (cheap, honest) rather than retire
+(rare, only when nothing points at the asset).
+
 ## Maintaining this library
 
 Derived artifacts are **generated, never hand-edited**: `_meta.json`, each skill's
@@ -55,10 +106,10 @@ python3 scripts/build.py
 
 It regenerates the derived files (`generate-bindings.py` → `build-catalog.py`) and then
 **validates** (`validate.py`: core-neutrality lint, JSON/JSONL validity, skill-contract
-presence), exiting non-zero on any finding. Stdlib-only and path-relative, so a fresh
+presence, lifecycle status), exiting non-zero on any finding. Stdlib-only and path-relative, so a fresh
 `git clone` rebuilds with nothing but `python3` — the SeeD-vanishes durability property applies
-to the library's own tooling, not just its content. Provenance (`lineage`, `libraryShare`) is
-preserved across regenerations; only genuinely new assets get defaults.
+to the library's own tooling, not just its content. Provenance (`lineage`, `libraryShare`,
+`status`, `superseded_by`) is preserved across regenerations; only genuinely new assets get defaults.
 
 ## Index
 

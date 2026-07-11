@@ -1,5 +1,7 @@
 # Business idea charter — <idea name>
 
+> Status: active
+
 <!-- Scaffold: replace every <angle-bracket> placeholder; delete guidance comments when done.
      Sections marked (required) must exist for the charter to pass composition checks.
      Written for an owner who may have no business training — every term is plain. -->

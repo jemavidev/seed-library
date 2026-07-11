@@ -1,5 +1,7 @@
 # Context pack — rag-injection
 
+> Status: active
+
 Declares how retrieved knowledge enters an agent's context: retrieve → filter/rerank →
 budget → cite. Store-agnostic — the pipeline is configuration consumed at context-assembly
 time; `vector-store-query` (or any retriever) is the mechanism underneath.

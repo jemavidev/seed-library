@@ -5,5 +5,6 @@
   "description": "A pre-run context hook: collects the project's rule files (agent context files, editor rule files, contribution guides) and injects the applicable subset into the agent's context before work starts \u2014 so style/convention compliance comes from the project, not from per-agent prompt copies.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

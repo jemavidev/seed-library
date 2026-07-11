@@ -7,5 +7,6 @@
   "capabilities": [
     "vision"
   ],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

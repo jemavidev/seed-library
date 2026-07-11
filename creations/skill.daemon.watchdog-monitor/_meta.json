@@ -5,5 +5,6 @@
   "description": "Register condition watches (metric/log/health/file) that emit trigger events with evidence; watch and act are separate by design.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

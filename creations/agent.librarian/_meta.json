@@ -5,5 +5,6 @@
   "description": "Route any request to the right library asset or flow, from the generated catalog \u2014 so a growing library stays navigable and nobody has to remember what exists.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

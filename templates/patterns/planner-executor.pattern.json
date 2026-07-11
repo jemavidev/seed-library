@@ -1,6 +1,7 @@
 {
   "id": "planner-executor",
   "alias": "plan-then-execute",
+  "status": "active",
   "intent": "A planner turns the objective into an explicit, reviewable plan artifact (typed steps with preconditions and effect classes); the plan is approved as a whole; an executor runs it step-by-step, re-validating preconditions and returning to the planner on deviation.",
   "state": {
     "objective": "string",

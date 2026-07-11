@@ -25,6 +25,7 @@ CREATIONS = ROOT / "creations"
 # Defaults applied ONLY to creations that have no _meta.json yet.
 DEFAULT_LINEAGE = "hand-seeded@2026-07-07"
 DEFAULT_SHARE = "candidate"
+DEFAULT_STATUS = "active"
 
 
 def parse_frontmatter(text: str):
@@ -83,7 +84,10 @@ def main():
             "lineage": prior.get("lineage", DEFAULT_LINEAGE),
             "capabilities": toolspec.get("capabilities", []),
             "libraryShare": prior.get("libraryShare", DEFAULT_SHARE),
+            "status": prior.get("status", DEFAULT_STATUS),
         }
+        if prior.get("superseded_by"):
+            meta["superseded_by"] = prior["superseded_by"]
         (creation / "_meta.json").write_text(json.dumps(meta, indent=2) + "\n")
 
         if kind == "skill":

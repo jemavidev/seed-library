@@ -5,5 +5,6 @@
   "description": "A context-watermark hook: watches an agent's working-context usage against a dual ceiling (absolute tokens AND percentage of the window \u2014 whichever is lower governs) and triggers graduated responses \u2014 compact at the soft mark, hand off at the hard mark.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

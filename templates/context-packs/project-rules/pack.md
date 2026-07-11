@@ -1,5 +1,7 @@
 # Context pack — project-rules
 
+> Status: active
+
 The convention for project-level rule files that agents must respect: which files count,
 how precedence works, and how the set compiles into one flat context block.
 

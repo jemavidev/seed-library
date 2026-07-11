@@ -1,6 +1,7 @@
 {
   "id": "prompt-chaining",
   "alias": "sequential-pipeline",
+  "status": "active",
   "intent": "Fixed linear stages: each stage's typed output is the next stage's input; a gate check between stages stops a bad intermediate from propagating.",
   "state": {
     "stage_outputs": "object keyed by stage id, each matching that stage's output schema",

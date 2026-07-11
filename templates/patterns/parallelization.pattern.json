@@ -1,6 +1,7 @@
 {
   "id": "parallelization",
   "alias": "map-reduce",
+  "status": "active",
   "intent": "Split a divisible task into independent shards, run the same worker over each concurrently, reduce the shard results into one consolidated output.",
   "state": {
     "shards": "array of shard descriptors",

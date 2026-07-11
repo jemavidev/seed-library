@@ -5,5 +5,6 @@
   "description": "A spend-watermark hook: watches cumulative spend per account (task and meta, fed by the spans `hook.span-metadata-recorder` writes) against each account's budget, and responds in graduated steps \u2014 notify at the warning mark, gate further spending at the hard mark.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

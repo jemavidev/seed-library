@@ -5,5 +5,6 @@
   "description": "A post-output hook: whenever an agent step declares an expected output schema, this hook validates the actual output against it before the result is accepted downstream.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

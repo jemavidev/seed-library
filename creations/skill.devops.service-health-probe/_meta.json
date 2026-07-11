@@ -7,5 +7,6 @@
   "capabilities": [
     "network-egress"
   ],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

@@ -1,6 +1,7 @@
 {
   "id": "context-handoff",
   "alias": "proactive-succession",
+  "status": "active",
   "intent": "When a working agent approaches its context ceiling, it finishes the current atomic step, writes a complete handoff packet, and yields to a fresh successor that continues from the packet alone — before quality degrades, not after.",
   "state": {
     "task_brief": "string — original, never summarized away",

@@ -1,6 +1,7 @@
 {
   "id": "evaluator-optimizer",
   "alias": "reflection-self-correction",
+  "status": "active",
   "intent": "A generator produces an artifact; an evaluator audits it with objective checks; failures feed back to the generator until pass or budget exhausted.",
   "state": {
     "task_brief": "string",

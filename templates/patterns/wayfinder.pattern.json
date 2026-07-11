@@ -1,6 +1,7 @@
 {
   "id": "wayfinder",
   "alias": "shared-map-planning",
+  "status": "active",
   "intent": "Plan an effort too big for one agent session as a shared map of typed decision tickets on a tracker; each session either charts the map or resolves exactly one ticket, graduating fog into new tickets, until the way to the destination is clear.",
   "state": {
     "map": "object — destination, notes, decisions-so-far index, not-yet-specified fog, out-of-scope; lives on the tracker, never only in context",

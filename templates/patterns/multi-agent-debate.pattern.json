@@ -1,6 +1,7 @@
 {
   "id": "multi-agent-debate",
   "alias": "debate-and-synthesis",
+  "status": "active",
   "intent": "Several agents argue distinct assigned perspectives over a decision; after bounded rounds of critique, a moderator synthesizes one recommendation with the disagreements preserved.",
   "state": {
     "question": "string — the decision to make, with its constraints",

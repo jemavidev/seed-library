@@ -1,6 +1,7 @@
 {
   "id": "canary-promotion",
   "alias": "eval-gated-upgrade",
+  "status": "active",
   "intent": "Decide whether creation version v_candidate replaces v_current: run both against the same eval set, compare win/regression rates, and promote through a gate — or reject with findings. The self-evolution loop, made a reviewable procedure.",
   "state": {
     "creation_ref": "string — the library creation under evaluation",

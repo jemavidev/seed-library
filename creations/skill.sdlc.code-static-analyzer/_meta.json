@@ -7,5 +7,6 @@
   "capabilities": [
     "subprocess"
   ],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

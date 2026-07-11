@@ -1,6 +1,7 @@
 {
   "id": "saga-compensation",
   "alias": "compensated-effect-chain",
+  "status": "active",
   "intent": "Execute a sequence of external-effect steps where each step's compensation is registered BEFORE the step runs; on failure at step k, execute compensations k-1..1 in reverse order and report the unwind.",
   "state": {
     "steps": "array of { step_id, tool_ref, action, compensation: { tool_ref, action, args }, status: pending|done|failed|compensated }",

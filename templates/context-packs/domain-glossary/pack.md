@@ -1,5 +1,7 @@
 # Context pack — domain-glossary
 
+> Status: active
+
 The convention for a project's **domain glossary** and its **architectural decision records**:
 where the canonical vocabulary lives, how it stays sharp, and when a decision earns a record.
 Charters give a project domain *orientation*; this pack gives it domain *vocabulary* — the

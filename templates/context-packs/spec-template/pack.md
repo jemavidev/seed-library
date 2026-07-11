@@ -1,5 +1,7 @@
 # Context pack — spec-template
 
+> Status: active
+
 The canonical anatomy of a **spec**: the document that fixes *what* will be built and *which
 decisions were made*, produced by synthesis (from a finished conversation, a wayfinder map, a
 grilled charter) — never by interviewing during writing. A spec is a specification, not an

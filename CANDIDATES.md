@@ -69,19 +69,17 @@ A candidate that fails G1 is dead; the rest are judgement calls to record.
 
 ## 4. Open candidates
 
-#### C-14 · Invocation-surface field + asset lifecycle states — `deferred`
-- **Source:** S1 (repo conventions: `disable-model-invocation` frontmatter; changesets +
-  CHANGELOG; `deprecated/` and `in-progress/` folders)
+#### C-14a · Invocation-surface field in ToolSpec — `deferred`
+- **Source:** S1 (repo convention: `disable-model-invocation` frontmatter)
 - **Redundancy check:** the *concept* (model-invoked vs user-invoked as context-load vs
   cognitive-load) is already in `lessons/cognitive-vs-context-load.md`; what's missing is
-  the **machine-readable** expression.
-- **Remaining delta:** (a) an invocation-surface field in ToolSpec / `_meta.json` so
-  bindings can generate the right frontmatter per harness — a product **contract change**,
-  needs a decision-log ruling before any library work; (b) lifecycle states
-  (`in-progress` / `active` / `deprecated`) in `_meta.json`, with renames shipped as
-  explicit deprecate-and-re-add and surfaced in the digest.
-- **Status:** deferred 2026-07-10 — blocked on a product-side decision-log ruling for (a);
-  revisit when that ruling lands.
+  the **machine-readable** expression so bindings can generate the right frontmatter per
+  harness.
+- **Remaining delta:** a field in ToolSpec / `_meta.json` — a product **contract change**,
+  needs a decision-log ruling before any library work.
+- **Status:** deferred 2026-07-10 — blocked on the product-side ruling; revisit when it
+  lands. (Part (b) of the original C-14 — lifecycle states — was accepted and built the
+  same day; see §5.)
 
 ## 5. Accepted log
 
@@ -110,6 +108,10 @@ reject what won't carry value"), all built the same day:
 - **C-11 Deep-module vocabulary** → `lessons/deep-modules.md`.
 - **C-12 Handoff deltas** → two mechanics added to `templates/patterns/context-handoff.md`
   (packet names its skills; reference, don't duplicate).
+- **C-14b Lifecycle states** → naming & lifecycle governance (README §Naming & lifecycle
+  governance): `status` field on every asset (`incubating`/`active`/`deprecated`/`retired`,
+  deprecate requires `superseded_by`), enforced by `validate.py` and rendered by the
+  catalog's lifecycle section. Renames ship as deprecate-and-re-add.
 
 ## 6. Rejection log
 

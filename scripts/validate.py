@@ -8,6 +8,10 @@ Checks:
   2. JSON / JSONL validity — every `.json` parses; every non-blank `.jsonl` line parses.
   3. Skill contract presence — every `skill.*` creation carries `toolspec.json`,
      `core/interface.schema.json`, and declares an `effects` class.
+  4. Lifecycle — every creation `_meta.json` and every `*.pattern.json` carries a valid
+     `status` (incubating | active | deprecated | retired); `deprecated` requires
+     `superseded_by`. Packs, charters and frontier policies carry a `> Status:` line in
+     their markdown; lessons carry a dated `**Valid at.**` line (invalidated, never deleted).
 
 Durability: stdlib-only, path-relative. Run in CI or before any commit.
 Usage: python3 scripts/validate.py   (from anywhere)
@@ -83,11 +87,60 @@ def check_skill_contracts():
     return findings
 
 
+VALID_STATUS = {"incubating", "active", "deprecated", "retired"}
+STATUS_LINE = re.compile(r"^> Status: ([a-z-]+)(.*)$", re.M)
+
+
+def check_lifecycle():
+    findings = []
+
+    def check_status_obj(rel, data):
+        s = data.get("status")
+        if s not in VALID_STATUS:
+            findings.append(f"{rel}: status '{s}' not in {sorted(VALID_STATUS)}")
+        elif s == "deprecated" and not data.get("superseded_by"):
+            findings.append(f"{rel}: deprecated without superseded_by")
+
+    for d in sorted(CREATIONS.iterdir()):
+        meta_p = d / "_meta.json"
+        if d.is_dir() and meta_p.exists():
+            try:
+                check_status_obj(meta_p.relative_to(ROOT), json.loads(meta_p.read_text()))
+            except Exception:
+                pass  # JSON validity already reported above
+
+    for f in sorted((ROOT / "templates" / "patterns").glob("*.pattern.json")):
+        try:
+            check_status_obj(f.relative_to(ROOT), json.loads(f.read_text()))
+        except Exception:
+            pass
+
+    md_assets = (list((ROOT / "templates" / "context-packs").glob("*/pack.md"))
+                 + list((ROOT / "templates" / "charters").glob("*.md"))
+                 + list((ROOT / "templates" / "frontier-policies").glob("*.md")))
+    for f in sorted(md_assets):
+        rel = f.relative_to(ROOT)
+        m = STATUS_LINE.search(f.read_text(errors="ignore"))
+        if not m:
+            findings.append(f"{rel}: missing '> Status:' line")
+        elif m.group(1) not in VALID_STATUS:
+            findings.append(f"{rel}: status '{m.group(1)}' not in {sorted(VALID_STATUS)}")
+        elif m.group(1) == "deprecated" and "superseded by" not in m.group(2):
+            findings.append(f"{rel}: deprecated without 'superseded by <ref>' on the Status line")
+
+    for f in sorted((ROOT / "lessons").glob("*.md")):
+        if "**Valid at.**" not in f.read_text(errors="ignore"):
+            findings.append(f"{f.relative_to(ROOT)}: missing dated '**Valid at.**' line")
+
+    return findings
+
+
 def main():
     groups = {
         "core-neutrality": check_neutrality(),
         "json-validity": check_json(),
         "skill-contracts": check_skill_contracts(),
+        "lifecycle": check_lifecycle(),
     }
     total = sum(len(v) for v in groups.values())
     for name, findings in groups.items():

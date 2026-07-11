@@ -1,6 +1,7 @@
 {
   "id": "hitl-checkpoint",
   "alias": "human-in-the-loop-interrupt",
+  "status": "active",
   "intent": "Run until a declared gate before a consequential action; freeze all state at the gate; resume, adjust, or abort based on a human verdict delivered through the runtime's approval stance.",
   "state": {
     "work_product": "object — everything produced up to the gate",

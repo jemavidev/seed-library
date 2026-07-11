@@ -5,5 +5,6 @@
   "description": "NPV/IRR/amortization/break-even/projection arithmetic with explicit assumptions; computes consequences, never gives investment advice.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

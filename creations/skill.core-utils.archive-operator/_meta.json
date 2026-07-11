@@ -5,5 +5,6 @@
   "description": "Create, list, or extract zip/tar.gz archives inside the sandbox; zip-slip-safe, all-or-nothing extraction.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

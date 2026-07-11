@@ -1,6 +1,7 @@
 {
   "id": "triage",
   "alias": "proposal-state-machine",
+  "status": "active",
   "intent": "Move incoming proposals (issues, requests, agent-generated suggestions) through a small state machine — gather, recommend, verify, grill if needed, apply — until each carries exactly one category and one state; every rejection writes its reason to a rejection log so it is never re-proposed.",
   "state": {
     "item": "object — the proposal under triage: full body, prior triage notes, reporter activity",

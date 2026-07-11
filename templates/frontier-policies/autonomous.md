@@ -1,5 +1,7 @@
 # Frontier policy — autonomous
 
+> Status: active
+
 The unattended-operation preset for mature setups running long-horizon or daemon work: local
 work is free, compensated external effects merely notify, and the only interruption left is
 the one that matters — an external effect nobody can undo. Its floor is structural: nothing

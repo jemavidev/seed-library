@@ -1,5 +1,7 @@
 # Context pack — default-agent-context
 
+> Status: active
+
 The baseline context policy attached to any instantiated agent profile. It declares — as
 data, not prose — what enters the agent's context, what state it shares with peers, and what
 it must hand off when it stops.

@@ -1,6 +1,7 @@
 {
   "id": "tracer-bullet-decomposition",
   "alias": "vertical-slice-tickets",
+  "status": "active",
   "intent": "Break an accepted spec or plan into tracer-bullet tickets — vertical slices that each cut a narrow but complete path through every layer, demoable on their own, sized to one fresh context window, each declaring its blocking edges — then publish them so sessions can work the frontier.",
   "state": {
     "source": "object — the spec, plan, or conversation being decomposed",

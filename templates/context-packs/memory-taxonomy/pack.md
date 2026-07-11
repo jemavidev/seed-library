@@ -1,5 +1,7 @@
 # Context pack — memory-taxonomy
 
+> Status: active
+
 Declares the five kinds of memory an agent system runs on, each as configuration: what it
 holds, its budget, where it lives (a binding), and how content enters and leaves. The point
 is that "memory" is never one undifferentiated blob — each kind has different guarantees, and

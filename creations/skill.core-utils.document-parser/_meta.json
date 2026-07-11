@@ -5,5 +5,6 @@
   "description": "Convert PDF/DOCX/XLSX/HTML documents to markdown or plain text with structure preserved. Read-only.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }

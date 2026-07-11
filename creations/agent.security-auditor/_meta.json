@@ -5,5 +5,6 @@
   "description": "Find and evidence security weaknesses in code, configuration, and logs \u2014 without changing anything and without exceeding proof-of-presence.",
   "lineage": "hand-seeded@2026-07-07",
   "capabilities": [],
-  "libraryShare": "candidate"
+  "libraryShare": "candidate",
+  "status": "active"
 }
