@@ -65,6 +65,8 @@ preserved across regenerations; only genuinely new assets get defaults.
 > The exhaustive, always-current index is **[CATALOG.md](CATALOG.md)**, generated from asset
 > metadata by `scripts/build-catalog.py` (regenerate after adding/renaming an asset).
 > `agent.librarian` routes from it. The curated list below is a human overview.
+> Ideas that are not assets yet live in **[CANDIDATES.md](CANDIDATES.md)** — the hand-maintained
+> intake queue where external sources are evaluated before anything is built.
 
 ### creations/
 - `agent.librarian` — router over the whole catalog; routes from CATALOG.md, never from memory
