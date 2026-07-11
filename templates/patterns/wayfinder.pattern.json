@@ -1,0 +1,40 @@
+{
+  "id": "wayfinder",
+  "alias": "shared-map-planning",
+  "intent": "Plan an effort too big for one agent session as a shared map of typed decision tickets on a tracker; each session either charts the map or resolves exactly one ticket, graduating fog into new tickets, until the way to the destination is clear.",
+  "state": {
+    "map": "object — destination, notes, decisions-so-far index, not-yet-specified fog, out-of-scope; lives on the tracker, never only in context",
+    "frontier": "array — open, unblocked, unclaimed tickets; computed by query each session, never stored",
+    "current_ticket": "object | null — the single ticket this session claimed (claim = assign before any work)",
+    "resolution": "object | null — the answer recorded on the ticket at close, plus fog graduated by it"
+  },
+  "nodes": [
+    { "id": "charter", "role_ref": "agent.idea-shaper" },
+    { "id": "picker", "role_ref": null },
+    { "id": "resolver-grilling", "role_ref": "agent.idea-shaper" },
+    { "id": "resolver-research", "role_ref": "agent.analyst-writer" },
+    { "id": "resolver-prototype", "role_ref": "agent.sdlc-developer" },
+    { "id": "resolver-task", "role_ref": null },
+    { "id": "recorder", "role_ref": null }
+  ],
+  "edges": [
+    { "from": "START", "to": "charter", "when": "map does not exist" },
+    { "from": "START", "to": "picker", "when": "map exists" },
+    { "from": "charter", "to": "END", "when": "map created with destination, fog, and first tickets — charting is a whole session's work" },
+    { "from": "picker", "to": "resolver-grilling", "when": "claimed ticket type == grilling" },
+    { "from": "picker", "to": "resolver-research", "when": "claimed ticket type == research" },
+    { "from": "picker", "to": "resolver-prototype", "when": "claimed ticket type == prototype" },
+    { "from": "picker", "to": "resolver-task", "when": "claimed ticket type == task" },
+    { "from": "resolver-grilling", "to": "recorder", "when": "decision made by the human" },
+    { "from": "resolver-research", "to": "recorder", "when": "findings written as a cited asset" },
+    { "from": "resolver-prototype", "to": "recorder", "when": "verdict captured from the human's reaction" },
+    { "from": "resolver-task", "to": "recorder", "when": "work done; resulting facts recorded" },
+    { "from": "recorder", "to": "END", "when": "answer posted, ticket closed, map index appended, graduated fog ticketed" }
+  ],
+  "interrupts": [
+    { "at": "resolver-grilling", "stance": "confirm", "timeout": "24h", "on_timeout": "abort" },
+    { "at": "resolver-prototype", "stance": "confirm", "timeout": "24h", "on_timeout": "abort" }
+  ],
+  "termination": "per session: ends after charting or after exactly one resolution, never more; per effort: the map is done when no open tickets remain and the fog section is empty — nothing left to decide before someone goes and does the thing",
+  "budget": { "max_iterations": 1, "account": "task" }
+}

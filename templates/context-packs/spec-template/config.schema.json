@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "spec-template config",
+  "type": "object",
+  "properties": {
+    "required_sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "Section titles every spec must carry, in order; empty sections render as explicit '(none)' rather than being dropped"
+    },
+    "story_format": {
+      "type": "string",
+      "enum": ["as-a-i-want-so-that"],
+      "description": "Only the actor/feature/benefit form is defined; the field exists so a future form is explicit"
+    },
+    "allow_prototype_snippets": {
+      "type": "boolean",
+      "description": "Whether prototype-validated, decision-rich snippets may be inlined (the only permitted code in a spec)"
+    },
+    "glossary_pack": {
+      "type": ["string", "null"],
+      "description": "Name of the domain-glossary pack instance whose vocabulary the spec must use; null if the project keeps no glossary"
+    }
+  },
+  "required": ["required_sections", "story_format", "allow_prototype_snippets", "glossary_pack"],
+  "additionalProperties": false
+}

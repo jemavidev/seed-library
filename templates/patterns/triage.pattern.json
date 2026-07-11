@@ -1,0 +1,38 @@
+{
+  "id": "triage",
+  "alias": "proposal-state-machine",
+  "intent": "Move incoming proposals (issues, requests, agent-generated suggestions) through a small state machine — gather, recommend, verify, grill if needed, apply — until each carries exactly one category and one state; every rejection writes its reason to a rejection log so it is never re-proposed.",
+  "state": {
+    "item": "object — the proposal under triage: full body, prior triage notes, reporter activity",
+    "category": "string (bug|enhancement) | null",
+    "state_role": "string (needs-triage|needs-info|ready-for-agent|ready-for-human|wontfix) | null",
+    "verification": "object | null — what reproducing or checking the claim actually showed",
+    "brief": "string | null — the durable agent brief when the outcome is ready-for-agent",
+    "rejection_reason": "string | null — required before a wontfix may close"
+  },
+  "nodes": [
+    { "id": "gatherer", "role_ref": null },
+    { "id": "recommender", "role_ref": null },
+    { "id": "verifier", "role_ref": "agent.qa-reviewer" },
+    { "id": "griller", "role_ref": "agent.idea-shaper" },
+    { "id": "applier", "role_ref": null }
+  ],
+  "edges": [
+    { "from": "START", "to": "gatherer", "when": null },
+    { "from": "gatherer", "to": "applier", "when": "redundancy check found it already implemented, or the rejection log already covers it — short-circuit to wontfix with pointer" },
+    { "from": "gatherer", "to": "recommender", "when": "item is genuinely new" },
+    { "from": "recommender", "to": "verifier", "when": "maintainer accepts recommendation and the claim is checkable" },
+    { "from": "recommender", "to": "griller", "when": "maintainer wants the request fleshed out" },
+    { "from": "recommender", "to": "applier", "when": "maintainer overrides with an explicit state" },
+    { "from": "verifier", "to": "griller", "when": "claim verified but shape still fuzzy" },
+    { "from": "verifier", "to": "applier", "when": "verification settles the state (confirmed → brief; insufficient detail → needs-info)" },
+    { "from": "griller", "to": "applier", "when": "decisions landed; outcome state chosen" },
+    { "from": "applier", "to": "END", "when": "exactly one category + one state applied; wontfix carries its logged reason; ready-for-agent carries its brief" }
+  ],
+  "interrupts": [
+    { "at": "recommender", "stance": "confirm", "timeout": "72h", "on_timeout": "abort" },
+    { "at": "griller", "stance": "confirm", "timeout": "72h", "on_timeout": "abort" }
+  ],
+  "termination": "the item reaches a terminal state (ready-for-agent, ready-for-human, wontfix) or a waiting state (needs-info, which re-enters at gatherer on reporter reply); never ends with zero or two state roles",
+  "budget": { "max_iterations": 3, "account": "task" }
+}

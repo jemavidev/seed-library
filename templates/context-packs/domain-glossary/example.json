@@ -1,0 +1,6 @@
+{
+  "glossary_file": "CONTEXT.md",
+  "context_map_file": null,
+  "adr_dir": "docs/adr",
+  "challenge_conflicts": true
+}

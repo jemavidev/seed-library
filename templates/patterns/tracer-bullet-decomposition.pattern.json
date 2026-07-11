@@ -1,0 +1,30 @@
+{
+  "id": "tracer-bullet-decomposition",
+  "alias": "vertical-slice-tickets",
+  "intent": "Break an accepted spec or plan into tracer-bullet tickets — vertical slices that each cut a narrow but complete path through every layer, demoable on their own, sized to one fresh context window, each declaring its blocking edges — then publish them so sessions can work the frontier.",
+  "state": {
+    "source": "object — the spec, plan, or conversation being decomposed",
+    "slices": "array — proposed tickets: title, what it delivers end-to-end, blocked_by edges",
+    "wide_refactors": "array — mechanical whole-codebase changes pulled out for expand–contract sequencing instead of slicing",
+    "verdict": "string (approved|amended) | null — maintainer's call on granularity and edges"
+  },
+  "nodes": [
+    { "id": "explorer", "role_ref": null },
+    { "id": "slicer", "role_ref": null },
+    { "id": "review-gate", "role_ref": null },
+    { "id": "publisher", "role_ref": null }
+  ],
+  "edges": [
+    { "from": "START", "to": "explorer", "when": null },
+    { "from": "explorer", "to": "slicer", "when": "codebase state and domain vocabulary gathered; prefactoring opportunities noted" },
+    { "from": "slicer", "to": "review-gate", "when": "every slice has a title, an end-to-end deliverable, and its blocking edges; wide refactors sequenced expand–contract" },
+    { "from": "review-gate", "to": "slicer", "when": "verdict == 'amended' — granularity or edges challenged" },
+    { "from": "review-gate", "to": "publisher", "when": "verdict == 'approved'" },
+    { "from": "publisher", "to": "END", "when": "one ticket per slice published in dependency order, blockers first, edges wired" }
+  ],
+  "interrupts": [
+    { "at": "review-gate", "stance": "confirm", "timeout": "24h", "on_timeout": "abort" }
+  ],
+  "termination": "tickets published with blocking edges wired and the frontier (tickets with no open blockers) non-empty, or the run aborts at the gate; publishing never modifies or closes the parent spec",
+  "budget": { "max_iterations": 3, "account": "task" }
+}

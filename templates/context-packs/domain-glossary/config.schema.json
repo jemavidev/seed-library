@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "domain-glossary config",
+  "type": "object",
+  "properties": {
+    "glossary_file": {
+      "type": "string",
+      "description": "Path of the glossary file, e.g. CONTEXT.md"
+    },
+    "context_map_file": {
+      "type": ["string", "null"],
+      "description": "Path of the multi-context map, or null for a single-context project"
+    },
+    "adr_dir": {
+      "type": "string",
+      "description": "Directory holding architectural decision records, e.g. docs/adr"
+    },
+    "challenge_conflicts": {
+      "type": "boolean",
+      "description": "Whether agents must call out term conflicts immediately (the convention's default is true)"
+    }
+  },
+  "required": ["glossary_file", "context_map_file", "adr_dir", "challenge_conflicts"],
+  "additionalProperties": false
+}

@@ -23,6 +23,11 @@ profile's `handoff_contract` (context pack `default-agent-context`).
 - **Generation cap**: a task surviving 3+ successions without finishing is not too big for
   one window — it is under-decomposed or stuck; escalate it (charged to the meta account,
   which is why `budget.account` is `meta`).
+- **The packet names its skills**: a suggested-skills section tells the successor which
+  assets to reach for on this task — the packet carries advice, not just state.
+- **Reference, don't duplicate**: anything already captured in an artifact (spec, decision
+  record, ticket, commit) travels as a pointer, never restated; restatement bloats the packet
+  and invites drift between copies.
 
 ## Failure modes
 - **Summary rot**: each succession compresses a little more until the objective blurs. The
